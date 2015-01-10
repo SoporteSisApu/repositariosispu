@@ -96,7 +96,7 @@
 				<textFieldExpression><![CDATA[$F{rendimEqherrApu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="21001df3-4a72-4dae-acc6-9af13de052de" x="448" y="1" width="79" height="20"/>
+				<reportElement uuid="21001df3-4a72-4dae-acc6-9af13de052de" x="440" y="1" width="79" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{costotEqherrApu}]]></textFieldExpression>
 			</textField>

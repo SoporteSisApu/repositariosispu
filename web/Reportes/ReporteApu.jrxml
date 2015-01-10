@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a7c6749-384a-443b-afe2-ba515d9de06f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="263"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Codigoapu" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -57,7 +57,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="63" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<textField>
 				<reportElement uuid="9c4a5c8a-5430-4376-992f-054c9549fd33" x="116" y="21" width="100" height="20"/>
 				<textElement/>
@@ -121,9 +121,9 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="377" splitType="Stretch">
+		<band height="548" splitType="Stretch">
 			<subreport>
-				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="83"/>
+				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="110"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="codigoApu">
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
@@ -132,7 +132,7 @@
 				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement uuid="bfbd0935-489e-44e4-8d3d-aa1f70919434" x="0" y="143" width="200" height="64"/>
+				<reportElement uuid="bfbd0935-489e-44e4-8d3d-aa1f70919434" x="0" y="143" width="200" height="83"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="codigoApu">
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
@@ -140,6 +140,114 @@
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\ManobraApu.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement uuid="dcfe2738-7de9-499b-b238-1ab5e09bdc05" x="0" y="241" width="200" height="78"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="codigoApu">
+					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\MaterialApu.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="a85f35cc-4e8b-4fb3-9b1a-5ef340427930" x="0" y="346" width="200" height="70"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="codigoApu">
+					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\TransporteApu.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement uuid="b066fd93-4235-40ef-a7ee-476c0643a3da" x="350" y="134" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b066fd93-4235-40ef-a7ee-476c0643a3da" x="350" y="249" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b066fd93-4235-40ef-a7ee-476c0643a3da" x="355" y="355" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b066fd93-4235-40ef-a7ee-476c0643a3da" x="355" y="429" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c69c2798-d440-4354-868c-32a9aef5d8eb" x="419" y="134" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{analApuEqherr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12c02122-0855-475c-abc5-27ded420945a" x="419" y="249" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{analApuMob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b73c9a04-2667-4ce1-96af-3673bfdae14b" x="424" y="355" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{analApuMat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="365005fb-3cf7-483a-9171-59c5d348b47e" x="424" y="429" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{analApuTran}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="351f81ef-09e7-490f-b0de-b9164adbf572" x="257" y="465" width="138" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Directo (EH+MO+M+T)]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2f83974b-0646-4c06-9217-318de06b0472" x="423" y="465" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costDirApu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e232cb60-9ead-4ef6-815f-4220bfd90db0" x="259" y="485" width="138" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo InDirecto y Utilidades]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3452ee2d-e37f-406d-b245-07f68a79031c" x="425" y="485" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costIndApu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5fcc8d78-e533-4367-95bc-001015133a86" x="414" y="485" width="10" height="20"/>
+				<textElement/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a0e66a5d-7d8f-4a7a-8725-aeffe3e18911" x="397" y="485" width="16" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{porcenIndApu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a4922818-b85b-4403-a3a5-ea2f85e287de" x="257" y="505" width="165" height="20"/>
+				<textElement/>
+				<text><![CDATA[Otros Costos Indirectos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a83833b-ffc1-42c3-b1b4-7d6e2da37f74" x="256" y="525" width="166" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Ofertado]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e7c9c425-d835-4bbd-877b-9c72531fbaaf" x="423" y="505" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costOtrosIndApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f54f4995-7198-43ca-9443-83e39fe245d2" x="422" y="525" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costotApu}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<pageFooter>
