@@ -55,8 +55,11 @@ import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.query.JRHibernateQueryExecuter;
+import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.SessionFactory;
 import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
@@ -1159,17 +1162,15 @@ public class ApuBeanVista {
         
         try
         {  
-             Class.forName(DRIVER);
-            CONEXION = DriverManager.getConnection(RUTA,USER,PASSWORD);
+            
          this.transaction=this.session.beginTransaction();
          
-        ApusDaoImpl apugenal=new ApusDaoImpl();
-        this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
-        this.analisisapus=apugenal.getByIdAPUS(session, this.analisisapus.getCodigoApu());
+       
        
 		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		  Map parametros = new HashMap();
-            parametros.put("codigo_apu",this.analisisapus.getCodigoApu());
+            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
+            parametros.put("codigoApu",this.analisisapus.getCodigoApu());
 		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,new JRBeanCollectionDataSource(this.listarapus));
             byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -1203,7 +1204,7 @@ public void imprimirpdfaapu(){
           
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		  Map parametros = new HashMap();
-            parametros.put("codigo_apu",this.analisisapus.getCodigoApu());
+            parametros.put("codigo_apu",58);
 		byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros, CONEXION);
           
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();

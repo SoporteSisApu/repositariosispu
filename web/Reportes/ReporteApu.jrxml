@@ -1,251 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f9d5c2be-49df-42b2-8b6f-2d595f2f5842">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a7c6749-384a-443b-afe2-ba515d9de06f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<style name="table">
-		<box>
-			<pen lineWidth="1.0" lineColor="#FFCC00"/>
-		</box>
-	</style>
-	<style name="table_TH" mode="Opaque" backcolor="#8FAFCC">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFCC00"/>
-		</box>
-	</style>
-	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFCC00"/>
-		</box>
-	</style>
-	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#FFCC00"/>
-		</box>
-	</style>
-	<style name="table 1">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Crosstab Data Text" hAlign="Center"/>
-	<subDataset name="Table Dataset 1" uuid="a841d6db-3fe0-477b-aa4a-10e8ccd02827"/>
-	<subDataset name="New Dataset 1" uuid="9d43430d-5a31-44db-aae4-d15734db99c4">
-		<queryString language="SQL">
-			<![CDATA[select * from equipherr_apu]]>
-		</queryString>
-		<field name="DESC_EQHERR_APU" class="java.lang.String"/>
-		<field name="CANT_EQHERR_APU" class="java.lang.Integer"/>
-		<field name="TARIFA_EQHERR_APU" class="java.lang.Double"/>
-		<field name="COSTOHORA_EQHERR_APU" class="java.lang.Double"/>
-		<field name="RENDIM_EQHERR_APU" class="java.lang.Double"/>
-		<field name="COSTOT_EQHERR_APU" class="java.lang.Double"/>
-	</subDataset>
-	<subDataset name="dataset1" uuid="a48e4686-4e18-4fa7-88ff-671dc547615d"/>
-	<parameter name="codigo_apu" class="java.lang.Integer">
+	<property name="ireport.y" value="60"/>
+	<parameter name="Codigoapu" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<queryString>
-		<![CDATA[select a.*,f.NOMBRE_ESCENARIO from analisispreciounitario a,escenarioapu f 
-where  a.CODIGO_ESCENARIO=f.CODIGO_ESCENARIO and a.CODIGO_APU=$P{codigo_apu}]]>
+	<queryString language="hql">
+		<![CDATA[select p from Analisispreciounitario p where p.codigoApu=$P{Codigoapu}]]>
 	</queryString>
-	<field name="CODIGO_APU" class="java.lang.Integer"/>
-	<field name="CODIGO_RUBRO" class="java.lang.Integer"/>
-	<field name="CODIGO_ESCENARIO" class="java.lang.Integer"/>
-	<field name="DESC_APU" class="java.lang.String"/>
-	<field name="UNIDAD_APU" class="java.lang.String"/>
-	<field name="CATEGORIA_APU" class="java.lang.String"/>
-	<field name="ANAL_APU_MAT" class="java.lang.Double"/>
-	<field name="ANAL_APU_EQHERR" class="java.lang.Double"/>
-	<field name="ANAL_APU_MOB" class="java.lang.Double"/>
-	<field name="ANAL_APU_TRAN" class="java.lang.Double"/>
-	<field name="COST_DIR_APU" class="java.lang.Double"/>
-	<field name="COST_IND_APU" class="java.lang.Double"/>
-	<field name="COST_OTROS_IND_APU" class="java.lang.Double"/>
-	<field name="COSTOT_APU" class="java.lang.Double"/>
-	<field name="REND_APU" class="java.lang.Double"/>
-	<field name="PORCEN_IND_APU" class="java.lang.Double"/>
-	<field name="NOMBRE_ESCENARIO" class="java.lang.String"/>
+	<field name="analApuEqherr" class="java.lang.Double"/>
+	<field name="analApuMat" class="java.lang.Double"/>
+	<field name="analApuMob" class="java.lang.Double"/>
+	<field name="analApuTran" class="java.lang.Double"/>
+	<field name="categoriaApu" class="java.lang.String"/>
+	<field name="codigoApu" class="java.lang.Integer"/>
+	<field name="costDirApu" class="java.lang.Double"/>
+	<field name="costIndApu" class="java.lang.Double"/>
+	<field name="costOtrosIndApu" class="java.lang.Double"/>
+	<field name="costotApu" class="java.lang.Double"/>
+	<field name="descApu" class="java.lang.String"/>
+	<field name="equipherrApus" class="java.util.Set"/>
+	<field name="escenarioapu" class="ec.com.sisapus.modelo.Escenarioapu"/>
+	<field name="manoobraApus" class="java.util.Set"/>
+	<field name="materialApus" class="java.util.Set"/>
+	<field name="porcenIndApu" class="java.lang.Double"/>
+	<field name="presupuestos" class="java.util.Set"/>
+	<field name="rendApu" class="java.lang.Double"/>
+	<field name="rubro" class="ec.com.sisapus.modelo.Rubro"/>
+	<field name="transporteApus" class="java.util.Set"/>
+	<field name="unidadApu" class="java.lang.String"/>
+	<field name="codigoEscenario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[escenarioapu.codigoEscenario]]></fieldDescription>
+	</field>
+	<field name="nombreEscenario" class="java.lang.String">
+		<fieldDescription><![CDATA[escenarioapu.nombreEscenario]]></fieldDescription>
+	</field>
+	<field name="codigoRubro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[rubro.codigoRubro]]></fieldDescription>
+	</field>
+	<field name="nombreRubro" class="java.lang.String">
+		<fieldDescription><![CDATA[rubro.nombreRubro]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="23" splitType="Stretch">
+		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="4f647730-4534-4d47-8423-75c50ff161a6" x="119" y="0" width="273" height="20" forecolor="#0099CC"/>
-				<textElement textAlignment="Center">
+				<reportElement uuid="5a9751c8-3872-4639-8e8c-60e76aca50f1" x="143" y="10" width="236" height="20" forecolor="#0066CC"/>
+				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Reporte de Analisis de Precio Unitario]]></text>
+				<text><![CDATA[Reporte Análisis Precio Unitario]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="64" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<textField>
-				<reportElement uuid="45f89cdf-b73b-473f-a094-ba78063e7674" x="85" y="0" width="23" height="20"/>
+				<reportElement uuid="9c4a5c8a-5430-4376-992f-054c9549fd33" x="116" y="21" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{CODIGO_APU}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{descApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c3da10f-3cd1-4ac7-83f5-77a82536ff17" x="94" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{codigoApu}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="27" y="1" width="49" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
+				<reportElement uuid="1486c2e4-8a7a-4261-bd0e-fd2160fe6b8a" x="54" y="1" width="39" height="20"/>
+				<textElement/>
 				<text><![CDATA[Código:]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="1a0c7022-0fe1-400a-a78b-8000cc04177e" x="86" y="20" width="22" height="19"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{CODIGO_RUBRO}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="27" y="19" width="49" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Rubro:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="7fa22811-72d7-4d42-b64b-1bf7da6cc29e" x="86" y="39" width="22" height="20"/>
+				<reportElement uuid="1486c2e4-8a7a-4261-bd0e-fd2160fe6b8a" x="294" y="1" width="39" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{CODIGO_ESCENARIO}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="26" y="39" width="59" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Escenario:]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="83c0a731-1a35-4fd9-a894-da6714c16122" x="108" y="39" width="90" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{NOMBRE_ESCENARIO}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="aa40d44c-f8cc-4bb5-881f-87e7d9089829" x="108" y="19" width="112" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{DESC_APU}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="526ab516-74cb-4d8b-8a5d-787eab2d10b9" x="319" y="1" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{UNIDAD_APU}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="c90a3076-65ab-4c0d-afc2-49b9cf5e562f" x="319" y="21" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{CATEGORIA_APU}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="234" y="1" width="49" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
 				<text><![CDATA[Unidad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="234" y="21" width="59" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Categoria:]]></text>
+				<reportElement uuid="e2aaa1fd-3f4d-44d4-a596-4ec71787a02f" x="54" y="21" width="42" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rubro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1486c2e4-8a7a-4261-bd0e-fd2160fe6b8a" x="293" y="21" width="55" height="20"/>
+				<textElement/>
+				<text><![CDATA[Escenario:]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement uuid="c60feac2-ca16-4260-afde-f4feac4c13f9" x="319" y="41" width="100" height="20"/>
+				<reportElement uuid="4a7730c7-ef56-4d9a-9a95-ccc98917a3f4" x="383" y="39" width="159" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="bb05318e-71b1-4202-8541-c39803b07096" x="234" y="41" width="85" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
+				<reportElement uuid="1486c2e4-8a7a-4261-bd0e-fd2160fe6b8a" x="294" y="39" width="89" height="20"/>
+				<textElement/>
 				<text><![CDATA[Fecha Impresión:]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="9949fa66-a341-4e0c-8f94-ca82165bfbe8" x="383" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{unidadApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="61a02d35-9e2b-4a8e-b5d0-6a77017a95b9" x="96" y="21" width="19" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{codigoRubro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eb275a53-e5fc-4d60-9c10-a7beae269828" x="383" y="19" width="18" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{codigoEscenario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="88222d5b-2e54-49fe-843e-36a11de7b631" x="401" y="21" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreEscenario}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="489" splitType="Stretch">
+		<band height="201" splitType="Stretch">
 			<subreport>
-				<reportElement uuid="b6307f4f-9757-4570-8821-afb35b6bb6ff" x="0" y="0" width="200" height="100"/>
-				<subreportParameter name="codigo_apu">
-					<subreportParameterExpression><![CDATA[$F{CODIGO_APU}]]></subreportParameterExpression>
+				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="60"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="codigoApu">
+					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\tesis-espe\\sisapus\\web\\Reportes\\EquipoHerramientaApu.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement uuid="06b30bc9-a977-4616-b5fc-30a9b61215df" x="0" y="100" width="200" height="100"/>
-				<subreportParameter name="codigo_apu">
-					<subreportParameterExpression><![CDATA[$F{CODIGO_APU}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\tesis-espe\\sisapus\\web\\Reportes\\ManobraApu.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement uuid="882dd12c-ed01-4c2b-a6c9-737698fbd33e" x="-2" y="200" width="200" height="100"/>
-				<subreportParameter name="codigo_apu">
-					<subreportParameterExpression><![CDATA[$F{CODIGO_APU}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\tesis-espe\\sisapus\\web\\Reportes\\materialApu.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement uuid="f354302e-34b7-4923-9e1f-e154922c9efb" x="0" y="300" width="200" height="100"/>
-				<subreportParameter name="codigo_apu">
-					<subreportParameterExpression><![CDATA[$F{CODIGO_APU}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\tesis-espe\\sisapus\\web\\Reportes\\TransporteApu.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</columnHeader>
 	<pageFooter>
-		<band height="25" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement uuid="76904697-906b-44e9-b208-7078b2bb485f" x="433" y="3" width="80" height="20"/>
+				<reportElement uuid="47e3f5be-ccf4-492d-8cde-49b57ef06bc7" x="433" y="32" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="f790edc4-c8cc-4e6f-8dbf-061d20eb90bb" x="513" y="3" width="40" height="20"/>
+				<reportElement uuid="572d525b-d7ea-4c35-a0cc-41a743abf9d7" x="513" y="32" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

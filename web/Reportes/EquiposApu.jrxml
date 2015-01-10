@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b376c542-07f8-4ac4-bddf-2d0658c98a8d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigoApu" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[select p from EquipherrApu p where p.analisispreciounitario.codigoApu=$P{codigoApu}]]>
+	</queryString>
+	<field name="analisispreciounitario" class="ec.com.sisapus.modelo.Analisispreciounitario"/>
+	<field name="cantEqherrApu" class="java.lang.Integer"/>
+	<field name="codEqherrApu" class="java.lang.Integer"/>
+	<field name="costohoraEqherrApu" class="java.lang.Double"/>
+	<field name="costotEqherrApu" class="java.lang.Double"/>
+	<field name="descEqherrApu" class="java.lang.String"/>
+	<field name="equipoherramienta" class="ec.com.sisapus.modelo.Equipoherramienta"/>
+	<field name="rendimEqherrApu" class="java.lang.Double"/>
+	<field name="tarifaEqherrApu" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="59" splitType="Stretch">
+			<line>
+				<reportElement uuid="4c01a1ae-d6bf-4079-abff-90d413be065f" x="0" y="29" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4c01a1ae-d6bf-4079-abff-90d413be065f" x="-1" y="46" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ce4e8d45-9007-4a0c-be87-163c02c99fa1" x="7" y="9" width="220" height="20" forecolor="#0066CC"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Equipos y Herramientas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e243e67-5cca-4bfe-afe0-8ed012600746" x="112" y="31" width="50" height="20" forecolor="#333333"/>
+				<textElement/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a1e17fb1-5452-442e-946b-d07a0f457051" x="7" y="30" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f12a282a-3b64-412f-a29d-3db2e203dabd" x="201" y="30" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tarifa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8458ea16-0a7e-4527-92d9-449a7368648e" x="283" y="31" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b776f3f5-8e5a-47df-bca5-716a9bd1b425" x="371" y="29" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rendimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d9d9aefb-4ae3-4503-b97e-cd8d38e2b15b" x="476" y="31" width="62" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ee5c7b1c-0a14-4c5b-8cb9-999d613fcf73" x="112" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantEqherrApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fecfa328-5f3b-4bd2-bd5f-e2cff37965b7" x="7" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{descEqherrApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="69ace93d-58e6-414e-9b14-c60df4cd8dbd" x="172" y="1" width="55" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tarifaEqherrApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ee74bfc8-bb18-4324-896f-37b3606e6ee7" x="257" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costohoraEqherrApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="18a0dc64-73ed-4e5b-a97c-ab07e4a9643a" x="371" y="1" width="51" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{rendimEqherrApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21001df3-4a72-4dae-acc6-9af13de052de" x="448" y="1" width="79" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costotEqherrApu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
