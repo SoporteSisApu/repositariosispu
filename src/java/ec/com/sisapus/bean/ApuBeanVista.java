@@ -117,11 +117,11 @@ public class ApuBeanVista {
     //
     private Escenarioapu escenariosapu;
 //llamar reporte
-     public static final String DRIVER="com.mysql.jdbc.Driver";
+   /*  public static final String DRIVER="com.mysql.jdbc.Driver";
         public static final String RUTA="jdbc:mysql://localhost/bdsisapu";
         public static final String USER="root";
         public static final String PASSWORD="nic0kl3p3r";
-	public static Connection CONEXION;
+	public static Connection CONEXION;*/
    //     
     public ApuBeanVista() {
         this.equipherramientas = new Equipoherramienta();
@@ -1156,46 +1156,8 @@ public class ApuBeanVista {
 
     //Reporte
     
- public void verPDF(ActionEvent e ) throws Exception{
-     this.session=null;
-        this.transaction=null;
-        
-        try
-        {  
-            
-         this.transaction=this.session.beginTransaction();
-         
-       
-       
-		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		  Map parametros = new HashMap();
-            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-            parametros.put("codigoApu",this.analisisapus.getCodigoApu());
-		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,new JRBeanCollectionDataSource(this.listarapus));
-            byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.setContentType("application/pdf");
-		response.setContentLength(bytes.length);
-		ServletOutputStream outStream = response.getOutputStream();
-		outStream.write(bytes, 0 , bytes.length);
-		outStream.flush();
-		outStream.close();
-	this.transaction.commit();
-		//FacesContext.getCurrentInstance().responseComplete();
-	
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Reporte Precio Unitario guardado correctamente"));
-        } catch (Exception ex) {
-            if (this.transaction != null) {
-                transaction.rollback();
-            }
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se genero Reporte"));
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
-}
+ 
+ /*
 public void imprimirpdfaapu(){
       
           try{
@@ -1222,9 +1184,9 @@ public void imprimirpdfaapu(){
             
   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
         }
-    }
+    }*/
          
-	public void imprimirexcelapu(){
+	/*public void imprimirexcelapu(){
       
           try{
             Class.forName(DRIVER);
@@ -1252,45 +1214,25 @@ public void imprimirpdfaapu(){
             
   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
         }
-    }
+    }*/
 
-/*
-    public void informe(){
-    //try - para controlar las excepciones.
-    try {               
-        //Iniciamos una transacción
-   this.transaction=this.session.beginTransaction();
-   
-        //Utilizamos un Lista para almacenar los datos combinados de Articulo y Tipo.
-        List articuloList = new ArrayList();
-        //Obtenemos una lista de artículos
-        List<Categoriamaterial> lista = (List<Categoriamaterial>)session.createQuery("From Categoriamaterial ").list();
-        //utilizamos Iterator para acceder a los datos
-        for (Iterator<Categoriamaterial> it = lista.iterator(); it.hasNext();) {
-            Categoriamaterial cat = it.next();
-            //Llenamos nuestro "articuloList", la diferencia con la lista original es que obtenemos las descripción del tipo con "articulo.getTipo().getDes()"
-            //de otra forma no traería un objeto "Tipo" no un String con el nombre específico que necesitamos.
-            articuloList.add( new Categoriamaterial( cat.getNombCatMat(),cat.getMaterials()));
-        }         
-        //Utilizamos el método siguiente para cargar el reporte "ArticuloReport.jasper"
-       File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		  Map parametros = new HashMap();
-            parametros.put("codigom",1);  
-		byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros, CONEXION);
-          
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.setContentType("application/pdf");
-		response.setContentLength(bytes.length);
-		ServletOutputStream outStream = response.getOutputStream();
-		outStream.write(bytes, 0 , bytes.length);
-		outStream.flush();
-		outStream.close();   
-           
-    } catch (Exception e) {
-       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
-    }
-}	*/	
+
+public void informe(){
+JasperPrint informe = null;
+Session sesion= HibernateUtil.
+getSessionFactory().openSession();
+HashMap parametros = new HashMap();
+parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,sesion);
+parametros.put("codigoApu",78);
+try
+{
+String fileName= "Reportes/ReporteApu.jasper";
+informe= JasperFillManager.fillReport(fileName, parametros);
+}
+
+catch (JRException e){e.printStackTrace();}
+JasperViewer.viewReport(informe,false);
       }
     
-    
+    }
 
