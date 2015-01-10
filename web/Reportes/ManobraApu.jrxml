@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2e524e63-cfb8-419b-b61d-c4c8a08a513a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigoApu" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString language="hql">
+		<![CDATA[ select p from ManoobraApu p where p.analisispreciounitario.codigoApu=$P{codigoApu}]]>
+	</queryString>
+	<field name="codigoApu" class="java.lang.Integer">
+		<fieldDescription><![CDATA[analisispreciounitario.codigoApu]]></fieldDescription>
+	</field>
+	<field name="cantMoApu" class="java.lang.Integer">
+		<fieldDescription><![CDATA[cantMoApu]]></fieldDescription>
+	</field>
+	<field name="categMoApu" class="java.lang.String">
+		<fieldDescription><![CDATA[categMoApu]]></fieldDescription>
+	</field>
+	<field name="costohoraMoApu" class="java.lang.Double">
+		<fieldDescription><![CDATA[costohoraMoApu]]></fieldDescription>
+	</field>
+	<field name="costojrhMoApu" class="java.lang.Double">
+		<fieldDescription><![CDATA[costojrhMoApu]]></fieldDescription>
+	</field>
+	<field name="costotMoApu" class="java.lang.Double">
+		<fieldDescription><![CDATA[costotMoApu]]></fieldDescription>
+	</field>
+	<field name="descMoApu" class="java.lang.String">
+		<fieldDescription><![CDATA[descMoApu]]></fieldDescription>
+	</field>
+	<field name="rendimMoApu" class="java.lang.Double">
+		<fieldDescription><![CDATA[rendimMoApu]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7b0bdef9-7db1-45ee-8298-ea710852cd09" x="0" y="0" width="100" height="20" forecolor="#0066FF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Mano de Obra]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6d312fb5-d8dd-4396-a1f0-370c6403f8bb" x="3" y="19" width="552" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="6d312fb5-d8dd-4396-a1f0-370c6403f8bb" x="0" y="44" width="552" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="78df47e8-3d1a-4620-a44c-040ce3caad77" x="3" y="25" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4cd654e-762c-45bf-9ab1-5e5701ba83de" x="103" y="25" width="53" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ec64a83-2ff4-4d79-97b2-e0697132d83f" x="166" y="25" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Jornal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="659c22ab-7681-41ca-b265-fab6fe83f950" x="280" y="25" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2dee0072-00c5-4ca4-bb88-fae1f877df0d" x="392" y="25" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rendimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e95ce66-ee3b-44c0-b912-0eddbff7bf90" x="479" y="25" width="56" height="20"/>
+				<textElement/>
+				<text><![CDATA[Costo Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c681cab1-2e5f-4cc0-b716-5a2ee2b04d4f" x="3" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{descMoApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="20d650ee-9cb8-4431-ad79-0521d935f945" x="103" y="0" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantMoApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5024fddb-7cc2-4ab9-a33f-17f084054f2b" x="156" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costojrhMoApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="069d3b76-de70-4451-8997-e752bc53b918" x="266" y="0" width="71" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costohoraMoApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6068f636-88de-4a1f-8bd2-a10b2f3ae2ed" x="392" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{rendimMoApu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="567bb463-e9cd-40c3-a0d8-8c80e61ed6d1" x="457" y="0" width="62" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{costotMoApu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

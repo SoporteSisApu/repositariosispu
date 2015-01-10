@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a7c6749-384a-443b-afe2-ba515d9de06f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="60"/>
+	<property name="ireport.y" value="263"/>
 	<parameter name="Codigoapu" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -121,15 +121,24 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="201" splitType="Stretch">
+		<band height="377" splitType="Stretch">
 			<subreport>
-				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="60"/>
+				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="83"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="codigoApu">
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="bfbd0935-489e-44e4-8d3d-aa1f70919434" x="0" y="143" width="200" height="64"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="codigoApu">
+					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\ManobraApu.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</columnHeader>
