@@ -833,9 +833,7 @@ public class ApuBeanVista {
          this.escenariosapu=new Escenarioapu();
       
         
-            // this.precioTotaltransporte=0.0;
          
-          
         } catch (Exception ex) {
             if (this.transaction != null) {
                 transaction.rollback();
@@ -1155,21 +1153,21 @@ public void imprimirpdfaapu(){
   
  this.session = null;
 this.transaction = null;
-  SessionFactoryImplementor sessionFactoryImplementor = null;
-    ConnectionProvider connectionProvider = null;
-    java.sql.Connection connection = null;
+ 
           try{
 this.session=HibernateUtil.getSessionFactory().openSession();
-    sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
-        connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
-        connection = connectionProvider.getConnection();      
+    
+    ApusDaoImpl apugenal=new ApusDaoImpl();
+    //this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
+    //this.analisisapus=apugenal.getByIdAPUS(session, this.analisisapus.getCodigoApu());
+    
 HashMap parametros = new HashMap();
     parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",78);
+parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
          // JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
-          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,connection);
+          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.coneccion);
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.setContentType("application/pdf");
 		response.setContentLength(bytes.length);
@@ -1214,7 +1212,7 @@ parametros.put("Codigoapu",78);
         }
     }*/
 
-public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException{
+public void exportarPDF() throws JRException, IOException{
        this.session = null;
 this.transaction = null;
   
@@ -1224,10 +1222,10 @@ this.transaction = null;
          this.transaction=this.session.beginTransaction();
          this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
          this.analisisapus=apugenal.getByIdAPUS(session,this.analisisapus.getCodigoApu());
-      
+this.transaction.commit();
     HashMap parametros = new HashMap();
     parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",81);
+parametros.put("Codigoapu",this.analisisapus);
 		
 	
 		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
