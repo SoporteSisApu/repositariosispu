@@ -394,10 +394,10 @@
                             <h:panelGroup>
 
                                 <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVista.guardarAPU()}"/>
-                                <p:commandButton value="IMPRIMIR PDF" ajax="false" actionListener="#{ApuBeanVista.exportarPDF(actionEvent)}"/>
-                                <p:commandButton id="pdf" value="IMPRIMIR PDF" ajax="false" actionListener="#{ApuBeanVista.imprimirpdfaapu()}"/>
-                              
-
+                                
+                                <p:commandButton id="imprimirreporte" value="Imprimir" ajax="false" actionListener="#{ApuBeanVista.imprimirpdfaapu()}"/>
+                                <p:commandButton value="PDF" ajax="false" actionListener="#{ApuBeanVista.exportarPDF(actionEvent)}"/>
+                                <p:commandButton value="Excel" ajax="false" actionListener="#{ApuBeanVista.imprimirexcelapu()}"/>
  
                             </h:panelGroup>
                         </h:panelGrid>
