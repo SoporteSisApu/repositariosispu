@@ -1168,13 +1168,13 @@ public class ApuBeanVista {
  
 public void imprimirpdfaapu(){
   
-    this.session = null;
+ this.session = null;
 this.transaction = null;
 
           try{
-  //session=SessionFactory.class.
+  
 HashMap parametros = new HashMap();
-parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,session);
+    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
 parametros.put("Codigoapu",78);
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
@@ -1187,10 +1187,7 @@ parametros.put("Codigoapu",78);
 		outStream.write(bytes, 0 , bytes.length);
 		outStream.flush();
 		outStream.close();   
-           
-
-
-
+          
         }catch(Exception e){
             
   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
@@ -1227,27 +1224,7 @@ parametros.put("Codigoapu",78);
         }
     }*/
 
-
-public void informe(){
-JasperPrint informe = null;
-Session sesion= HibernateUtil.getSessionFactory().openSession();
-HashMap parametros = new HashMap();
-parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,sesion);
-parametros.put("Codigoapu",78);
-try
-{
-String fileName= "Reportes/ReporteApu.jasper";
-informe= JasperFillManager.fillReport(fileName, parametros);
-HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		
-           
-}
-
-catch (JRException e){e.printStackTrace();}
-JasperViewer.viewReport(informe,false);
-      }
-
-    public Connection getConeccion() {
+ public Connection getConeccion() {
          Session session = this.getSession();
     SessionFactoryImplementor sessionFactoryImplementor = null;
     ConnectionProvider connectionProvider = null;
@@ -1262,10 +1239,33 @@ JasperViewer.viewReport(informe,false);
         return connection;
     }
 
+
     public void setConeccion(Connection coneccion) {
         this.coneccion = coneccion;
     }
 
+public void inprimerpdf2() throws JRException, IOException
+{
+   
+ 
+HashMap parametros = new HashMap();
+    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,session);
+parametros.put("Codigoapu",78);
+         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
+		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
+          JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
+          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.coneccion);
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.setContentType("application/pdf");
+		response.setContentLength(bytes.length);
+		ServletOutputStream outStream = response.getOutputStream();
+		outStream.write(bytes, 0 , bytes.length);
+		outStream.flush();
+		outStream.close();   
+
+}
+
+   
 
 
 
