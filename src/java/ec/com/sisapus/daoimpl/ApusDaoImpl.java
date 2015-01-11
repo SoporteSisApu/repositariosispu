@@ -77,7 +77,7 @@ public class ApusDaoImpl implements ApusDao {
 
     @Override
     public Analisispreciounitario getByIdAPUS(Session session, Integer ideapu) throws Exception {
-        return (Analisispreciounitario) session.load(EquipherrApu.class, ideapu); //To change body of generated methods, choose Tools | Templates.
+        return (Analisispreciounitario) session.load(Analisispreciounitario.class, ideapu); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

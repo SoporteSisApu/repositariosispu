@@ -1153,7 +1153,7 @@ public class ApuBeanVista {
  
 public void imprimirpdfaapu(){
   
-    this.session = null;
+ this.session = null;
 this.transaction = null;
   SessionFactoryImplementor sessionFactoryImplementor = null;
     ConnectionProvider connectionProvider = null;
@@ -1214,7 +1214,45 @@ parametros.put("Codigoapu",78);
         }
     }*/
 
- public Connection getConeccion() {
+public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException{
+       this.session = null;
+this.transaction = null;
+  
+    try {
+        this.session=HibernateUtil.getSessionFactory().openSession();
+          ApusDaoImpl apugenal=new ApusDaoImpl();
+         this.transaction=this.session.beginTransaction();
+         this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
+         this.analisisapus=apugenal.getByIdAPUS(session,this.analisisapus.getCodigoApu());
+      
+    HashMap parametros = new HashMap();
+    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
+parametros.put("Codigoapu",81);
+		
+	
+		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros,this.coneccion);
+		
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.addHeader("Content-disposition","attachment; filename=jsfReporte.pdf");
+		ServletOutputStream stream = response.getOutputStream();
+		
+		JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+		
+		stream.flush();
+		stream.close();
+		FacesContext.getCurrentInstance().responseComplete();
+                   this.transaction.commit();	
+                } catch (Exception ex) {
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
+        } 
+	}
+ 
+
+
+
+public Connection getConeccion() {
          Session session = this.getSession();
     SessionFactoryImplementor sessionFactoryImplementor = null;
     ConnectionProvider connectionProvider = null;
@@ -1229,20 +1267,7 @@ parametros.put("Codigoapu",78);
         return connection;
     }
 
-/*public  Connection getConnection(Object object) throws Exception {
-  Connection connection=null;
-  if (object instanceof EntityManagerFactoryImpl) {
-    EntityManagerFactoryImpl impl=(EntityManagerFactoryImpl)object;
-    SessionFactory sessionFactory=impl.getSessionFactory();
-    if (sessionFactory instanceof SessionFactoryImpl) {
-      SessionFactoryImpl sfi=(SessionFactoryImpl)sessionFactory;
-      Settings settings=sfi.getSettings();
-      ConnectionProvider provider=settings.getConnectionProvider();
-      connection=provider.getConnection();
-    }
-  }
-  return connection;
-}*/
+
 
 
 
