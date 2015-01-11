@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.activation.DataSource;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -62,10 +63,14 @@ import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Settings;
 import org.hibernate.connection.ConnectionProvider;
+import org.hibernate.connection.DatasourceConnectionProvider;
+import org.hibernate.ejb.EntityManagerFactoryImpl;
 import org.hibernate.ejb.HibernateEntityManager;
 import org.hibernate.engine.SessionFactoryImplementor;
 import org.hibernate.engine.SessionImplementor;
+import org.hibernate.impl.SessionFactoryImpl;
 import org.hibernate.mapping.Component;
 import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
@@ -842,15 +847,7 @@ public class ApuBeanVista {
                 this.session.close();
             }
         }
-    }
-
-    
-    
-    
-    
-    
-    
-     
+    }    
     //costos totales apus
     public void calcularCostosTotalesAPU() {
         try {
@@ -1149,30 +1146,23 @@ public class ApuBeanVista {
     }
 
     ///probar cambio de datos
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-
-
-        }
-    }
-
+   
     //Reporte
     
  
  
 public void imprimirpdfaapu(){
   
- this.session = null;
+    this.session = null;
 this.transaction = null;
 
           try{
-  
+this.session=HibernateUtil.getSessionFactory().openSession();
+        
+          //los daos que necesito
+          //daos para el analilsis ose la cabecera
+    
+         this.transaction=this.session.beginTransaction();
 HashMap parametros = new HashMap();
     parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
 parametros.put("Codigoapu",78);
@@ -1239,31 +1229,27 @@ parametros.put("Codigoapu",78);
         return connection;
     }
 
+/*public  Connection getConnection(Object object) throws Exception {
+  Connection connection=null;
+  if (object instanceof EntityManagerFactoryImpl) {
+    EntityManagerFactoryImpl impl=(EntityManagerFactoryImpl)object;
+    SessionFactory sessionFactory=impl.getSessionFactory();
+    if (sessionFactory instanceof SessionFactoryImpl) {
+      SessionFactoryImpl sfi=(SessionFactoryImpl)sessionFactory;
+      Settings settings=sfi.getSettings();
+      ConnectionProvider provider=settings.getConnectionProvider();
+      connection=provider.getConnection();
+    }
+  }
+  return connection;
+}*/
+
+
 
     public void setConeccion(Connection coneccion) {
         this.coneccion = coneccion;
     }
 
-public void inprimerpdf2() throws JRException, IOException
-{
-   
- 
-HashMap parametros = new HashMap();
-    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,session);
-parametros.put("Codigoapu",78);
-         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
-          JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
-          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.coneccion);
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.setContentType("application/pdf");
-		response.setContentLength(bytes.length);
-		ServletOutputStream outStream = response.getOutputStream();
-		outStream.write(bytes, 0 , bytes.length);
-		outStream.flush();
-		outStream.close();   
-
-}
 
    
 
