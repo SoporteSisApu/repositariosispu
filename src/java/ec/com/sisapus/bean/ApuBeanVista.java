@@ -36,12 +36,14 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
@@ -60,6 +62,11 @@ import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.SessionFactory;
+import org.hibernate.connection.ConnectionProvider;
+import org.hibernate.ejb.HibernateEntityManager;
+import org.hibernate.engine.SessionFactoryImplementor;
+import org.hibernate.engine.SessionImplementor;
+import org.hibernate.mapping.Component;
 import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
@@ -116,6 +123,7 @@ public class ApuBeanVista {
     private Categoriarubro catrubro;
     //
     private Escenarioapu escenariosapu;
+    private Connection coneccion;
 //llamar reporte
    /*  public static final String DRIVER="com.mysql.jdbc.Driver";
         public static final String RUTA="jdbc:mysql://localhost/bdsisapu";
@@ -591,7 +599,7 @@ public class ApuBeanVista {
 
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
-
+         
             transporteDaoImpl transpdao = new transporteDaoImpl();
 
 
@@ -1157,18 +1165,21 @@ public class ApuBeanVista {
     //Reporte
     
  
- /*
+ 
 public void imprimirpdfaapu(){
-      
+  
+    this.session = null;
+this.transaction = null;
+
           try{
-            Class.forName(DRIVER);
-            CONEXION = DriverManager.getConnection(RUTA,USER,PASSWORD);
-          
+  //session=SessionFactory.class.
+HashMap parametros = new HashMap();
+parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,session);
+parametros.put("Codigoapu",78);
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		  Map parametros = new HashMap();
-            parametros.put("codigo_apu",58);
-		byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros, CONEXION);
-          
+		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
+          JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
+          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.getConeccion());
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.setContentType("application/pdf");
 		response.setContentLength(bytes.length);
@@ -1184,7 +1195,7 @@ public void imprimirpdfaapu(){
             
   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
         }
-    }*/
+    }
          
 	/*public void imprimirexcelapu(){
       
@@ -1219,20 +1230,44 @@ public void imprimirpdfaapu(){
 
 public void informe(){
 JasperPrint informe = null;
-Session sesion= HibernateUtil.
-getSessionFactory().openSession();
+Session sesion= HibernateUtil.getSessionFactory().openSession();
 HashMap parametros = new HashMap();
 parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,sesion);
-parametros.put("codigoApu",78);
+parametros.put("Codigoapu",78);
 try
 {
 String fileName= "Reportes/ReporteApu.jasper";
 informe= JasperFillManager.fillReport(fileName, parametros);
+HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		
+           
 }
 
 catch (JRException e){e.printStackTrace();}
 JasperViewer.viewReport(informe,false);
       }
-    
+
+    public Connection getConeccion() {
+         Session session = this.getSession();
+    SessionFactoryImplementor sessionFactoryImplementor = null;
+    ConnectionProvider connectionProvider = null;
+    java.sql.Connection connection = null;
+    try {
+        sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
+        connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
+        connection = connectionProvider.getConnection();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        return connection;
+    }
+
+    public void setConeccion(Connection coneccion) {
+        this.coneccion = coneccion;
+    }
+
+
+
+
     }
 
