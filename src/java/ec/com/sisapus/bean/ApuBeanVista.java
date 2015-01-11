@@ -1155,21 +1155,21 @@ public void imprimirpdfaapu(){
   
     this.session = null;
 this.transaction = null;
-
+  SessionFactoryImplementor sessionFactoryImplementor = null;
+    ConnectionProvider connectionProvider = null;
+    java.sql.Connection connection = null;
           try{
 this.session=HibernateUtil.getSessionFactory().openSession();
-        
-          //los daos que necesito
-          //daos para el analilsis ose la cabecera
-    
-         this.transaction=this.session.beginTransaction();
+    sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
+        connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
+        connection = connectionProvider.getConnection();      
 HashMap parametros = new HashMap();
     parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
 parametros.put("Codigoapu",78);
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
-          JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
-          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.getConeccion());
+         // JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
+          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,connection);
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.setContentType("application/pdf");
 		response.setContentLength(bytes.length);
@@ -1178,10 +1178,10 @@ parametros.put("Codigoapu",78);
 		outStream.flush();
 		outStream.close();   
           
-        }catch(Exception e){
+         } catch (Exception ex) {
             
-  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
-        }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
+        } 
     }
          
 	/*public void imprimirexcelapu(){
