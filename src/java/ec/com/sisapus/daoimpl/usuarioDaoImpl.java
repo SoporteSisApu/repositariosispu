@@ -139,5 +139,32 @@ public class usuarioDaoImpl implements usuarioDao{
         }
         
     }
+
+    @Override
+    public Usuario getByCodigoUsuario(Session session, String codigoUsuario) throws Exception {
+        return (Usuario) session.get(Usuario.class, codigoUsuario); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario getByCorreoElectronico(Session session, String correoElectronico) throws Exception {
+         String hql="from Usuario where correoUsu=:correoElectronico";
+        Query query=session.createQuery(hql);
+        query.setParameter("correoElectronico", correoElectronico);
+        
+        Usuario usuarios=(Usuario) query.uniqueResult();
+        return usuarios; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario getByCorreoElectronicoDiferent(Session session, String codigoUsuario, String correoElectronico) throws Exception {
+        String hql="from Usuario where codigoUsu!=:codigoUsuario and correoUsu=:correoElectronico";
+        Query query=session.createQuery(hql);
+        query.setParameter("codigoUsuario", codigoUsuario);
+        query.setParameter("correoElectronico", correoElectronico);
+        
+        Usuario tUsuario=(Usuario) query.uniqueResult();
+        
+        return tUsuario; //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

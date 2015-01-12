@@ -44,6 +44,7 @@ import java.util.Map;
 import javax.activation.DataSource;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -129,12 +130,10 @@ public class ApuBeanVista {
     //
     private Escenarioapu escenariosapu;
     private Connection coneccion;
-//llamar reporte
-   /*  public static final String DRIVER="com.mysql.jdbc.Driver";
-        public static final String RUTA="jdbc:mysql://localhost/bdsisapu";
-        public static final String USER="root";
-        public static final String PASSWORD="nic0kl3p3r";
-	public static Connection CONEXION;*/
+  //Escenarios
+    private boolean escenarioact1;
+    private boolean escenarioact2;
+    private boolean escenarioact3;
    //     
     public ApuBeanVista() {
         this.equipherramientas = new Equipoherramienta();
@@ -147,16 +146,40 @@ public class ApuBeanVista {
         this.listaTransporteApus = new ArrayList<>();
         this.rubro = new Rubro();
         this.analisisapus = new Analisispreciounitario();
-        this.escenariosapu=new Escenarioapu();
-        
+        this.escenariosapu=new Escenarioapu();  
         this.auxdesrubro = "";
         this.auxunidrubro = "";
-        //inicializar precios totales
-        //escenarios
-
-
-
+     this.escenarioact1=false;
+    this.escenarioact2=true;
+    this.escenarioact3=true;
     }
+
+    public boolean isEscenarioact1() {
+        return escenarioact1;
+    }
+
+    public void setEscenarioact1(boolean escenarioact1) {
+        this.escenarioact1 = escenarioact1;
+    }
+
+    public boolean isEscenarioact2() {
+        return escenarioact2;
+    }
+
+    public void setEscenarioact2(boolean escenarioact2) {
+        this.escenarioact2 = escenarioact2;
+    }
+
+    public boolean isEscenarioact3() {
+        return escenarioact3;
+    }
+
+    public void setEscenarioact3(boolean escenarioact3) {
+        this.escenarioact3 = escenarioact3;
+    }
+    
+    
+    
 
     public Escenarioapu getEscenariosapu() {
         return escenariosapu;
@@ -228,8 +251,8 @@ public class ApuBeanVista {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Rubro agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta4");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta4");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
 
 
         } catch (Exception ex) {
@@ -264,8 +287,8 @@ public class ApuBeanVista {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Equipo/Herramienta agregado"));
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
 
 
         } catch (Exception ex) {
@@ -312,9 +335,9 @@ public class ApuBeanVista {
             this.analisisapus.setAnalApuEqherr(totalVenta);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Equipos y Herramientas retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -322,8 +345,6 @@ public class ApuBeanVista {
     //calculo subtotal equipos
 
     public void calcularCostos() {
-
-
 
         try {
             Double totalVenta = new Double("0.00");
@@ -339,8 +360,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalEquipo(totalVenta);
               this.analisisapus.setAnalApuEqherr(totalVenta);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -402,8 +423,8 @@ public class ApuBeanVista {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
             //
 
         } catch (Exception ex) {
@@ -451,9 +472,9 @@ public class ApuBeanVista {
                this.analisisapus.setAnalApuMob(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Mano de Obra retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -476,8 +497,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalmanoobra(totalVenta1);
                this.analisisapus.setAnalApuMob(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -512,8 +533,8 @@ public class ApuBeanVista {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
             //
 
         } catch (Exception ex) {
@@ -561,9 +582,9 @@ public class ApuBeanVista {
    this.analisisapus.setAnalApuMat(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Material retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -586,8 +607,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalmaterial(totalVenta1);
                this.analisisapus.setAnalApuMat(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -618,8 +639,8 @@ public class ApuBeanVista {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
             //
 
         } catch (Exception ex) {
@@ -667,9 +688,9 @@ public class ApuBeanVista {
                this.analisisapus.setAnalApuTran(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Transporte retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -695,8 +716,8 @@ public class ApuBeanVista {
 
 
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -806,7 +827,7 @@ public class ApuBeanVista {
                  
             }
           
-          	//   imprimirexcelapu();
+          	
            
             this.transaction.commit();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Precio Unitario guardado correctamente"));
@@ -863,14 +884,14 @@ public class ApuBeanVista {
             this.analisisapus.setCostDirApu(costodir1APu);
             this.analisisapus.setCostIndApu(costoinAPu);
             this.analisisapus.setCostOtrosIndApu(costosotrosindAPu);
-            this.analisisapus.setCostotApu(costoinAPu);
+            this.analisisapus.setCostotApu(costoaputotal);
             this.analisisapus.setPorcenIndApu(getAuxiliarPorcenjate());
             //setear los totales de la pantalla
             this.setTotaldirAPU(costodir1APu);
             this.setCostoinAPu(costoinAPu);
             this.setCostoaputotal(costoaputotal);
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:panelFinalVenta5");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta5");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -1151,18 +1172,16 @@ public class ApuBeanVista {
  
 public void imprimirpdfaapu(){
   
- this.session = null;
+    this.session = null;
 this.transaction = null;
  
           try{
+              ApusDaoImpl apugenal=new ApusDaoImpl();
 this.session=HibernateUtil.getSessionFactory().openSession();
-    
-    ApusDaoImpl apugenal=new ApusDaoImpl();
-    //this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
-    //this.analisisapus=apugenal.getByIdAPUS(session, this.analisisapus.getCodigoApu());
-    
+this.transaction=this.session.beginTransaction();   
+this.analisisapus=apugenal.getUltimoRegistroApu(session);
 HashMap parametros = new HashMap();
-    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
+parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
 parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
 		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
@@ -1175,26 +1194,43 @@ parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
 		outStream.write(bytes, 0 , bytes.length);
 		outStream.flush();
 		outStream.close();   
-          
-         } catch (Exception ex) {
+          this.transaction.commit();
+            
+           // this.analisisapus=new Analisispreciounitario();
+            //this.contrasenia=null; 
+         /*} catch (Exception ex) {
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
-        } 
+        } */
+                }   catch (Exception ex) {
+            
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
+                }
+
+            
     }
          
-	/*public void imprimirexcelapu(){
+	public void imprimirexcelapu(){
       
+           this.session = null;
+          this.transaction = null;
+ 
           try{
-            Class.forName(DRIVER);
-            CONEXION = DriverManager.getConnection(RUTA,USER,PASSWORD);
+              ApusDaoImpl apugenal=new ApusDaoImpl();
+this.session=HibernateUtil.getSessionFactory().openSession();
+this.transaction=this.session.beginTransaction();   
+this.analisisapus=apugenal.getUltimoRegistroApu(session);
+HashMap parametros = new HashMap();
+parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
+parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
+   
+          
           File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		  Map parametros = new HashMap();
-            parametros.put("codigo_apu",this.analisisapus.getCodigoApu());  
-       
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, CONEXION);
+		  
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros,this.coneccion);
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.xls");
+		response.addHeader("Content-disposition","attachment; filename=APU"+this.analisisapus.getDescApu()+".xls");
 		ServletOutputStream outStream = response.getOutputStream();
 		
 		JRXlsExporter exporter = new JRXlsExporter();
@@ -1205,49 +1241,60 @@ parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
 		outStream.flush();
 		outStream.close();
 		FacesContext.getCurrentInstance().responseComplete();		
-
+          this.transaction.commit();
         }catch(Exception e){
             
   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
         }
-    }*/
+    }
 
-public void exportarPDF() throws JRException, IOException{
-       this.session = null;
+
+		public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException{
+		 
+           this.session = null;
 this.transaction = null;
-  
-    try {
-        this.session=HibernateUtil.getSessionFactory().openSession();
-          ApusDaoImpl apugenal=new ApusDaoImpl();
-         this.transaction=this.session.beginTransaction();
-         this.analisisapus=apugenal.getUltimoRegistroReporteApu(session);
-         this.analisisapus=apugenal.getByIdAPUS(session,this.analisisapus.getCodigoApu());
-this.transaction.commit();
-    HashMap parametros = new HashMap();
-    parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",this.analisisapus);
+ 
+          try{
+              ApusDaoImpl apugenal=new ApusDaoImpl();
+this.session=HibernateUtil.getSessionFactory().openSession();
+this.transaction=this.session.beginTransaction();   
+this.analisisapus=apugenal.getUltimoRegistroApu(session);
+HashMap parametros = new HashMap();
+parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
+parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
+   
 		
-	
 		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros,this.coneccion);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, this.coneccion);
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.pdf");
+		response.addHeader("Content-disposition","attachment; filename=APU"+this.analisisapus.getDescApu()+".pdf");
 		ServletOutputStream stream = response.getOutputStream();
 		
 		JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
 		
 		stream.flush();
 		stream.close();
-		FacesContext.getCurrentInstance().responseComplete();
-                   this.transaction.commit();	
-                } catch (Exception ex) {
+		FacesContext.getCurrentInstance().getResponseStream();
+                             this.transaction.commit();
+        }catch(Exception e){
             
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
-        } 
+  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
+        }
 	}
- 
+	
+//cambio de escenarios
+  public void ActivarEscenarios(ValueChangeEvent vcEvent){
 
+       // rendered = Boolean.valueOf(vcEvent.getNewValue().toString()).booleanValue();
+       this.escenarioact1=false;
+       this.escenarioact2=false;
+       this.escenarioact3=false;
+        System.out.println();
+
+    }
+
+ 
 
 
 public Connection getConeccion() {
