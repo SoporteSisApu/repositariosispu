@@ -76,6 +76,7 @@ import org.hibernate.mapping.Component;
 import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -344,7 +345,7 @@ public class ApuBeanVista {
     }
     //calculo subtotal equipos
 
-    public void calcularCostos() {
+    public void calcularCostos(RowEditEvent e) {
 
         try {
             Double totalVenta = new Double("0.00");
