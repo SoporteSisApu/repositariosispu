@@ -345,7 +345,7 @@ public class ApuBeanVista {
     }
     //calculo subtotal equipos
 
-    public void calcularCostos(RowEditEvent e) {
+    public void calcularCostos() {
 
         try {
             Double totalVenta = new Double("0.00");

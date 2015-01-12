@@ -21,7 +21,7 @@
             <ui:define name="content">
 
                 <h:form id="frmRealizarVentas">
-                 <p:tabView id="Escenarios" >
+                 <p:tabView id="Escenarios">
                
                      <p:tab id="tab1"  title="APU GENERICO"> 
                     <p:growl id="mensajeGeneral" showDetail="true"/>          
@@ -105,10 +105,10 @@
                     <FIELDSET  style="-moz-border-radius:10px;background-color: #dddddd;
                                width: 1118px;" class="borderFieldSet" >
                         <legend>Equipos y Herramientas</legend>
-                         <p:dataTable  id="tablaListaProductosVenta" 
+                        <p:dataTable  id="tablaListaProductosVenta" 
                                       editable="true" editMode="cell" value="#{ApuBeanVista.listaEquiposApus}" var="item" scrollable="true" scrollHeight="100">
 
-                             <p:ajax event="cellEdit" listener="#{ApuBeanVista.calcularCostos(e)}"   />
+                          
 
                             <p:column headerText="NOMBRE" style="text-align: left;">
 
@@ -116,10 +116,10 @@
 
                             </p:column>
                             <p:column headerText="Cantidad" style="text-align: center;">
-                                <p:cellEditor>
-                                    <f:facet name="output">   <h:outputText value="#{item.cantEqherrApu}" style="text-align: center;" /> </f:facet>                    
-                                    <f:facet name="input">   <p:inputText value="#{item.cantEqherrApu}" style="text-align: center;" /> </f:facet>                    
-                                </p:cellEditor>
+                              
+                                 
+                                      <p:inputText value="#{item.cantEqherrApu}" style="text-align: center;" />                     
+                               
                             </p:column>
                             <p:column headerText="Tarifa" style="text-align: center;">
                                 $./     <h:outputText value="#{item.tarifaEqherrApu}" />
@@ -129,18 +129,15 @@
                                 $./   <h:outputText value="#{item.costohoraEqherrApu}" />
                             </p:column>
                             <p:column headerText="Rendimiento" style="text-align: center;">
-                                <p:cellEditor>
-                                    <f:facet name="output">   <h:outputText value="#{item.rendimEqherrApu}" style="text-align: center;" />      </f:facet>                 
-                                    <f:facet name="input">   <p:inputText value="#{item.rendimEqherrApu}" style="text-align: center;" />      </f:facet>              
-                                </p:cellEditor>
-                            </p:column>
-
+                               
+                                    
+                                     <p:inputText value="#{item.rendimEqherrApu}" style="text-align: center;" />  </p:column>               
                             <p:column headerText="Total" style="text-align: center;">
                                 $./ 
                                 <h:outputText value="#{item.costotEqherrApu}"/>
                             </p:column>
-                            <p:column style="width:8%; text-align: center;">
-                                <p:commandButton icon="icon-delete" title="Retirar Equipo y Herramientas" ajax="true" actionListener="#{ApuBeanVista.EliminarListaEquipo(item.descEqherrApu)}"/>
+                            <p:column style="width:5%; text-align: center">
+                                <p:commandButton icon="icon-delete" ajax="true" actionListener="#{ApuBeanVista.EliminarListaEquipo(item.descEqherrApu)}"/>
                             </p:column >
 
                         </p:dataTable >
