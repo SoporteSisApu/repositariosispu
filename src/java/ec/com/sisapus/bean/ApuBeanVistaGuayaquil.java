@@ -84,9 +84,9 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author kleber
  */
-@Named(value = "ApuBeanVista")
+@Named(value = "ApuBeanVistaGuayaquil")
 @ViewScoped
-public class ApuBeanVista {
+public class ApuBeanVistaGuayaquil {
     
     
      Session session;
@@ -138,7 +138,7 @@ public class ApuBeanVista {
     private boolean escenarioact2;
     private boolean escenarioact3;
    //     
-    public ApuBeanVista() {
+    public ApuBeanVistaGuayaquil() {
         this.equipherramientas = new Equipoherramienta();
         this.listaEquiposApus = new ArrayList<>();
         this.manoobras = new Manoobra();
@@ -785,7 +785,7 @@ public class ApuBeanVista {
          }*/
          
         // if (componente2.equals("tab2")){
-         this.escenariosapu.setCodigoEscenario(1);
+         this.escenariosapu.setCodigoEscenario(2);
          //}
          /*if (componente3.equals("tab3")){
          this.escenariosapu.setCodigoEscenario(3);
@@ -1309,7 +1309,7 @@ parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
        // rendered = Boolean.valueOf(vcEvent.getNewValue().toString()).booleanValue();
        this.escenarioact1=false;
        this.escenarioact2=false;
-       this.escenarioact3=true;
+       this.escenarioact3=false;
         
 
     }

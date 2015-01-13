@@ -84,9 +84,9 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author kleber
  */
-@Named(value = "ApuBeanVista")
+@Named(value = "ApuBeanVistaQuito")
 @ViewScoped
-public class ApuBeanVista {
+public class ApuBeanVistaQuito {
     
     
      Session session;
@@ -138,7 +138,7 @@ public class ApuBeanVista {
     private boolean escenarioact2;
     private boolean escenarioact3;
    //     
-    public ApuBeanVista() {
+    public ApuBeanVistaQuito() {
         this.equipherramientas = new Equipoherramienta();
         this.listaEquiposApus = new ArrayList<>();
         this.manoobras = new Manoobra();
@@ -254,8 +254,8 @@ public class ApuBeanVista {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Rubro agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta4");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta10");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
 
 
         } catch (Exception ex) {
@@ -290,8 +290,8 @@ public class ApuBeanVista {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Equipo/Herramienta agregado"));
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta11");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
 
 
         } catch (Exception ex) {
@@ -338,9 +338,9 @@ public class ApuBeanVista {
             this.analisisapus.setAnalApuEqherr(totalVenta);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Equipos y Herramientas retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta11");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta11");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -363,8 +363,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalEquipo(totalVenta);
               this.analisisapus.setAnalApuEqherr(totalVenta);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta11");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta11");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -426,8 +426,8 @@ public class ApuBeanVista {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta12");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
             //
 
         } catch (Exception ex) {
@@ -475,9 +475,9 @@ public class ApuBeanVista {
                this.analisisapus.setAnalApuMob(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Mano de Obra retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta12");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta12");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -500,8 +500,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalmanoobra(totalVenta1);
                this.analisisapus.setAnalApuMob(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta12");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta12");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -536,8 +536,8 @@ public class ApuBeanVista {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta13");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
             //
 
         } catch (Exception ex) {
@@ -585,9 +585,9 @@ public class ApuBeanVista {
    this.analisisapus.setAnalApuMat(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Material retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta13");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta13");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -610,8 +610,8 @@ public class ApuBeanVista {
 
             this.setPrecioTotalmaterial(totalVenta1);
                this.analisisapus.setAnalApuMat(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta13");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta13");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -642,8 +642,8 @@ public class ApuBeanVista {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta14");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
             //
 
         } catch (Exception ex) {
@@ -691,9 +691,9 @@ public class ApuBeanVista {
                this.analisisapus.setAnalApuTran(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Transporte retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta14");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta14");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral1");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -719,8 +719,8 @@ public class ApuBeanVista {
 
 
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta14");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta14");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -785,7 +785,7 @@ public class ApuBeanVista {
          }*/
          
         // if (componente2.equals("tab2")){
-         this.escenariosapu.setCodigoEscenario(1);
+         this.escenariosapu.setCodigoEscenario(2);
          //}
          /*if (componente3.equals("tab3")){
          this.escenariosapu.setCodigoEscenario(3);
@@ -911,7 +911,7 @@ public class ApuBeanVista {
             this.setCostoinAPu(costoinAPu);
             this.setCostoaputotal(costoaputotal);
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta5");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta15");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -1309,7 +1309,7 @@ parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
        // rendered = Boolean.valueOf(vcEvent.getNewValue().toString()).booleanValue();
        this.escenarioact1=false;
        this.escenarioact2=false;
-       this.escenarioact3=true;
+       this.escenarioact3=false;
         
 
     }
