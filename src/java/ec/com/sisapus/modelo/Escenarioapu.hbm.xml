@@ -8,9 +8,7 @@
             <column name="CODIGO_ESCENARIO" />
             <generator class="identity" />
         </id>
-        <property name="codigoApu" type="java.lang.Integer">
-            <column name="CODIGO_APU" />
-        </property>
+        
         <property name="nombreEscenario" type="string">
             <column name="NOMBRE_ESCENARIO" length="100" />
         </property>

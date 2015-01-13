@@ -43,8 +43,10 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.activation.DataSource;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.naming.spi.DirStateFactory;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -771,8 +773,25 @@ public class ApuBeanVista {
         
         try
         {
+            
         this.session=HibernateUtil.getSessionFactory().openSession();
-        this.escenariosapu.setCodigoEscenario(1);
+        //enconntrar ide del tab segun eso setear el escenario
+        
+       // UIComponent componente1 = findComponent("tab1", FacesContext.getCurrentInstance().getViewRoot());
+       // UIComponent componente2 = findComponent("tab2", FacesContext.getCurrentInstance().getViewRoot());
+       // UIComponent componente3 = findComponent("tab3", FacesContext.getCurrentInstance().getViewRoot());
+        /* if (componente1.equals("tab1")){
+         this.escenariosapu.setCodigoEscenario(1);
+         }*/
+         
+        // if (componente2.equals("tab2")){
+         this.escenariosapu.setCodigoEscenario(2);
+         //}
+         /*if (componente3.equals("tab3")){
+         this.escenariosapu.setCodigoEscenario(3);
+         }*/
+         
+       //this.escenariosapu.setCodigoEscenario(1);
         this.analisisapus.setEscenarioapu(escenariosapu);
         this.analisisapus.setDescApu(getAuxdesrubro());
         this.analisisapus.setCategoriaApu(getAuxcategoria());
@@ -1291,7 +1310,7 @@ parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
        this.escenarioact1=false;
        this.escenarioact2=false;
        this.escenarioact3=false;
-        System.out.println();
+        
 
     }
 
@@ -1321,7 +1340,33 @@ public Connection getConeccion() {
         this.coneccion = coneccion;
     }
 
-
+//buscar el id para setear los escenarios
+  /*  private UIComponent findComponent(String id, UIComponent idcomp) {
+if (idcomp == null) {
+   return null;
+}
+else if (idcomp.getId().equals(id)) {
+   return idcomp;
+}
+else {
+    
+    
+   List<UIComponent> childrenList = idcomp.getChildren();
+   if (childrenList == null || childrenList.isEmpty()) {
+      return null;
+   }
+   for (UIComponent child : childrenList) {
+      UIComponent result = null;
+      result = findComponent(id, child);
+      if(result != null) {
+         return result;
+   }
+   return result;
+}
+   }
+      
+}*/
+    
    
 
 

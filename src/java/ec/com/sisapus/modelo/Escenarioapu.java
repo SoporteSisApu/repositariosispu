@@ -12,7 +12,7 @@ public class Escenarioapu  implements java.io.Serializable {
 
 
      private Integer codigoEscenario;
-     private Integer codigoApu;
+
      private String nombreEscenario;
      private Set analisispreciounitarios = new HashSet(0);
 
@@ -20,8 +20,8 @@ public class Escenarioapu  implements java.io.Serializable {
         this.codigoEscenario=0;
     }
 
-    public Escenarioapu(Integer codigoApu, String nombreEscenario, Set analisispreciounitarios) {
-       this.codigoApu = codigoApu;
+    public Escenarioapu( String nombreEscenario, Set analisispreciounitarios) {
+   
        this.nombreEscenario = nombreEscenario;
        this.analisispreciounitarios = analisispreciounitarios;
     }
@@ -33,13 +33,7 @@ public class Escenarioapu  implements java.io.Serializable {
     public void setCodigoEscenario(Integer codigoEscenario) {
         this.codigoEscenario = codigoEscenario;
     }
-    public Integer getCodigoApu() {
-        return this.codigoApu;
-    }
-    
-    public void setCodigoApu(Integer codigoApu) {
-        this.codigoApu = codigoApu;
-    }
+ 
     public String getNombreEscenario() {
         return this.nombreEscenario;
     }

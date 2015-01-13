@@ -57,7 +57,7 @@
                             <h:outputText value="#{proyecto.fechaProy}" />
                         </p:column>
                         
-                        <p:column style="width:5%; text-align: center">  
+                        <p:column headerText="Acciones" style="width:10%; text-align:center">  
                             <p:commandButton id="btnProyectoUpdate" update=":formUpdate" oncomplete="dialogProyectoUpdate.show()" icon="icon-edit" title="Modificar">  
                                 <f:setPropertyActionListener value="#{proyecto}" target="#{proyectoBean.proyecto}" />  
                             </p:commandButton>  
@@ -83,7 +83,12 @@
                             <p:outputLabel value="Nombre Obra:" />  
                             <p:inputText value="#{proyectoBean.proyecto.obraProy}" />  
                             <p:outputLabel value="Ubicacion:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.ubicProy}" />
+                            <p:selectOneMenu value="#{proyectoBean.proyecto.ubicProy}">  
+                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" />  
+                              
+                                <f:selectItems value="#{proyectoBean.opciones}" />
+                               
+                            </p:selectOneMenu> 
                             <p:outputLabel value="Fecha:" for="txtFechaProyecto" />  
                             <h:panelGroup layout="block">
                             <p:calendar id="txtFechaProyecto" label="Fecha:" showOn="button" title="Ejemplo: dd/mm/yyyy" value="#{proyectoBean.proyecto.fechaProy}" pattern="dd/MM/yyyy" navigator="true" yearRange="c-50:c+2"/>

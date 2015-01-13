@@ -224,7 +224,7 @@ public class usuarioBean {
             message.setFrom(new InternetAddress("klepermix@gmail.com"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
             message.setSubject("Bienvenidos a SISAPU");
-            message.setText("Fecha:" + fecha + "\n\nGracias por Registrarse sus datos de registro son:" + "\n \nusuario:" + sobrenombre + "\ncontraseña:" + contrasenia + "\n\n Saludos" + "\n\n Atte. SisApu");
+            message.setText("Fecha:" + fecha + "\n\nGracias por Registrarse sus datos de registro son:" + "\n \nusuario:" + sobrenombre + "\ncontraseña:" + contrasenia + "\n\n Para ingresar al sistema click en el siguiente enlace:" +"\n http://localhost:8080/sisapus/ "+"\n\n Saludos" + "\n Atte. Soporte Sis-Apu");
             t = session.getTransport("smtp");
             // Transport t = session.getTransport("smtp");
             t.connect("klepermix@gmail.com", clave);

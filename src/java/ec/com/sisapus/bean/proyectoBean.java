@@ -41,6 +41,22 @@ public class proyectoBean implements Serializable {
     private List<Proyecto> liscaldimensional;
     private List<Proyecto> listaporUsuario;
     
+    private SelectItem[] opciones = new SelectItem[]{
+		new SelectItem("Quito", "Quito"),
+		new SelectItem("Guayaquil", "Guayaquil"),
+		new SelectItem("Cuenca", "Cuenca")};
+
+    public SelectItem[] getOpciones() {
+        return opciones;
+    }
+
+    public void setOpciones(SelectItem[] opciones) {
+        this.opciones = opciones;
+    }
+
+    
+    
+    
     //////
     private Session session;
     private Transaction transaccion;
