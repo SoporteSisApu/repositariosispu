@@ -24,7 +24,7 @@ import org.hibernate.Transaction;
  *
  * @author KevinArnold
  */
-@Named(value = "mbSLogin")
+@Named(value = "MbSLogin")
 @SessionScoped
 public class MbSLogin implements Serializable {
 
@@ -60,7 +60,7 @@ public class MbSLogin implements Serializable {
             
             if(tUsuario!=null)
             {
-                if(tUsuario.getContraseniaUsu().equals(Encrypt.sha512(this.contrasenia)))
+                if(tUsuario.getContraseniaUsu().equals((this.contrasenia)))
                 {
                     HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                     httpSession.setAttribute("correoElectronico", this.correoElectronico);

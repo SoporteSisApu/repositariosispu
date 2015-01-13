@@ -93,4 +93,6 @@ public class loginBean implements Serializable{
         context.addCallbackParam("loggetOut", true);
         context.addCallbackParam("ruta", ruta);
     }
+    
+  
 }

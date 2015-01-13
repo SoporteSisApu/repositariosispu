@@ -21,7 +21,7 @@ public class usuarioDaoImpl implements usuarioDao{
     @Override
     public Usuario buscarPorUsuario(Usuario usuario) {
      Session session = HibernateUtil.getSessionFactory().openSession();
-     String sql="select u from Usuario u where SOBRENOMBRE_USU=:usuario and CONTRASENIA_USU=:clave and ESTADO_USU=1";
+     String sql="select  u  from Usuario u where SOBRENOMBRE_USU=:usuario and CONTRASENIA_USU=:clave and ESTADO_USU=1";
      Query query=session.createQuery(sql);
      query.setString("usuario", usuario.getSobrenombreUsu());
      query.setString("clave", usuario.getContraseniaUsu());
@@ -165,6 +165,16 @@ public class usuarioDaoImpl implements usuarioDao{
         Usuario tUsuario=(Usuario) query.uniqueResult();
         
         return tUsuario; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario buscarPorcodigoUsuario(Usuario usuario) {
+          Session session = HibernateUtil.getSessionFactory().openSession();
+     String sql="select  u.codigoUsu from Usuario u where SOBRENOMBRE_USU=:usuario and CONTRASENIA_USU=:clave and ESTADO_USU=1";
+     Query query=session.createQuery(sql);
+     query.setString("usuario", usuario.getSobrenombreUsu());
+     query.setString("clave", usuario.getContraseniaUsu());
+     return (Usuario) query.uniqueResult(); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

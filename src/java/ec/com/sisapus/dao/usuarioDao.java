@@ -12,6 +12,7 @@ import org.hibernate.Session;
 public interface usuarioDao {
 ///Metodo Validacion Usuario
     public Usuario buscarPorUsuario(Usuario usuario);
+       public Usuario buscarPorcodigoUsuario(Usuario usuario);
 ///MetodosCrud Usuario
     public List<Usuario> buscarTodosUsu();
     public boolean crearUsu(Usuario usuario);

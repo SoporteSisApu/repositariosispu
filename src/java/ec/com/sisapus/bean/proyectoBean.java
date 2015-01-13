@@ -2,6 +2,7 @@ package ec.com.sisapus.bean;
 
 import ec.com.sisapus.dao.proyectoDao;
 import ec.com.sisapus.daoimpl.proyectoDaoImpl;
+import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Proyecto;
 import ec.com.sisapus.modelo.Usuario;
 import ec.com.sisapus.util.HibernateUtil;
@@ -40,6 +41,11 @@ public class proyectoBean implements Serializable {
     private List<Proyecto> listaProyectos;
     private List<Proyecto> liscaldimensional;
     private List<Proyecto> listaporUsuario;
+     private Session session;
+    private Transaction transaccion;
+    private List<SelectItem> cargarProyectos;
+    
+    private Integer codigoProy;
     
     private SelectItem[] opciones = new SelectItem[]{
 		new SelectItem("Quito", "Quito"),
@@ -54,20 +60,9 @@ public class proyectoBean implements Serializable {
         this.opciones = opciones;
     }
 
-    
-    
-    
-    //////
-    private Session session;
-    private Transaction transaccion;
-    private List<SelectItem> cargarProyectos;
-    
-    private Integer codigoProy;
-    /////
-    private Usuario idUssuu;
-
     public proyectoBean() {
         this.proyecto = new Proyecto();
+        this.usuario=new Usuario();
     }
 
     public Proyecto getProyecto() {
@@ -151,15 +146,7 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
         this.transaccion = transaccion;
     }
 
-    //////----Getter y Setter idUsss//////
-    public Usuario getIdUssuu() {
-        return idUssuu;
-
-    }
-
-    public void setIdUssuu(Usuario idUssuu) {
-        this.idUssuu = idUssuu;
-    }
+    
 
     //////////
     //////////////////////////
@@ -167,8 +154,10 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
     public void crearProyecto(ActionEvent actionEvent) {
         proyectoDao proyectDao = new proyectoDaoImpl();
         String msg;
-        /*this.proyecto.setUsuario(this.proyecto.getUsuario());
-        this.proyecto.setContratProy(this.proyecto.getContratProy());
+       usuarioDaoImpl userdao= new usuarioDaoImpl();
+        this.usuario=userdao.buscarPorcodigoUsuario(usuario);
+        this.proyecto.setUsuario(this.usuario);
+        /*this.proyecto.setContratProy(this.proyecto.getContratProy());
         this.proyecto.setPropiepProy(this.proyecto.getPropiepProy());
         this.proyecto.setObraProy(this.proyecto.getObraProy());
         this.proyecto.setUbicProy(this.proyecto.getUbicProy());

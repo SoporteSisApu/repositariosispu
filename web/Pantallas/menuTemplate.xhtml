@@ -55,20 +55,23 @@
                         </p:submenu>  
 
                         <p:submenu rendered="#{loginBean.usuario.perfil.modAnalcosto}" label="Analisis de Costos" icon="icon-costo">  
-                            <p:menuitem rendered="#{loginBean.usuario.perfil.modApu}"   value="APU" url="#{appBean.basePath}preciounitario/prueba.xhtml" icon="icon-precio" />  
+                            <p:menuitem rendered="#{loginBean.usuario.perfil.modApu}"   value="APU" url="#{appBean.basePath}preciounitario/apugenerico.xhtml" icon="icon-precio" />  
                             <p:menuitem rendered="#{loginBean.usuario.perfil.modPresup}"   value="Presupuestos" url="#{appBean.basePath}presupuesto/presupuestoMant.xhtml" icon="icon-presupuesto"/>  
                             <p:menuitem rendered="#{loginBean.usuario.perfil.modCronograma}"   value="Cronograma Valorado" url="#" icon="icon-cronograma" />  
                             <p:menuitem rendered="#{loginBean.usuario.perfil.modReajprec}"    value="Reajuste de Precios" url="#" icon="icon-reajuste" />  
                         </p:submenu>
                         
                         <p:submenu rendered="#{loginBean.usuario.perfil.modReportes}" label="Reportes Generales" icon="icon-reporte">  
-                            <p:menuitem rendered="#{loginBean.usuario.perfil.modReppartida}" value="Partidas" url="#"  />  
+                            <p:menuitem rendered="#{loginBean.usuario.perfil.modReppartida}" value="Partidas" url="#"  /> 
+                            <p:menuitem rendered="#{loginBean.usuario.perfil.modReppresup}" value="Presupuesto" url="#"  />
+                            <p:menuitem rendered="#{loginBean.usuario.perfil.modRepejecpres}" value="Ejecutados y Presupuestados" url="#"  />
+                            
                         </p:submenu>
 
                         <p:submenu rendered="#{loginBean.usuario.perfil.modSeguridad}" label="Seguridad" icon="icon-seguridad">  
                             <p:menuitem rendered="#{loginBean.usuario.perfil.modUsuario}" value="Gestion Usuarios" url="#{appBean.basePath}usuarios/usuariomantenimiento.xhtml" icon="icon-user"/>  
                             <p:menuitem rendered="#{loginBean.usuario.perfil.modPerfil}" value="Gestion Perfiles" url="#{appBean.basePath}perfiles/perfilmantenimiento.xhtml" icon="icon-perfil"/>  
-                            <p:menuitem rendered="#{loginBean.usuario.perfil.modRegusu}" value="Registrar Usuario" url="#{appBean.basePath}usuarios/registroUsuarios.xhtml" />  
+                            
                         </p:submenu>
                         
                         <p:menuitem value="Cerrar Sesion" actionListener="#{loginBean.cerrarSesion()}" icon="icon-salir" oncomplete="handleLoginRequest(xhr, status, args)" style="margin-right:10px" />  
