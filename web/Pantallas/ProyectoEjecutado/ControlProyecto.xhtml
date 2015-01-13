@@ -25,8 +25,9 @@
                 <h:form id="control">
                     
                  <p:panel header="Grafica de Barras de Proyectos Ejecutados y Presupuestados" style="width: 550px">
-                     <p:barChart value="#{ControlEjecutadoBean.crearModeloBarrasControlProyecto()}" legendPosition="ne"  
-		title="Proyectos Ejecutados" style="width:400px;height:400px"/> 
+                     <p:barChart value="#{ControlEjecutadoBean.grafControl}" legendPosition="ne"
+  title="Gestión de viviendas" style="height:300px"
+  xaxisLabel="Año" yaxisLabel="Número de viviendas" />
             </p:panel>
                     
                     

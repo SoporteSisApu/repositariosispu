@@ -13,6 +13,6 @@ import org.hibernate.Session;
  * @author kleber
  */
 public interface ControlEjecucionDao {
-     public List<ControlEjecutadoPresupuestado> listaproyectosejecucion (Session session) throws  Exception;
+     public List<ControlEjecutadoPresupuestado> listaproyectosejecucion () ;
     
 }
