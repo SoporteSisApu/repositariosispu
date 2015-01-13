@@ -407,7 +407,7 @@
                         </h:panelGrid>
                     </FIELDSET>   
               </p:tab>
-                     <p:tab id="tab2" title="Quito" disabled="#{ApuBeanVista.escenarioact2}">
+               <p:tab id="tab2" title="Quito" disabled="#{ApuBeanVista.escenarioact2}">
                <p:growl id="mensajeGeneral1" showDetail="true"/>          
                     
                     <p:dialog header="Rubros" id="dlg10" widgetVar="dlg10" showEffect="fade" hideEffect="explode" height="145"  modal="true">
@@ -793,8 +793,390 @@
                          
             </p:tab>
 
-            <p:tab id="tab3" title="Cuenca" disabled="#{ApuBeanVista.escenarioact2}">
-               
+            <p:tab id="tab3" title="Guayaquil" disabled="#{ApuBeanVista.escenarioact2}">
+                  <p:growl id="mensajeGeneral2" showDetail="true"/>          
+                    
+                    <p:dialog header="Rubros" id="dlg16" widgetVar="dlg16" showEffect="fade" hideEffect="explode" height="145"  modal="true">
+
+                        <p:dataTable value="#{rubroBeanVista.all}" var="item8"  scrollable="true" scrollHeight="100"
+                                     style="width:650px ">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{item8.codigoRubro}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" >
+                                <h:outputText value="#{item8.nombreRubro}"/>
+                            </p:column>
+                            <p:column headerText="Detalle">
+                                <h:outputText value="#{item8.detalleRubro}"/>
+                            </p:column>
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{item8.categoriarubro.descripcionCatRubro}"/>
+                            </p:column>
+                            <p:column headerText="Unidad">
+                                <h:outputText value="#{item8.unidadRubro}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton   icon="icon-add" title="Añadir"  actionListener="#{ApuBeanVistaGuayaquil.agregarRubroApus(item8.codigoRubro)}"/>
+                            </p:column>      
+
+                        </p:dataTable>
+
+                    </p:dialog>           
+
+                    <FIELDSET  style="-moz-border-radius:10px; width: 1118px; "  class="borderFieldSet">
+                        <legend>Rubro</legend>
+
+                        <h:panelGrid id="panelFinalVenta16" columns="2" cellpadding="1" >
+
+                            <p:outputLabel value="Codigo:"/>
+                            <p:inputText value="#{ApuBeanVistaGuayaquil.auxocidigo}" id="auxcodrub2" size="10"/>
+
+                            <p:outputLabel value="Descripcion:"/>
+                            <p:inputTextarea value="#{ApuBeanVistaGuayaquil.auxdesrubro}" id="auxdesru2" rows="4" cols="70"/>
+                            <p:outputLabel value="Unidad:" />
+                            <p:inputText value="#{ApuBeanVistaGuayaquil.auxunidrubro}" id="auxunidad2" size="20"/>
+                            <p:outputLabel value="Categoria:" />
+                            <p:inputText value="#{ApuBeanVistaGuayaquil.auxcategoria}" id="auxcatru2" size="20"/>          
+                            <h:panelGroup>
+                                <p:commandButton id="btnCrearRubro1344" oncomplete="dlg16.show()" value="Añadir"/>
+
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+                    </FIELDSET>
+
+
+                    <p:dialog header="Equipos y Herramientas" id="dlg17" widgetVar="dlg17" showEffect="fade" hideEffect="explode" height="145"  modal="true">
+
+                        <p:dataTable value="#{equipoherramientaBean.listaEquipoHerramienta}" var="item"  scrollable="true" scrollHeight="100"
+                                     style="width:650px ">
+                            <p:column headerText="Codigo">
+                                
+                                <h:outputText value="#{item.codigoEqherr}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" >
+                                <h:outputText value="#{item.nombreEqherr}"/>
+                            </p:column>
+                            <p:column headerText="Costo Hora">
+                                <h:outputText value="#{item.costohoraEqherr}"/>
+                            </p:column>
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{item.categoriaequipoherramienta.nombCatEqherr}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton  icon="icon-add" title="Añadir"   actionListener="#{ApuBeanVistaGuayaquil.agregarListaEquiposApus(item.codigoEqherr)}"
+                                                  />
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+
+
+                    <FIELDSET  style="-moz-border-radius:10px;background-color: #dddddd;
+                               width: 1118px;" class="borderFieldSet" >
+                        <legend>Equipos y Herramientas</legend>
+                        <p:dataTable  id="tablaListaProductosVenta17" 
+                                      editable="true" editMode="cell" value="#{ApuBeanVistaGuayaquil.listaEquiposApus}" var="item" scrollable="true" scrollHeight="100">
+
+                          
+
+                            <p:column headerText="NOMBRE" style="text-align: left;">
+
+                                <h:outputText value="#{item.descEqherrApu}"/>
+
+                            </p:column>
+                            <p:column headerText="Cantidad" style="text-align: center;">
+                              
+                                 
+                                      <p:inputText value="#{item.cantEqherrApu}" style="text-align: center;" />                     
+                               
+                            </p:column>
+                            <p:column headerText="Tarifa" style="text-align: center;">
+                                $./     <h:outputText value="#{item.tarifaEqherrApu}" />
+                            </p:column>
+
+                            <p:column headerText="Costo Hora" style="text-align: center;">
+                                $./   <h:outputText value="#{item.costohoraEqherrApu}" />
+                            </p:column>
+                            <p:column headerText="Rendimiento" style="text-align: center;">
+                               
+                                    
+                                     <p:inputText value="#{item.rendimEqherrApu}" style="text-align: center;" />  </p:column>               
+                            <p:column headerText="Total" style="text-align: center;">
+                                $./ 
+                                <h:outputText value="#{item.costotEqherrApu}"/>
+                            </p:column>
+                            <p:column style="width:5%; text-align: center">
+                                <p:commandButton icon="icon-delete" ajax="true" actionListener="#{ApuBeanVistaGuayaquil.EliminarListaEquipo(item.descEqherrApu)}"/>
+                            </p:column >
+
+                        </p:dataTable >
+
+                        <p:panelGrid id="panelFinalVenta17" columns="1" style="text-align: right;width: 98%;">
+                            <h:panelGroup>
+                                <p:commandButton id="btnProyectoCreate1344"  oncomplete="dlg17.show()"  value="Añadir"/>  
+                                Total $./
+                                <h:outputText value="#{ApuBeanVistaGuayaquil.precioTotalEquipo}" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>               
+                                ____________
+                                <p:commandButton value="Calcular" actionListener="#{ApuBeanVistaGuayaquil.calcularCostos()}" />
+                               
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </FIELDSET>     
+
+
+
+
+                    <p:dialog header="Effects" id="dlg18" widgetVar="dlg18" showEffect="fade" hideEffect="explode" height="145"  modal="true">
+
+                        <p:dataTable value="#{manodeobraBean.listamanoobra}" var="item2"  scrollable="true" scrollHeight="100"
+                                     style="width:650px ">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{item2.codigoManob}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" >
+                                <h:outputText value="#{item2.nombreManob}"/>
+                            </p:column>
+                            <p:column headerText="Costo Jornal H/R">
+                                <h:outputText value="#{item2.costojrhManob}"/>
+                            </p:column>
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{item2.categoriamanoobra.nombCatManob}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-add" title="Seleccionar"  actionListener="#{ApuBeanVistaGuayaquil.agregarListaManobraApu(item2.codigoManob)}"
+                                                 />
+
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:dialog>
+
+                    <FIELDSET  style="-moz-border-radius:10px;background-color: #dddddd;
+                               width: 1118px;" class="borderFieldSet" >
+                        <legend>Mano de Obra</legend>
+                        <p:dataTable id="tablaListaProductosVenta18" value="#{ApuBeanVistaGuayaquil.listaManoBra}" var="item1" scrollable="true" scrollHeight="100">
+
+
+                            <p:column headerText="NOMBRE" style="text-align: left;">
+                                <h:outputText value="#{item1.descMoApu}"/>
+                            </p:column>
+                            <p:column headerText="Cantidad" style="text-align: center;">
+                                <p:inputText value="#{item1.cantMoApu}" style="text-align: center;" />                    
+                            </p:column>
+
+                            <p:column headerText="Costo Jornal H/R" style="text-align: center;">
+                                S./   <h:outputText value="#{item1.costojrhMoApu}"  />
+                            </p:column>
+
+                            <p:column headerText="Costo Hora" style="text-align: center;">
+                                S./   <h:outputText value="#{item1.costohoraMoApu}" />
+                            </p:column>      
+
+                            <p:column headerText="Rendimiento" style="text-align: center;">
+                                <p:inputText value="#{item1.rendimMoApu}" style="text-align: center;" />                    
+                            </p:column>
+
+                            <p:column headerText="Total" style="text-align: center;">
+                                S./ 
+                                <h:outputText value="#{item1.costotMoApu}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-delete" title="Retirar Mano de Obra" ajax="true" actionListener="#{ApuBeanVistaGuayaquil.EliminarListaManObra(item1.descMoApu)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:panelGrid id="panelFinalVenta18" columns="1" style="text-align: right;width: 100%;">
+                            <h:panelGroup>
+                                <p:commandButton id="btnProyectoCreate123456"  oncomplete="dlg18.show()"  value="Añadir">  
+                                </p:commandButton>   
+
+                                <p:commandButton value="Calcular" actionListener="#{ApuBeanVistaGuayaquil.calcularCostosManobra()}" />
+                                Total $./ 
+                                <h:outputText value="#{ApuBeanVistaGuayaquil.precioTotalmanoobra}" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>
+                                _________          
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </FIELDSET>     
+                    <!--  </h:form> -->
+
+                    <!--<h:form id="frmRealizarVentas2">-->
+                    <!--<p:growl id="mensajeGeneral2" showDetail="true"/>-->   
+
+                    <p:dialog header="Effects" id="dlg19" widgetVar="dlg19" showEffect="fade" hideEffect="explode" height="145"  modal="true">
+
+                        <p:dataTable value="#{materialBean.listaMateriales}" var="item4"  scrollable="true" scrollHeight="100"
+                                     style="width:650px ">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{item4.codigoMat}"/>
+                            </p:column>
+                            <p:column headerText="Nombre" >
+                                <h:outputText value="#{item4.nombreMat}"/>
+                            </p:column>
+                            <p:column headerText="Unidad" >
+                                <h:outputText value="#{item4.unidMat}"/>
+                            </p:column>
+                            <p:column headerText="Costo Unitario">
+                                <h:outputText value="#{item4.precunitMat}"/>
+                            </p:column>
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{item4.categoriamaterial.nombCatMat}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-add" title="Seleccione Material"  actionListener="#{ApuBeanVistaGuayaquil.agregarListaMaterialApu(item4.codigoMat)}"
+                                                 />
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+
+                    <FIELDSET  style="-moz-border-radius:10px;background-color: #dddddd;
+                               width: 1118px;" class="borderFieldSet" >
+                        <legend>Materiales</legend>
+                        <p:dataTable id="tablaListaProductosVenta19" value="#{ApuBeanVistaGuayaquil.listaMaterialApus}" var="item3" scrollable="true" scrollHeight="100">
+
+
+                            <p:column headerText="NOMBRE" style="text-align: left;">
+                                <h:outputText value="#{item3.descMatApu}"/>
+                            </p:column>
+                            <p:column headerText="Unidad" style="text-align: center;">
+                                <h:outputText value="#{item3.unidMatApu}"/>
+                            </p:column>
+                            <p:column headerText="Cantidad" style="text-align: center;">
+                                <p:inputText value="#{item3.cantMatApu}" style="text-align: center;" />                    
+                            </p:column>
+                            <p:column headerText="Costo Unitario" style="text-align: center;">
+                                <h:outputText value="#{item3.preunitMatApu}"/>                 
+                            </p:column>
+                            <p:column headerText="Total" style="text-align: center;">
+                                S./ 
+                                <h:outputText value="#{item3.costotMatApu}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-delete" title="Retirar Material" ajax="true" actionListener="#{ApuBeanVistaGuayaquil.EliminarListaMateriales(item3.descMatApu)}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <p:panelGrid id="panelFinalVenta19" columns="1" style="text-align: right;width: 100%;">
+                            <h:panelGroup>
+                                <p:commandButton id="btnProyectoCreate25546"  oncomplete="dlg19.show()"  value="Añadir">  
+                                </p:commandButton>   
+
+                                <p:commandButton value="Calcular" actionListener="#{ApuBeanVistaGuayaquil.calcularCostosMateriales()}" />
+                                Total $./ 
+                                <h:outputText value="#{ApuBeanVistaGuayaquil.precioTotalmaterial}" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>
+                                _______
+
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </FIELDSET>     
+                    <!--  </h:form>     -->
+
+
+                    <!--aumento de dialogo para crear equipos y herramientas-->
+                    <!--aumento materiales para crear equipos y herramientas-->
+                    <!-- <h:form id="frmRealizarVentas3">-->
+                    <!--  <p:growl id="mensajeGeneral3" showDetail="true"/>  --> 
+
+                    <p:dialog header="Effects" id="dlg20" widgetVar="dlg20"
+                              showEffect="fade" hideEffect="explode" height="145"  modal="true">
+
+                        <p:dataTable value="#{transportesBean.listaTransporte}" var="item5"  scrollable="true" scrollHeight="100"
+                                     style="width:650px ">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{item5.codigoTransp}"/>
+                            </p:column>
+                            <p:column headerText="NOMBRE" >
+                                <h:outputText value="#{item5.nombreTransp}"/>
+                            </p:column>
+                            <p:column headerText="Tarifa">
+                                <h:outputText value="#{item5.tarifaTransp}"/>
+                            </p:column>
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{item5.categoriatransporte.nombCatTrans}"/>
+                            </p:column>
+                            <p:column style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-add" title="Seleccionar Transporte"  actionListener="#{ApuBeanVistaGuayaquil.agregarListaTransporteApu(item5.codigoTransp)}"
+                                                 />
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+
+                    <FIELDSET  style="-moz-border-radius:10px;background-color: #dddddd;
+                               width: 1118px;" class="borderFieldSet" >
+                        <legend>Transporte</legend>
+                        <p:dataTable id="tablaListaProductosVenta120" value="#{ApuBeanVistaGuayaquil.listaTransporteApus}" var="item6" scrollable="true" scrollHeight="100">
+
+
+                            <p:column headerText="NOMBRE" style="text-align: left;">
+                                <h:outputText value="#{item6.descTranApu}"/>
+                            </p:column>
+
+                            <p:column headerText="Unidad" style="text-align: center;">
+                                <h:outputText value="#{item6.unidTranApu}" style="text-align: center;" />                    
+                            </p:column>
+                            <p:column headerText="Cantidad" style="text-align: center;">
+                                <p:inputText value="#{item6.cantTranApu}" style="text-align: center;" />                    
+                            </p:column>
+
+                            <p:column headerText="Tarifa" style="text-align: center;">
+                                S./   <h:outputText value="#{item6.tarifaTranApu}"/>                  
+                            </p:column>
+                            <p:column headerText="Total" style="text-align: center;">
+                                S./ 
+                                <h:outputText value="#{item6.costotTranApu}"/>
+                            </p:column>
+                            <p:column  style="width:8%; text-align: center">
+                                <p:commandButton icon="icon-delete" title="Retirar Transporte" ajax="true" actionListener="#{ApuBeanVistaGuayaquil.EliminarListaTransporte(item6.descTranApu)}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <p:panelGrid id="panelFinalVenta20" columns="1" style="text-align: right;width: 100%;">
+                            <h:panelGroup>
+                                <p:commandButton id="btnProyectoCreate1467"  oncomplete="dlg20.show()"  value="Añadir">  
+                                </p:commandButton>   
+
+                                <p:commandButton value="Calcular" actionListener="#{ApuBeanVistaGuayaquil.calcularCostosTransporte()}" />
+                                Total $./ 
+                                <h:outputText value="#{ApuBeanVistaGuayaquil.precioTotaltransporte}" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>          
+                                ________
+
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </FIELDSET>     
+
+
+                    <FIELDSET  style="-moz-border-radius:10px; width: 1118px; "  class="borderFieldSet">
+                        <legend>Costo Rubro</legend>
+
+                        <h:panelGrid id="panelFinalVenta21" columns="5" cellpadding="8" style="float:right" border="2">
+
+                            <p:ajax event="keyup" update="otrocostodirecto" listener="#{ApuBeanVistaGuayaquil.calcularCostosTotalesAPU()}" /> 
+                            <p:outputLabel value="Costo Directo (EH+M+MO+T)$:"  for="costodirecto12" />
+                            <h:outputText  value="#{ApuBeanVistaGuayaquil.totaldirAPU}" id="costodirecto12" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;" />
+
+
+                            <p:outputLabel value="Costo Indirecto y Utilidades$:" for="costoindirecto12" />
+                            <p:inputText value="#{ApuBeanVistaGuayaquil.auxiliarPorcenjate}" id="costoindirectoaux12" size="10"/>
+                            <h:outputText value="#{ApuBeanVistaGuayaquil.costoinAPu}" id="costoindirecto12" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>
+                            <p:outputLabel value="Otros Costos Indirectos:" for="otrocostodirecto12" />
+                            <p:inputText value="#{ApuBeanVistaGuayaquil.auxiliarotroscostos}" id="otrocostodirecto12" size="10"/>  
+                            <p:outputLabel value="Valor Ofertado:" for="valorofertado12" />
+                            <h:outputText value="#{ApuBeanVistaGuayaquil.costoaputotal}" id="valorofertado12" style="box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);padding: 7px;"/>
+
+                            <h:panelGroup>
+
+                                <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.guardarAPU()}"/>
+                                
+                                <p:commandButton id="imprimirreporte2" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirpdfaapu()}"/>
+                                <p:commandButton value="PDF" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.exportarPDF(actionEvent)}"/>
+                                <p:commandButton value="Excel" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirexcelapu()}"/>
+                                <h:selectBooleanCheckbox title="Seleccionar Escenarios" id="escenarios2" value="#{ApuBeanVistaGuayaquil.escenarioact1}" >
+                                    <p:ajax event="valueChange" update="Escenarios" listener="#{ApuBeanVistaGuayaquil.ActivarEscenarios(vcEvent)}" />
+               </h:selectBooleanCheckbox>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </FIELDSET>
+        
             </p:tab>
                      
                      

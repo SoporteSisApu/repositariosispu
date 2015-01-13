@@ -254,8 +254,8 @@ public class ApuBeanVistaGuayaquil {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Rubro agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta4");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta16");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
 
 
         } catch (Exception ex) {
@@ -290,8 +290,8 @@ public class ApuBeanVistaGuayaquil {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Equipo/Herramienta agregado"));
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta17");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
 
 
         } catch (Exception ex) {
@@ -338,9 +338,9 @@ public class ApuBeanVistaGuayaquil {
             this.analisisapus.setAnalApuEqherr(totalVenta);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Equipos y Herramientas retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta17");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta17");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -363,8 +363,8 @@ public class ApuBeanVistaGuayaquil {
 
             this.setPrecioTotalEquipo(totalVenta);
               this.analisisapus.setAnalApuEqherr(totalVenta);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta17");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta17");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -426,8 +426,8 @@ public class ApuBeanVistaGuayaquil {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta18");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
             //
 
         } catch (Exception ex) {
@@ -475,9 +475,9 @@ public class ApuBeanVistaGuayaquil {
                this.analisisapus.setAnalApuMob(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Mano de Obra retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta18");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta18");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -500,8 +500,8 @@ public class ApuBeanVistaGuayaquil {
 
             this.setPrecioTotalmanoobra(totalVenta1);
                this.analisisapus.setAnalApuMob(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta18");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta18");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -536,8 +536,8 @@ public class ApuBeanVistaGuayaquil {
 
 
             //el qu estaba
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta19");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
             //
 
         } catch (Exception ex) {
@@ -585,9 +585,9 @@ public class ApuBeanVistaGuayaquil {
    this.analisisapus.setAnalApuMat(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Material retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta19");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta19");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -610,8 +610,8 @@ public class ApuBeanVistaGuayaquil {
 
             this.setPrecioTotalmaterial(totalVenta1);
                this.analisisapus.setAnalApuMat(totalVenta1);
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta19");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta19");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -642,8 +642,8 @@ public class ApuBeanVistaGuayaquil {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte agregado"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta20");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
             //
 
         } catch (Exception ex) {
@@ -691,9 +691,9 @@ public class ApuBeanVistaGuayaquil {
                this.analisisapus.setAnalApuTran(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Transporte retirado de la lista"));
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta20");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta20");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:mensajeGeneral2");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -719,8 +719,8 @@ public class ApuBeanVistaGuayaquil {
 
 
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta3");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta20");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta20");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
@@ -785,7 +785,7 @@ public class ApuBeanVistaGuayaquil {
          }*/
          
         // if (componente2.equals("tab2")){
-         this.escenariosapu.setCodigoEscenario(2);
+         this.escenariosapu.setCodigoEscenario(3);
          //}
          /*if (componente3.equals("tab3")){
          this.escenariosapu.setCodigoEscenario(3);
@@ -911,7 +911,7 @@ public class ApuBeanVistaGuayaquil {
             this.setCostoinAPu(costoinAPu);
             this.setCostoaputotal(costoaputotal);
 
-            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta5");
+            RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta21");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
