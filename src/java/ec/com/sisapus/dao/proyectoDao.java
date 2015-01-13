@@ -4,6 +4,7 @@
  */
 package ec.com.sisapus.dao;
 
+import ec.com.sisapus.modelo.ControlEjecutadoPresupuestado;
 import ec.com.sisapus.modelo.Proyecto;
 import ec.com.sisapus.modelo.Usuario;
 import java.util.List;
@@ -28,5 +29,6 @@ public interface proyectoDao {
     
     //Metodos Agregados para usarlos dentro del presupuesto
     public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception;
-    
+    //metodo para la ejecucion de los proyectos
+     public List<ControlEjecutadoPresupuestado> listaproyectosejecucion (Session session) throws  Exception;
 }
