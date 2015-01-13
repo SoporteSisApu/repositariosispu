@@ -4,6 +4,7 @@
  */
 package ec.com.sisapus.bean;
 
+import ec.com.sisapus.daoimpl.ControlEjecucionImpl;
 import ec.com.sisapus.modelo.ControlEjecutadoPresupuestado;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.inject.Named;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 /**
  *
@@ -36,9 +38,21 @@ public class ControlEjecutadoBean implements Serializable {
  this.listaControl=new ArrayList<>();
  }
 
- public void criaModeloBarras() {
+ public void crearModeloBarrasControlProyecto() throws Exception {
      model= new CartesianChartModel();
-     ControlEj
+     ControlEjecucionImpl daoeje=new ControlEjecucionImpl();
+   List< ControlEjecutadoPresupuestado> listacontrol=daoeje.listaproyectosejecucion(session);
+   ChartSeries seriegrafic;
+   for (ControlEjecutadoPresupuestado control : listacontrol)           {
+               seriegrafic=new ChartSeries();
+               String Nombre=String.valueOf(control.getDescripcionEjec());
+               String Id=String.valueOf(control.getCodigoEjec());
+               seriegrafic.setLabel(Nombre);
+               seriegrafic.set("Ejecutados", control.getPTotalEjec());
+               model.addSeries(seriegrafic);
+               //model.addSeries(seriegrafic);
+           }
+   
      
  }
  
@@ -52,6 +66,8 @@ public class ControlEjecutadoBean implements Serializable {
  
  
     public CartesianChartModel getModel() {
+  
+      
         return model;
     }
 
