@@ -15,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import net.sf.jasperreports.engine.analytics.data.Axis;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.component.chart.bar.BarChart;
@@ -80,27 +81,21 @@ private CartesianChartModel GrafControl;
         GrafControl = new CartesianChartModel();
          
   for (ControlEjecutadoPresupuestado control :listacontrol)           {
-              final  ChartSeries ejec= new ChartSeries("Ejecucion");
+              final  ChartSeries ejec= new ChartSeries("Proyectos en Ejecucion");
               // String Nombre=String.valueOf(control.getDescripcionEjec());
               // String Id=String.valueOf(control.getCodigoEjec());
               //.setLabel(Nombre);
-               ejec.set("Ejecutados", control.getPTotalEjec());
+               ejec.set("Precio Total", control.getPTotalEjec());
+               ejec.set("Precio Unitario", control.getPUnitEjec());
                GrafControl.addSeries(ejec);
-               //model.addSeries(seriegrafic);
            }      
-        /*final ChartSeries venta  = new ChartSeries("Venta");
-        venta.set("2008", 800);
-        venta.set("2009", 1300);
-        venta.set("2010", 700);
-        venta.set("2011", 500);*/
+        
          
-        final ChartSeries alquiler  = new ChartSeries("Alquiler");
-        alquiler.set("2008", 1200);
-        alquiler.set("2009", 1100);
-        alquiler.set("2010", 1700);
-        alquiler.set("2011", 1900);
-         
-        //GrafControl.addSeries(ejec);
+        final ChartSeries alquiler  = new ChartSeries("Proyecto Presupuestados");
+        alquiler.set("Precio Total", 200);
+        alquiler.set("Precio Unitario",200);
+        
+
         GrafControl.addSeries(alquiler);
   
  }

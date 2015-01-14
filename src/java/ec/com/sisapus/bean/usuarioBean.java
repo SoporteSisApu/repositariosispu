@@ -252,9 +252,19 @@ public class usuarioBean {
         if (this.contrasenia.equals(this.contraseniaRepita)) {
 
             try {
-                usuarioregistrodao.registrarUsuario(nombre, apellido, sobrenombre, contrasenia, correo);
                 
-                enviar_correo(correo);
+                usuarioregistrodao.registrarUsuario(nombre, apellido, sobrenombre, contrasenia, correo);
+                if(correo==null)
+                {
+                    msg = "El correo ingresado es incorrecto intente nuevamente";
+                FacesMessage message45 = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null);
+                FacesContext.getCurrentInstance().addMessage(null, message45);
+                }
+                else 
+                        {
+                            enviar_correo(correo);
+                        }      
+               
 
                 msg = "Usuario registrado correctamente";
                 FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
