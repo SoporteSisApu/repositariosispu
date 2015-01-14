@@ -43,7 +43,7 @@ public class MbSLogin implements Serializable {
         miSession.setMaxInactiveInterval(5000);
     }
     
-    public String login()
+ /*   public String login()
     {
         this.session=null;
         this.transaccion=null;
@@ -56,7 +56,7 @@ public class MbSLogin implements Serializable {
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=this.session.beginTransaction();
             
-            Usuario tUsuario=daousu.getByCorreoElectronico(this.session, this.correoElectronico);
+        //    Usuario tUsuario=daousu.getByCorreoElectronico(this.session, this.correoElectronico);
             
             if(tUsuario!=null)
             {
@@ -98,7 +98,7 @@ public class MbSLogin implements Serializable {
             }
         }
     }
-    
+    */
     public String cerrarSesion()
     {
         this.correoElectronico=null;

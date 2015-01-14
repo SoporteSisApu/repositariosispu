@@ -97,7 +97,7 @@ public class proyectoBean implements Serializable {
 
     ///////////
     public List<Proyecto> getListaporUsuario() {
-        //  proyectoDao proyecDao = new proyectoDaoImpl();
+         // proyecDao = new proyectoDaoImpl();
         //listaporUsuario = proyecDao.listarProyectosPorUsuario("kleper");
         this.session = null;
         this.transaccion = null;
@@ -105,7 +105,7 @@ public class proyectoBean implements Serializable {
             proyectoDaoImpl daoproyecto = new proyectoDaoImpl();
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaccion = this.session.beginTransaction();
-            this.listaporUsuario = daoproyecto.listarProyectosPorUsuario(this.proyecto.getUsuario().getSobrenombreUsu());
+            this.listaporUsuario = daoproyecto.listarProyectosPorUsuario("kleper");
             this.transaccion.commit();
             return this.listaporUsuario;
         } catch (Exception ex) {

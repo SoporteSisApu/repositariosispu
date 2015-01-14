@@ -44,7 +44,8 @@ public class usuarioBean {
     private String contraseniaRepita;
     private String nombre,apellido,sobrenombre, contrasenia,correo;
     //private boolean estado;
-    
+    private Session session;
+   
     private String nombreperfil;
     //private Date fechaReg, fechaMod;
     
@@ -252,24 +253,28 @@ public class usuarioBean {
         if (this.contrasenia.equals(this.contraseniaRepita)) {
 
             try {
-                
-                usuarioregistrodao.registrarUsuario(nombre, apellido, sobrenombre, contrasenia, correo);
-                if(correo==null)
-                {
-                    msg = "El correo ingresado es incorrecto intente nuevamente";
-                FacesMessage message45 = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null);
-                FacesContext.getCurrentInstance().addMessage(null, message45);
-                }
-                else 
-                        {
+                //this.usuario=usuarioregistrodao.getByCorreoElectronico(this.correo);
+                     
+            //if(this.usuario.equals(null))
+            //{
+                usuarioregistrodao.registrarUsuario(nombre,apellido,sobrenombre,contrasenia,correo);
+             
                             enviar_correo(correo);
-                        }      
-               
-
-                msg = "Usuario registrado correctamente";
+                            msg = "Usuario registrado correctamente";
                 FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
                 FacesContext.getCurrentInstance().addMessage(null, message1);
                 limpiar_campos();
+            //} else
+                
+               
+            /*{
+                msg = "el usuario se encuentra registrado";
+                FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null);
+                FacesContext.getCurrentInstance().addMessage(null, message2);
+
+            }*/
+
+                
 
             } catch (Exception e) {
                 msg = "No se pudo registrar el usuario";
@@ -333,7 +338,33 @@ public class usuarioBean {
     //public String getLoggedUserName() {
       //  return ((usuarioBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(USER_KEY)).toString();
     //}
-
+//obtener lista de usuarios por sesion
+    
+    public Usuario buscarPorUsuario1()
+    {
+        //this.session=null;
+        //this.transaccion=null;
+        
+        
+            usuarioDaoImpl usuariobdao=new usuarioDaoImpl();
+            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+           this.usuario=usuariobdao.buscarPorsobreUsuario(sessionUsuario.getAttribute("usuario").toString());
+            
+           // this.transaccion.commit();
+            
+           
+         //   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "));
+           
+        return this.usuario;
+        
+    }
+    
+    
+    
+    
+    
     public String getNombreperfil() {
         return nombreperfil;
     }

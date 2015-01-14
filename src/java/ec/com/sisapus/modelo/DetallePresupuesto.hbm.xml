@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="ec.com.sisapus.modelo.DetallePresupuesto" table="detalle_presupuesto" catalog="bdsisapu_1">
+        <id name="codigoDetPres" type="java.lang.Integer">
+            <column name="CODIGO_DET_PRES" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cabeceraPresupuesto" class="ec.com.sisapus.modelo.CabeceraPresupuesto" fetch="select">
+            <column name="CODIGO_PRES" />
+        </many-to-one>
+        <many-to-one name="analisispreciounitario" class="ec.com.sisapus.modelo.Analisispreciounitario" fetch="select">
+            <column name="CODIGO_APU" />
+        </many-to-one>
+        <property name="nombreDetPres" type="string">
+            <column name="NOMBRE_DET_PRES" length="100" />
+        </property>
+        <property name="unidadDetPres" type="string">
+            <column name="UNIDAD_DET_PRES" length="50" />
+        </property>
+        <property name="categoriaDetPres" type="string">
+            <column name="CATEGORIA_DET_PRES" length="100" />
+        </property>
+        <property name="cantidadDetPres" type="java.lang.Integer">
+            <column name="CANTIDAD_DET_PRES" />
+        </property>
+        <property name="punitDetPres" type="java.lang.Double">
+            <column name="PUNIT_DET_PRES" precision="22" scale="0" />
+        </property>
+        <property name="ptotDetPres" type="java.lang.Double">
+            <column name="PTOT_DET_PRES" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

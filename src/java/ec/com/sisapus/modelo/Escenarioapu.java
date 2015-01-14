@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,7 +12,6 @@ public class Escenarioapu  implements java.io.Serializable {
 
 
      private Integer codigoEscenario;
-
      private String nombreEscenario;
      private Set analisispreciounitarios = new HashSet(0);
 
@@ -20,8 +19,7 @@ public class Escenarioapu  implements java.io.Serializable {
         this.codigoEscenario=0;
     }
 
-    public Escenarioapu( String nombreEscenario, Set analisispreciounitarios) {
-   
+    public Escenarioapu(String nombreEscenario, Set analisispreciounitarios) {
        this.nombreEscenario = nombreEscenario;
        this.analisispreciounitarios = analisispreciounitarios;
     }
@@ -33,7 +31,6 @@ public class Escenarioapu  implements java.io.Serializable {
     public void setCodigoEscenario(Integer codigoEscenario) {
         this.codigoEscenario = codigoEscenario;
     }
- 
     public String getNombreEscenario() {
         return this.nombreEscenario;
     }

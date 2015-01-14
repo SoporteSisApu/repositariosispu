@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -16,20 +16,18 @@ public class Rubro  implements java.io.Serializable {
      private String nombreRubro;
      private String detalleRubro;
      private String unidadRubro;
-     private Set presupuestos = new HashSet(0);
      private Set analisispreciounitarios = new HashSet(0);
 
     public Rubro() {
-         this.codigoRubro = 0;
+        this.codigoRubro = 0;
         this.categoriarubro = new Categoriarubro();
     }
 
-    public Rubro(Categoriarubro categoriarubro, String nombreRubro, String detalleRubro, String unidadRubro, Set presupuestos, Set analisispreciounitarios) {
+    public Rubro(Categoriarubro categoriarubro, String nombreRubro, String detalleRubro, String unidadRubro, Set analisispreciounitarios) {
        this.categoriarubro = categoriarubro;
        this.nombreRubro = nombreRubro;
        this.detalleRubro = detalleRubro;
        this.unidadRubro = unidadRubro;
-       this.presupuestos = presupuestos;
        this.analisispreciounitarios = analisispreciounitarios;
     }
    
@@ -67,13 +65,6 @@ public class Rubro  implements java.io.Serializable {
     
     public void setUnidadRubro(String unidadRubro) {
         this.unidadRubro = unidadRubro;
-    }
-    public Set getPresupuestos() {
-        return this.presupuestos;
-    }
-    
-    public void setPresupuestos(Set presupuestos) {
-        this.presupuestos = presupuestos;
     }
     public Set getAnalisispreciounitarios() {
         return this.analisispreciounitarios;

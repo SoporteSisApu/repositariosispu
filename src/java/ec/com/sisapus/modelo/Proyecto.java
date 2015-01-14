@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -22,14 +22,14 @@ public class Proyecto  implements java.io.Serializable {
      private Double costotProy;
      private Set cronogramas = new HashSet(0);
      private Set controlEjecutadoPresupuestados = new HashSet(0);
-     private Set presupuestos = new HashSet(0);
+     private Set cabeceraPresupuestos = new HashSet(0);
 
     public Proyecto() {
-         this.codigoProy = 0;
-        this.usuario = new Usuario();
+        this.codigoProy=0;
+        this.usuario=new Usuario();
     }
 
-    public Proyecto(Usuario usuario, String propiepProy, String contratProy, String obraProy, String ubicProy, Date fechaProy, Double costotProy, Set cronogramas, Set controlEjecutadoPresupuestados, Set presupuestos) {
+    public Proyecto(Usuario usuario, String propiepProy, String contratProy, String obraProy, String ubicProy, Date fechaProy, Double costotProy, Set cronogramas, Set controlEjecutadoPresupuestados, Set cabeceraPresupuestos) {
        this.usuario = usuario;
        this.propiepProy = propiepProy;
        this.contratProy = contratProy;
@@ -39,7 +39,7 @@ public class Proyecto  implements java.io.Serializable {
        this.costotProy = costotProy;
        this.cronogramas = cronogramas;
        this.controlEjecutadoPresupuestados = controlEjecutadoPresupuestados;
-       this.presupuestos = presupuestos;
+       this.cabeceraPresupuestos = cabeceraPresupuestos;
     }
    
     public Integer getCodigoProy() {
@@ -112,12 +112,12 @@ public class Proyecto  implements java.io.Serializable {
     public void setControlEjecutadoPresupuestados(Set controlEjecutadoPresupuestados) {
         this.controlEjecutadoPresupuestados = controlEjecutadoPresupuestados;
     }
-    public Set getPresupuestos() {
-        return this.presupuestos;
+    public Set getCabeceraPresupuestos() {
+        return this.cabeceraPresupuestos;
     }
     
-    public void setPresupuestos(Set presupuestos) {
-        this.presupuestos = presupuestos;
+    public void setCabeceraPresupuestos(Set cabeceraPresupuestos) {
+        this.cabeceraPresupuestos = cabeceraPresupuestos;
     }
 
 

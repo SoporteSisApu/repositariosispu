@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/01/2015 01:13:48 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ec.com.sisapus.modelo.Perfil" table="perfil" catalog="bdsisapu">
+    <class name="ec.com.sisapus.modelo.Perfil" table="perfil" catalog="bdsisapu_1">
         <id name="codigoPerf" type="java.lang.Integer">
             <column name="CODIGO_PERF" />
             <generator class="identity" />

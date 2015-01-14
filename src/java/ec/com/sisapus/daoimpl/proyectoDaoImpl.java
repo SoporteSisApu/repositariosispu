@@ -5,6 +5,7 @@
 package ec.com.sisapus.daoimpl;
 
 import ec.com.sisapus.dao.proyectoDao;
+import ec.com.sisapus.modelo.ControlEjecutadoPresupuestado;
 import ec.com.sisapus.modelo.Proyecto;
 import ec.com.sisapus.modelo.Usuario;
 import ec.com.sisapus.util.HibernateUtil;
@@ -98,7 +99,7 @@ public class proyectoDaoImpl implements proyectoDao{
     public List<Proyecto> listarProyectosPorUsuario(String sobre) {
         List<Proyecto> listado = null;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "from Proyecto p inner join p.usuario u WHERE u.sobrenombreUsu=usuario";
+        String sql = "select p,u from Proyecto p, Usuario u where p.usuario=u.codigoUsu and u.sobrenombreUsu=usuario";
         try {
             Query query=sesion.createQuery(sql);
             sesion.beginTransaction();
@@ -135,6 +136,11 @@ public class proyectoDaoImpl implements proyectoDao{
     @Override
     public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception {
         return (Proyecto) session.load(Proyecto.class, idProyecto);
+    }
+
+    @Override
+    public List<ControlEjecutadoPresupuestado> listaproyectosejecucion(Session session) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
       

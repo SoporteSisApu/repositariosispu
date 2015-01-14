@@ -12,7 +12,10 @@ import org.hibernate.Session;
 public interface usuarioDao {
 ///Metodo Validacion Usuario
     public Usuario buscarPorUsuario(Usuario usuario);
-       public Usuario buscarPorcodigoUsuario(Usuario usuario);
+    public Usuario buscarPorcodigoUsuario(Usuario usuario);
+       //buscar por sobrenombre
+    public Usuario buscarPorsobreUsuario(String sobrenombre);   
+       
 ///MetodosCrud Usuario
     public List<Usuario> buscarTodosUsu();
     public boolean crearUsu(Usuario usuario);
@@ -23,7 +26,7 @@ public interface usuarioDao {
     public void registrarUsuario(String nombre, String apellido, String sobrenom, String contrasenia, String correo );
 //agregado para el login
  public Usuario getByCodigoUsuario(Session session, String codigoUsuario)throws Exception;
-    public Usuario getByCorreoElectronico(Session session, String correoElectronico)throws Exception;
+    public Usuario getByCorreoElectronico(String correoElectronico);
     public Usuario getByCorreoElectronicoDiferent(Session session, String codigoUsuario ,String correoElectronico)throws Exception;
 //    
     

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/01/2015 01:13:48 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ec.com.sisapus.modelo.Analisispreciounitario" table="analisispreciounitario" catalog="bdsisapu">
+    <class name="ec.com.sisapus.modelo.Analisispreciounitario" table="analisispreciounitario" catalog="bdsisapu_1">
         <id name="codigoApu" type="java.lang.Integer">
             <column name="CODIGO_APU" />
             <generator class="identity" />
@@ -53,23 +53,23 @@
         <property name="porcenIndApu" type="java.lang.Double">
             <column name="PORCEN_IND_APU" precision="22" scale="0" />
         </property>
+        <set name="detallePresupuestos" inverse="true">
+            <key>
+                <column name="CODIGO_APU" />
+            </key>
+            <one-to-many class="ec.com.sisapus.modelo.DetallePresupuesto" />
+        </set>
         <set name="materialApus" inverse="true">
             <key>
                 <column name="CODIGO_APU" />
             </key>
             <one-to-many class="ec.com.sisapus.modelo.MaterialApu" />
         </set>
-        <set name="presupuestos" inverse="true">
+        <set name="transporteApus" inverse="true">
             <key>
                 <column name="CODIGO_APU" />
             </key>
-            <one-to-many class="ec.com.sisapus.modelo.Presupuesto" />
-        </set>
-        <set name="manoobraApus" inverse="true">
-            <key>
-                <column name="CODIGO_APU" />
-            </key>
-            <one-to-many class="ec.com.sisapus.modelo.ManoobraApu" />
+            <one-to-many class="ec.com.sisapus.modelo.TransporteApu" />
         </set>
         <set name="equipherrApus" inverse="true">
             <key>
@@ -77,11 +77,11 @@
             </key>
             <one-to-many class="ec.com.sisapus.modelo.EquipherrApu" />
         </set>
-        <set name="transporteApus" inverse="true">
+        <set name="manoobraApus" inverse="true">
             <key>
                 <column name="CODIGO_APU" />
             </key>
-            <one-to-many class="ec.com.sisapus.modelo.TransporteApu" />
+            <one-to-many class="ec.com.sisapus.modelo.ManoobraApu" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -17,7 +17,8 @@ public class ControlEjecutadoPresupuestado  implements java.io.Serializable {
      private Double PTotalEjec;
 
     public ControlEjecutadoPresupuestado() {
-        this.codigoEjec = 0;
+        
+ this.codigoEjec = 0;
         this.proyecto = new Proyecto();
     }
 

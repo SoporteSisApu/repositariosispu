@@ -146,9 +146,10 @@ public class usuarioDaoImpl implements usuarioDao{
     }
 
     @Override
-    public Usuario getByCorreoElectronico(Session session, String correoElectronico) throws Exception {
-         String hql="from Usuario where correoUsu=:correoElectronico";
-        Query query=session.createQuery(hql);
+    public Usuario getByCorreoElectronico( String correoElectronico)  {
+        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+         String hql="select u from Usuario u where correoUsu=:correoElectronico";
+        Query query=sesion.createQuery(hql);
         query.setParameter("correoElectronico", correoElectronico);
         
         Usuario usuarios=(Usuario) query.uniqueResult();
@@ -169,11 +170,20 @@ public class usuarioDaoImpl implements usuarioDao{
 
     @Override
     public Usuario buscarPorcodigoUsuario(Usuario usuario) {
-          Session session = HibernateUtil.getSessionFactory().openSession();
-     String sql="select  u.codigoUsu from Usuario u where SOBRENOMBRE_USU=:usuario and CONTRASENIA_USU=:clave and ESTADO_USU=1";
+     Session session = HibernateUtil.getSessionFactory().openSession();
+     String sql="select  u.SOBRENOMBRE_USU from Usuario u where SOBRENOMBRE_USU=:usuario and CONTRASENIA_USU=:clave and ESTADO_USU=1";
      Query query=session.createQuery(sql);
      query.setString("usuario", usuario.getSobrenombreUsu());
      query.setString("clave", usuario.getContraseniaUsu());
+     return (Usuario) query.uniqueResult(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario buscarPorsobreUsuario(String sobrenombre) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+     String sql="select  u from Usuario u where SOBRENOMBRE_USU=:usuario and ESTADO_USU=1";
+     Query query=session.createQuery(sql);
+     query.setString("usuario",sobrenombre); 
      return (Usuario) query.uniqueResult(); //To change body of generated methods, choose Tools | Templates.
     }
     

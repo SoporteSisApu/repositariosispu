@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class Cronograma  implements java.io.Serializable {
      private Set detallecronogramas = new HashSet(0);
 
     public Cronograma() {
-         this.codigoCron = 0;
+        this.codigoCron = 0;
         this.proyecto = new Proyecto();
     }
 

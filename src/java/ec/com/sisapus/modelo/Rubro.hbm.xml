@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/01/2015 01:13:48 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="ec.com.sisapus.modelo.Rubro" table="rubro" catalog="bdsisapu">
+    <class name="ec.com.sisapus.modelo.Rubro" table="rubro" catalog="bdsisapu_1">
         <id name="codigoRubro" type="java.lang.Integer">
             <column name="CODIGO_RUBRO" />
             <generator class="identity" />
@@ -20,12 +20,6 @@
         <property name="unidadRubro" type="string">
             <column name="UNIDAD_RUBRO" length="50" />
         </property>
-        <set name="presupuestos" inverse="true">
-            <key>
-                <column name="CODIGO_RUBRO" />
-            </key>
-            <one-to-many class="ec.com.sisapus.modelo.Presupuesto" />
-        </set>
         <set name="analisispreciounitarios" inverse="true">
             <key>
                 <column name="CODIGO_RUBRO" />

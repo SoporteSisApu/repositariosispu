@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 07/01/2015 01:13:46 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -25,8 +25,9 @@ public class Usuario  implements java.io.Serializable {
      private Set proyectos = new HashSet(0);
 
     public Usuario() {
-         this.codigoUsu = 0;
+          this.codigoUsu = 0;
         this.perfil = new Perfil();
+
     }
 
     public Usuario(Perfil perfil, String nombreUsu, String apellidoUsu, String sobrenombreUsu, String contraseniaUsu, String correoUsu, Boolean estadoUsu, Date fechregUsu, Date fechmodUsu, Set proyectos) {

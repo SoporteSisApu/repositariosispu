@@ -4,7 +4,7 @@
  */
 package ec.com.sisapus.dao;
 
-import ec.com.sisapus.modelo.Presupuesto;
+//import ec.com.sisapus.modelo.Pre;
 import org.hibernate.Session;
 
 /**
@@ -13,6 +13,6 @@ import org.hibernate.Session;
  */
 public interface presupuestoDao {
     
-    public boolean insert(Session session, Presupuesto presupuesto) throws Exception;
+   // public boolean insert(Session session, Presupuesto presupuesto) throws Exception;
     
 }
