@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a7c6749-384a-443b-afe2-ba515d9de06f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="97"/>
 	<parameter name="Codigoapu" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -20,27 +20,24 @@
 	<field name="costOtrosIndApu" class="java.lang.Double"/>
 	<field name="costotApu" class="java.lang.Double"/>
 	<field name="descApu" class="java.lang.String"/>
+	<field name="detallePresupuestos" class="java.util.Set"/>
 	<field name="equipherrApus" class="java.util.Set"/>
 	<field name="escenarioapu" class="ec.com.sisapus.modelo.Escenarioapu"/>
 	<field name="manoobraApus" class="java.util.Set"/>
 	<field name="materialApus" class="java.util.Set"/>
 	<field name="porcenIndApu" class="java.lang.Double"/>
-	<field name="presupuestos" class="java.util.Set"/>
 	<field name="rendApu" class="java.lang.Double"/>
 	<field name="rubro" class="ec.com.sisapus.modelo.Rubro"/>
 	<field name="transporteApus" class="java.util.Set"/>
 	<field name="unidadApu" class="java.lang.String"/>
+	<field name="codigoRubro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[rubro.codigoRubro]]></fieldDescription>
+	</field>
 	<field name="codigoEscenario" class="java.lang.Integer">
 		<fieldDescription><![CDATA[escenarioapu.codigoEscenario]]></fieldDescription>
 	</field>
 	<field name="nombreEscenario" class="java.lang.String">
 		<fieldDescription><![CDATA[escenarioapu.nombreEscenario]]></fieldDescription>
-	</field>
-	<field name="codigoRubro" class="java.lang.Integer">
-		<fieldDescription><![CDATA[rubro.codigoRubro]]></fieldDescription>
-	</field>
-	<field name="nombreRubro" class="java.lang.String">
-		<fieldDescription><![CDATA[rubro.nombreRubro]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -122,15 +119,6 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="548" splitType="Stretch">
-			<subreport>
-				<reportElement uuid="5637a0e9-e58a-426d-8f2d-fee66624af08" x="0" y="0" width="200" height="110"/>
-				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
-				<subreportParameter name="codigoApu">
-					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
-			</subreport>
 			<subreport>
 				<reportElement uuid="bfbd0935-489e-44e4-8d3d-aa1f70919434" x="0" y="143" width="200" height="83"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
@@ -248,6 +236,15 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{costotApu}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement uuid="8c9e4468-20ac-4fed-9aae-12e5516d352f" x="0" y="22" width="200" height="100"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="codigoApu">
+					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</columnHeader>
 	<pageFooter>
