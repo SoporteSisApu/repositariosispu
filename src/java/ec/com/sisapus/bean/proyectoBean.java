@@ -155,8 +155,8 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
         proyectoDao proyectDao = new proyectoDaoImpl();
         String msg;
        usuarioDaoImpl userdao= new usuarioDaoImpl();
-        this.usuario=userdao.buscarPorcodigoUsuario(usuario);
-        this.proyecto.setUsuario(this.usuario);
+        //this.usuario=userdao.buscarPorcodigoUsuario(usuario);
+       // this.proyecto.setUsuario(this.usuario.);
         /*this.proyecto.setContratProy(this.proyecto.getContratProy());
         this.proyecto.setPropiepProy(this.proyecto.getPropiepProy());
         this.proyecto.setObraProy(this.proyecto.getObraProy());
