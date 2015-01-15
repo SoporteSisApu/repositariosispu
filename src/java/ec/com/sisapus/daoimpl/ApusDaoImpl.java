@@ -82,7 +82,7 @@ public class ApusDaoImpl implements ApusDao {
 
     @Override
     public Analisispreciounitario obtenerApuPorId(Session session, Integer idapu) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Analisispreciounitario) session.load(Analisispreciounitario.class, idapu);
     }
 
     @Override

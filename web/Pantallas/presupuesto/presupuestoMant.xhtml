@@ -26,8 +26,6 @@
 
                     <p:growl id="mensajeGeneralPresupuesto" showDetail="true"/>          
 
-                    <p:growl id="msgs" showDetail="false" />  
-
                     <p:dialog header="Proyectos" id="dialogProyectos" widgetVar="dialogProyectos" showEffect="fade" hideEffect="explode" height="165"  modal="true">
                         <p:dataTable value="#{proyectoBean.listaProyectos}" var="proyecto"  scrollable="true" scrollHeight="100"
                                      style="width:650px ">
@@ -113,31 +111,31 @@
                     <FIELDSET style="-moz-border-radius:10px;background-color: #EEEEEE;
                               width: 850px;" >
                         <legend>Detalle Presupuesto</legend>
-                        <p:dataTable id="tablaDetallePresupuesto" value="#{presupuestoBean.listaPresupuestos}" var="apus" 
+                        <p:dataTable id="tablaDetallePresupuesto" value="#{presupuestoBean.listaDetPresupuestos}" var="apus" 
                                      editable="true" editMode="cell" scrollable="true" scrollHeight="100">
 
                             <p:column headerText="#" style="text-align: center;">
                                 <h:outputText value="" />
                             </p:column>
                             <p:column headerText="Descripcion" style="text-align: center;">
-                                <h:outputText value="#{apus.descripPres}" />
+                                <h:outputText value="#{apus.nombreDetPres}" />
                             </p:column>
                             <p:column headerText="Unidad" style="text-align: center;">
-                                <h:outputText value="#{apus.unidadPres}" />
+                                <h:outputText value="#{apus.unidadDetPres}" />
                             </p:column>
                             <p:column headerText="Costo U" style="text-align: center;">
                                 S./
-                                <h:outputText value="#{apus.punitPres}" />
+                                <h:outputText value="#{apus.punitDetPres}" />
                             </p:column>
                             <p:column headerText="Cantidad" style="text-align: center;">
-                                <p:inputText value="#{apus.cantidadPres}" style="text-align: center;" />                    
+                                <p:inputText value="#{apus.cantidadDetPres}" style="text-align: center;" />                    
                             </p:column>
                             <p:column headerText="Costo T" style="text-align: center;">
                                 S./
-                                <h:outputText value="#{apus.ptotPres}" />
+                                <h:outputText value="#{apus.ptotDetPres}" />
                             </p:column>
                             <p:column style="text-align: center;">
-                                <p:commandButton value="Retirar" ajax="true" actionListener="#{presupuestoBean.EliminarApuLista(apus.descripPres)}"/>
+                                <p:commandButton value="Retirar" ajax="true" actionListener="#{presupuestoBean.EliminarApuLista(apus.nombreDetPres)}"/>
                             </p:column >
                         </p:dataTable>
                         <p:panelGrid id="panelFinalPres" columns="1" style="text-align: right;width: 98%;">
@@ -155,6 +153,7 @@
 
                         <td></td>
                         <h:panelGrid id="panelPresupuestar" columns="2" style="float:right" cellpadding="3" border="1">
+                            
                             <h:outputText value="Subtotal "/>
                             <h:outputText value="#{presupuestoBean.precioTotApuRubro}"/>  
                             <h:outputText value="IVA " />
@@ -167,7 +166,8 @@
                     </FIELDSET>
                     <br></br>
 
-                    <p:commandButton id="btnPresupuestar1" title="Generar Presupuesto" value="Presupuestar"/>  
+                    <p:commandButton id="btnPresupuestar1" title="Guardar Presupuesto" value="Presupuestar"
+                                     actionListener="#{presupuestoBean.guardarPresupuesto()}"/>  
 
 
                 </h:form>

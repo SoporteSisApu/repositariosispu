@@ -204,7 +204,7 @@ public class ApuBeanVista {
 
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = this.session.beginTransaction();
-            //this.listarapus = daoapu.listarApus(this.session);
+            this.listarapus = daoapu.listarApus(this.session);
             this.transaction.commit();
             return this.listarapus;
         } catch (Exception ex) {
@@ -245,7 +245,7 @@ public class ApuBeanVista {
             this.rubro = daorubro.getByIdRubro(session, idRubros);
 
             this.setAuxocidigo(this.rubro.getCodigoRubro());
-            this.setAuxdesrubro(this.rubro.getDetalleRubro());
+            this.setAuxdesrubro(this.rubro.getNombreRubro());
             this.setAuxunidrubro(this.rubro.getUnidadRubro());
             this.setAuxcategoria(this.rubro.getCategoriarubro().getDescripcionCatRubro());
 
