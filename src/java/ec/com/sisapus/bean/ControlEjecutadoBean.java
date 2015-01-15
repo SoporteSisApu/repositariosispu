@@ -15,7 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import net.sf.jasperreports.engine.analytics.data.Axis;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.component.chart.bar.BarChart;
