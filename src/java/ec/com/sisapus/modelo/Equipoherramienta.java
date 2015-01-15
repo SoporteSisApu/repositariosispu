@@ -2,6 +2,8 @@ package ec.com.sisapus.modelo;
 // Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
 
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +57,7 @@ public class Equipoherramienta  implements java.io.Serializable {
     }
     
     public void setCostohoraEqherr(Double costohoraEqherr) {
+          
         this.costohoraEqherr = costohoraEqherr;
     }
     public Set getEquipherrApus() {

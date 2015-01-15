@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -323,15 +325,18 @@ public class ApuBeanVista {
             }
 
             Double totalVenta = new Double("0");
-
+  DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
-                Double costohora = item.getCantEqherrApu() * (new Double(item.getTarifaEqherrApu()));
+                Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
 
                 Double totalVentaPorProducto = (costohora * (new Double(item.getRendimEqherrApu())));
-                item.setCostohoraEqherrApu(costohora);
-                item.setCostotEqherrApu(totalVentaPorProducto);
+                item.setCostohoraEqherrApu(Double.parseDouble(formato.format(costohora)));
+                item.setCostotEqherrApu(Double.parseDouble(formato.format(totalVentaPorProducto)));
 
-                totalVenta = totalVenta + totalVentaPorProducto;
+                totalVenta = Double.parseDouble(formato.format(totalVenta + totalVentaPorProducto));
             }
 
             this.setPrecioTotalEquipo(totalVenta);
@@ -351,14 +356,17 @@ public class ApuBeanVista {
 
         try {
             Double totalVenta = new Double("0.00");
-
+          DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
-                Double costohora = item.getCantEqherrApu() * (new Double(item.getTarifaEqherrApu()));
+                Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
                 Double totalVentaPorProducto = (costohora * (new Double(item.getRendimEqherrApu())));
-                item.setCostohoraEqherrApu(costohora);
-                item.setCostotEqherrApu(totalVentaPorProducto);
+                item.setCostohoraEqherrApu(Double.parseDouble(formato.format(costohora)));
+                item.setCostotEqherrApu(Double.parseDouble(formato.format(totalVentaPorProducto)));
 
-                totalVenta = totalVenta + totalVentaPorProducto;
+                totalVenta =Double.parseDouble(formato.format(totalVenta + totalVentaPorProducto));
             }
 
             this.setPrecioTotalEquipo(totalVenta);
@@ -459,14 +467,17 @@ public class ApuBeanVista {
                 i++;
             }
 
-            Double totalVenta1 = new Double("0.00");
-
+             Double totalVenta1 = new Double("0.00");
+             DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);  
             for (ManoobraApu item : this.listaManoBra) {
-                Double costohora1 = item.getCantMoApu() * (new Double(item.getCostojrhMoApu()));
+                Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
                 Double totalVentaPorProducto1 = (costohora1 * (new Double(item.getRendimMoApu())));
-                item.setCostohoraMoApu(costohora1);
-                item.setCostotMoApu(totalVentaPorProducto1);
+                item.setCostohoraMoApu(Double.parseDouble(formato.format(costohora1)));
+                item.setCostotMoApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
                 totalVenta1 = totalVenta1 + totalVentaPorProducto1;
             }
@@ -487,13 +498,16 @@ public class ApuBeanVista {
     public void calcularCostosManobra() {
         try {
             Double totalVenta1 = new Double("0.00");
-
+             DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (ManoobraApu item : this.listaManoBra) {
-                Double costohora1 = item.getCantMoApu() * (new Double(item.getCostojrhMoApu()));
+                Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
                 Double totalVentaPorProducto1 = (costohora1 * (new Double(item.getRendimMoApu())));
-                item.setCostohoraMoApu(costohora1);
-                item.setCostotMoApu(totalVentaPorProducto1);
+                item.setCostohoraMoApu(Double.parseDouble(formato.format(costohora1)));
+                item.setCostotMoApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
                 totalVenta1 = totalVenta1 + totalVentaPorProducto1;
             }
@@ -570,15 +584,19 @@ public class ApuBeanVista {
             }
 
             Double totalVenta1 = new Double("0.00");
+            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
             for (MaterialApu item : this.listaMaterialApus) {
 
 
-                Double totalVentaPorProducto1 = (new Double(item.getCantMatApu())) * (new Double(item.getPreunitMatApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((new Double(item.getCantMatApu())))) * (new Double(item.getPreunitMatApu()));
 
-                item.setCostotMatApu(totalVentaPorProducto1);
+                item.setCostotMatApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotalmaterial(totalVenta1);
@@ -597,15 +615,18 @@ public class ApuBeanVista {
     public void calcularCostosMateriales() {
         try {
             Double totalVenta1 = new Double("0.00");
-
+          DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (MaterialApu item : this.listaMaterialApus) {
 
 
-                Double totalVentaPorProducto1 = (new Double(item.getCantMatApu())) * (new Double(item.getPreunitMatApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantMatApu()))) * (new Double(item.getPreunitMatApu()));
 
-                item.setCostotMatApu(totalVentaPorProducto1);
+                item.setCostotMatApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotalmaterial(totalVenta1);
@@ -676,15 +697,19 @@ public class ApuBeanVista {
             }
 
             Double totalVenta1 = new Double("0.00");
+            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
 
-                Double totalVentaPorProducto1 = (new Double(item.getCantTranApu())) * (new Double(item.getTarifaTranApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
 
-                item.setCostotTranApu(totalVentaPorProducto1);
+                item.setCostotTranApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotaltransporte(totalVenta1);
@@ -703,15 +728,19 @@ public class ApuBeanVista {
     public void calcularCostosTransporte() {
         try {
             Double totalVenta1 = new Double("0.00");
+            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
 
-                Double totalVentaPorProducto1 = (new Double(item.getCantTranApu())) * (new Double(item.getTarifaTranApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
 
-                item.setCostotTranApu(totalVentaPorProducto1);
+                item.setCostotTranApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotaltransporte(totalVenta1);
@@ -894,12 +923,18 @@ public class ApuBeanVista {
             Double costoinAPu = new Double("0.00");
             Double costosotrosindAPu = new Double("0.00");
             Double costoaputotal = new Double("0.00");
+            
+            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+    simbolo.setDecimalSeparator('.');
+    simbolo.setGroupingSeparator(',');
+DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+
             Analisispreciounitario apus = new Analisispreciounitario();
 
-            costodir1APu = this.precioTotaltransporte + this.precioTotalEquipo + this.precioTotalmaterial + this.precioTotalmanoobra;
-            costoinAPu = (costodir1APu * (this.auxiliarPorcenjate / 100));
-            costosotrosindAPu = this.auxiliarotroscostos;
-            costoaputotal = costodir1APu + costoinAPu + costosotrosindAPu;
+            costodir1APu = Double.parseDouble(formato.format(this.precioTotaltransporte + this.precioTotalEquipo + this.precioTotalmaterial + this.precioTotalmanoobra));
+            costoinAPu = Double.parseDouble(formato.format(costodir1APu * (this.auxiliarPorcenjate / 100)));
+            costosotrosindAPu = Double.parseDouble(formato.format(this.auxiliarotroscostos));
+            costoaputotal = Double.parseDouble(formato.format(costodir1APu + costoinAPu + costosotrosindAPu));
             //setear los totales del apu     
             this.analisisapus.setCostDirApu(costodir1APu);
             this.analisisapus.setCostIndApu(costoinAPu);
