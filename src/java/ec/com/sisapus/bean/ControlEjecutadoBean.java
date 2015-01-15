@@ -85,15 +85,15 @@ private CartesianChartModel GrafControl;
               // String Nombre=String.valueOf(control.getDescripcionEjec());
               // String Id=String.valueOf(control.getCodigoEjec());
               //.setLabel(Nombre);
-               ejec.set("Precio Total", control.getPTotalEjec());
-               ejec.set("Precio Unitario", control.getPUnitEjec());
+               ejec.set("Precio Total", 1/*control.getPTotalEjec()*/);
+               ejec.set("Precio Unitario",1/* control.getPUnitEjec()*/);
                GrafControl.addSeries(ejec);
            }      
         
          
         final ChartSeries alquiler  = new ChartSeries("Proyecto Presupuestados");
-        alquiler.set("Precio Total", 200);
-        alquiler.set("Precio Unitario",200);
+        alquiler.set("Precio Total",1);
+        alquiler.set("Precio Unitario",1);
         
 
         GrafControl.addSeries(alquiler);
