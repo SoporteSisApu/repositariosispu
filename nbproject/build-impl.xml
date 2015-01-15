@@ -1003,7 +1003,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.primefaces-4.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.delta-1.0.10.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.rocket-1.0.10.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${libs.hibernate4.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.hibernate-persistence.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.hibernate-support.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.JasperReport.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
