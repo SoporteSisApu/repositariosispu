@@ -592,7 +592,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (MaterialApu item : this.listaMaterialApus) {
 
 
-                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((new Double(item.getCantMatApu())))) * (new Double(item.getPreunitMatApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((item.getCantMatApu()))) * (new Double(item.getPreunitMatApu()));
 
                 item.setCostotMatApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
@@ -622,7 +622,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (MaterialApu item : this.listaMaterialApus) {
 
 
-                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantMatApu()))) * (new Double(item.getPreunitMatApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((item.getCantMatApu()))) * (new Double(item.getPreunitMatApu()));
 
                 item.setCostotMatApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
@@ -705,7 +705,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (TransporteApu item : this.listaTransporteApus) {
 
 
-                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
 
                 item.setCostotTranApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
@@ -736,7 +736,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             for (TransporteApu item : this.listaTransporteApus) {
 
 
-                Double totalVentaPorProducto1 = Double.parseDouble(formato.format(new Double(item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
+                Double totalVentaPorProducto1 = Double.parseDouble(formato.format((item.getCantTranApu()))) * (new Double(item.getTarifaTranApu()));
 
                 item.setCostotTranApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
