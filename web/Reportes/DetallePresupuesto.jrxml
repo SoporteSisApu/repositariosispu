@@ -79,13 +79,6 @@
 				<textFieldExpression><![CDATA[$F{nombreDetPres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="2b913898-8762-462e-b20f-de971159ba96" x="152" y="3" width="100" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{punitDetPres}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement uuid="3915643d-8f01-426b-a1de-41e9c2b60d7d" x="327" y="3" width="75" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -105,6 +98,13 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ptotDetPres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc422cb8-933a-4cfb-9454-c5daa675306e" x="144" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidadDetPres}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

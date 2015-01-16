@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f9c36bd5-c5f2-4fd3-8aaf-c7eaf4a7c686">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="340"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="codigoPres" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -49,7 +49,7 @@
 				<text><![CDATA[REPORTE GENERAL PRESUPUESTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="f8e44efa-ddca-4a13-9f0f-e507756b98fc" x="160" y="35" width="164" height="20" forecolor="#0033FF"/>
+				<reportElement uuid="f8e44efa-ddca-4a13-9f0f-e507756b98fc" x="180" y="35" width="164" height="20" forecolor="#0033FF"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
