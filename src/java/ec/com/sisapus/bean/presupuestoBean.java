@@ -17,6 +17,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -432,20 +434,25 @@ public class presupuestoBean implements Serializable {
                 }
                 i++;
             }
+             Double totalVenta = new Double("0");
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
             Double valorTotalPres = new Double("0.00");
             
             for (DetallePresupuesto presup : this.listaDetPresupuestos) 
             {
-                Double costototalapurubro = (new Double(presup.getCantidadDetPres())) * (new Double(presup.getPunitDetPres()));
+                Double costototalapurubro = Double.parseDouble(formato.format((presup.getCantidadDetPres()))) * (new Double(presup.getPunitDetPres()));
                 presup.setPtotDetPres(costototalapurubro);
-                subtotalPresup = subtotalPresup + costototalapurubro;
+                subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
             this.setPrecioTotApuRubro(subtotalPresup);
-            ivaPres = (subtotalPresup * (this.porcentajeiva/100));
+            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva/100)));
             this.setPrecioTiva(ivaPres);
-            valorTotalPres=subtotalPresup+ivaPres;
+            valorTotalPres= Double.parseDouble(formato.format((subtotalPresup+ivaPres)));
             this.setCostoPresupuesto(valorTotalPres);
             
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Rubro retirado de la lista"));
@@ -462,6 +469,11 @@ public class presupuestoBean implements Serializable {
     public void calcularCostosPresupuesto() {
         
         try {
+             Double totalVenta = new Double("0");
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
@@ -469,13 +481,13 @@ public class presupuestoBean implements Serializable {
             
            for (DetallePresupuesto presup : this.listaDetPresupuestos) 
             {
-                Double costototalapurubro = (new Double(presup.getCantidadDetPres())) * (new Double(presup.getPunitDetPres()));
+                Double costototalapurubro = Double.parseDouble(formato.format(presup.getCantidadDetPres())) * (new Double(presup.getPunitDetPres()));
                 presup.setPtotDetPres(costototalapurubro);
-                subtotalPresup = subtotalPresup + costototalapurubro;
+                subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
             
-            ivaPres = (subtotalPresup * (this.porcentajeiva/100));
-            valorTotalPres = subtotalPresup + ivaPres;
+            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva/100)));
+            valorTotalPres = Double.parseDouble(formato.format(subtotalPresup + ivaPres));
             ////
             this.cabpresupuesto.setSubtPres(subtotalPresup);
             this.cabpresupuesto.setIvaPres(ivaPres);
@@ -554,7 +566,7 @@ public class presupuestoBean implements Serializable {
             parametros.put("codigoPres",23);
 
 
-            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReportePresupuesto.jasper"));
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.coneccion);
 
             HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
