@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a7c6749-384a-443b-afe2-ba515d9de06f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="615"/>
+	<property name="ireport.y" value="18"/>
 	<parameter name="Codigoapu" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -216,7 +216,7 @@
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\14-01-2015-2153\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\EquiposApu.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement uuid="7872cc57-21cf-41e8-ab81-11522895bdd4" x="19" y="155" width="200" height="113"/>
@@ -225,7 +225,7 @@
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\14-01-2015-2153\\sisapus\\web\\Reportes\\ManobraApu.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\ManobraApu.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement uuid="8b344666-47a6-4d3a-8cc4-db5302863a0d" x="19" y="302" width="200" height="131"/>
@@ -234,7 +234,7 @@
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\14-01-2015-2153\\sisapus\\web\\Reportes\\MaterialApu.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\MaterialApu.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement uuid="6090b0dd-642d-4a34-bd2f-7ca7ca1bb1e9" x="19" y="477" width="200" height="64"/>
@@ -243,7 +243,7 @@
 					<subreportParameterExpression><![CDATA[$F{codigoApu}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\14-01-2015-2153\\sisapus\\web\\Reportes\\TransporteApu.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\TransporteApu.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</columnHeader>

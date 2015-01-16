@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f9c36bd5-c5f2-4fd3-8aaf-c7eaf4a7c686">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="241"/>
+	<property name="ireport.y" value="340"/>
 	<parameter name="codigoPres" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -40,123 +40,166 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="34" splitType="Stretch">
+		<band height="74" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="f8e44efa-ddca-4a13-9f0f-e507756b98fc" x="190" y="10" width="203" height="20" forecolor="#0033FF"/>
+				<reportElement uuid="f8e44efa-ddca-4a13-9f0f-e507756b98fc" x="140" y="15" width="285" height="20" forecolor="#0033FF"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[REPORTE PRESUPUESTO]]></text>
+				<text><![CDATA[REPORTE GENERAL PRESUPUESTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f8e44efa-ddca-4a13-9f0f-e507756b98fc" x="160" y="35" width="164" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[EMPRESA EISCO S.A.]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="88" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<textField>
-				<reportElement uuid="4222a91c-4aaf-4463-94bc-a6cdb931e544" x="85" y="0" width="76" height="20"/>
-				<textElement/>
+				<reportElement uuid="4222a91c-4aaf-4463-94bc-a6cdb931e544" x="85" y="28" width="76" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{codigoPres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="42caf847-a797-4b3a-88b4-69dc05b9edc8" x="85" y="20" width="202" height="20"/>
-				<textElement/>
+				<reportElement uuid="42caf847-a797-4b3a-88b4-69dc05b9edc8" x="85" y="48" width="202" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{propiepProy}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="228cd858-9287-4b2a-9303-96aadd202f16" x="85" y="40" width="202" height="20"/>
-				<textElement/>
+				<reportElement uuid="228cd858-9287-4b2a-9303-96aadd202f16" x="85" y="68" width="202" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{contratProy}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ed8cedf8-dd40-41c2-90b1-5fa676f5d137" x="393" y="0" width="162" height="20"/>
-				<textElement/>
+				<reportElement uuid="ed8cedf8-dd40-41c2-90b1-5fa676f5d137" x="393" y="28" width="162" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{obraProy}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b7172833-35b4-4e0f-a310-d0ecad8021a3" x="393" y="20" width="162" height="20"/>
-				<textElement/>
+				<reportElement uuid="b7172833-35b4-4e0f-a310-d0ecad8021a3" x="393" y="48" width="162" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ubicProy}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f6ecdca2-9d19-4d31-9558-f4097a9f9b1b" x="393" y="40" width="162" height="20"/>
-				<textElement/>
+				<reportElement uuid="f6ecdca2-9d19-4d31-9558-f4097a9f9b1b" x="393" y="68" width="162" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaProy}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="5" y="0" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="5" y="28" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Codigo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="6" y="22" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="6" y="50" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Propietario:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="5" y="43" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="5" y="71" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Contratista:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="324" y="2" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="324" y="30" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Obra:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="324" y="22" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="324" y="50" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Ubicación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="323" y="42" width="69" height="20"/>
-				<textElement/>
+				<reportElement uuid="4031b8a3-6f05-411a-b468-b90a99847ef9" x="323" y="70" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="272">
+		<band height="367">
 			<staticText>
-				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="249" width="81" height="20"/>
-				<textElement/>
+				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="322" width="81" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Costo Total:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="209" width="81" height="20"/>
-				<textElement/>
+				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="282" width="81" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[Subtotal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="229" width="81" height="20"/>
-				<textElement/>
+				<reportElement uuid="02645990-e21e-45fd-9541-953f003bacbf" x="364" y="302" width="81" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<text><![CDATA[Iva:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="4d6db0a5-a138-4a6c-9cf6-e53332fa822b" x="448" y="249" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="4d6db0a5-a138-4a6c-9cf6-e53332fa822b" x="448" y="322" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{gastotPres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ef162cc2-e964-4730-a8a0-9e9cfec968f5" x="448" y="229" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="ef162cc2-e964-4730-a8a0-9e9cfec968f5" x="448" y="302" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ivaPres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ab66455e-ca30-40b9-b571-6f063cfad71e" x="448" y="209" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="ab66455e-ca30-40b9-b571-6f063cfad71e" x="448" y="282" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{subtPres}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement uuid="2ed39090-0caf-406f-a342-98ea53d31a66" x="6" y="26" width="200" height="100"/>
+				<reportElement uuid="2ed39090-0caf-406f-a342-98ea53d31a66" x="6" y="26" width="200" height="123"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="codigoPres">
 					<subreportParameterExpression><![CDATA[$F{codigoPres}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\14-01-2015-2153\\sisapus\\web\\Reportes\\DetallePresupuesto.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\DetallePresupuesto.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
-				<reportElement uuid="4ad9909a-9f99-4c2c-adae-bc97a110c540" x="16" y="197" width="532" height="1"/>
+				<reportElement uuid="4ad9909a-9f99-4c2c-adae-bc97a110c540" x="6" y="257" width="542" height="1"/>
 			</line>
 		</band>
 	</columnHeader>
@@ -164,7 +207,9 @@
 		<band height="44" splitType="Stretch">
 			<textField>
 				<reportElement uuid="101c1234-ff79-4a38-8748-935b8db823aa" x="425" y="17" width="80" height="20"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
