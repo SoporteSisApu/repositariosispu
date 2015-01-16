@@ -1,43 +1,71 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.com.sisapus.bean;
 
-import ec.com.sisapus.dao.usuarioDao;
-import ec.com.sisapus.daoimpl.usuarioDaoImpl;
+import ec.com.sisapus.daoimpl.usuarioDaoImpl1;
 import ec.com.sisapus.modelo.Usuario;
-import java.awt.event.ActionEvent;
+import ec.com.sisapus.util.HibernateUtil;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.primefaces.context.RequestContext;
 
-/**
- *
- * @author Edison
- */
 @Named(value = "loginBean")
 @SessionScoped
+public class loginBean implements Serializable {
 
-public class loginBean implements Serializable{
-    
+    private String sobrenombre;
+    private String contrasenia;
+    private Session session;
+    private Transaction transaccion;
     private Usuario usuario;
     private String usuarioSesion;
 
-    /**
-     * Creates a new instance of loginBean
-     */
     public loginBean() {
+        HttpSession miSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        miSession.setMaxInactiveInterval(5000);
+    }
+
+    ///Getters y Setters de variables declaradas
+    public String getSobrenombre() {
+        return sobrenombre;
+    }
+
+    public void setSobrenombre(String sobrenombre) {
+        this.sobrenombre = sobrenombre;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaccion() {
+        return transaccion;
+    }
+
+    public void setTransaccion(Transaction transaccion) {
+        this.transaccion = transaccion;
     }
 
     public Usuario getUsuario() {
-        if(this.usuario==null){
-        usuario = new Usuario();
-        }
+//        if (this.usuario == null) {
+//            usuario = new Usuario();
+//        }
         return usuario;
     }
 
@@ -52,47 +80,73 @@ public class loginBean implements Serializable{
     public void setUsuarioSesion(String usuarioSesion) {
         this.usuarioSesion = usuarioSesion;
     }
-    
-    ///Login en el Sistema   
-    public void login(ActionEvent actionEvent) {  
-        RequestContext  context = RequestContext.getCurrentInstance();  
-        FacesMessage msg = null;  
-        boolean loggedIn = false;  
-        
-        usuarioDao usuarioDao= new usuarioDaoImpl();
-        usuario = usuarioDao.buscarPorUsuario(usuario);
-          
-        if(usuario != null) {  
-            loggedIn = true;
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", this.usuario.getSobrenombreUsu());
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getSobrenombreUsu());
-            usuarioSesion=usuario.getSobrenombreUsu();
-        } else {  
-            loggedIn = false;  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Usuario o Contraseña Incorrectos");  
-            if (this.usuario == null) {
-                this.usuario = new Usuario();
-            }
-        }  
-          
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        context.addCallbackParam("loggedIn", loggedIn);  
-    }  
-    
-    
-    ///Cerrar Sesion en el Sistema
-    public void cerrarSesion() {
-        String ruta = "/sisapus/login.xhtml";
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        HttpSession sesion = (HttpSession) facesContext.getExternalContext().getSession(false);
-        if(sesion != null){
-        sesion.invalidate();
+    ////////////////////////////////////////////
+    //Funcion para iniciar sesion en el sistema
+    public String iniciarSesion() {
+        this.session = null;
+        this.transaccion = null;
+        FacesMessage msg = null;
+        boolean logeado = false;  
+        try {
+             RequestContext context = RequestContext.getCurrentInstance();
+            usuarioDaoImpl1 daousuario = new usuarioDaoImpl1();
+
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaccion = this.session.beginTransaction();
+
+            this.usuario = daousuario.getBySobrenombreusu(this.session, this.sobrenombre);
+
+            if (usuario != null) {
+                
+                     if (usuario.getContraseniaUsu().equals(this.contrasenia)) {
+                    HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                    httpSession.setAttribute("sobre", this.sobrenombre);
+                    msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", usuario.getSobrenombreUsu());
+                    this.usuarioSesion = usuario.getSobrenombreUsu();
+                    return "/Pantallas/menuTemplate.xhtml";
+                }
+                     else 
+                         
+                {
+                  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de acceso:", "Usuario o contraseña incorrecto"));
+                }
+
+            }
+            
+            else
+            
+            {
+                logeado=false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de acceso:", "Usuario o contraseña incorrecto"));
+            }
+
+            this.transaccion.commit();
+
+            this.sobrenombre = null;
+            this.contrasenia = null;
+
+            
+            return "/login.xhtml";
+            
+        } catch (Exception ex) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
+
+            return null;
         }
-        context.addCallbackParam("loggetOut", true);
-        context.addCallbackParam("ruta", ruta);
+
+
     }
-    
-  
+
+    //Funcion para cerrar sesion en el sistema
+    public String cerrarSesion() {
+        this.sobrenombre = null;
+        this.contrasenia = null;
+
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.invalidate();
+
+        return "/login.xhtml";
+    }
 }

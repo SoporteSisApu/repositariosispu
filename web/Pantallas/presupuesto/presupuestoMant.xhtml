@@ -168,7 +168,7 @@
 
                     <p:commandButton id="btnPresupuestar1" title="Guardar Presupuesto" value="Presupuestar"
                                      actionListener="#{presupuestoBean.guardarPresupuesto()}"/>  
-
+                    <p:commandButton value="PDF" ajax="false" actionListener="#{presupuestoBean.exportarPresupuestoPDF(actionEvent)}"/>
 
                 </h:form>
             </ui:define>

@@ -74,7 +74,7 @@
                             
                         </p:submenu>
                         
-                        <p:menuitem value="Cerrar Sesion" actionListener="#{loginBean.cerrarSesion()}" icon="icon-salir" oncomplete="handleLoginRequest(xhr, status, args)" style="margin-right:10px" />  
+                        <p:menuitem value="Cerrar Sesion" action="#{loginBean.cerrarSesion()}" icon="icon-salir" style="margin-right:10px" />  
                         </p:menubar>  
 
                 </h:form>
@@ -88,13 +88,13 @@
                 <ui:insert name="bottom">&copy;SISAPU 2014, Derechos Reservados</ui:insert>
             </div>
         </div>
-         <script type="text/javascript">
+<!--         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.loggetOut) {
                     location.href = args.ruta;
                 }
             }
-        </script>
+        </script>-->
     </h:body>
 
 </html>

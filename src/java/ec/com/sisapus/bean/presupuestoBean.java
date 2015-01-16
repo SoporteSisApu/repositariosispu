@@ -10,15 +10,30 @@ import ec.com.sisapus.modelo.DetallePresupuesto;
 import ec.com.sisapus.modelo.Proyecto;
 import ec.com.sisapus.modelo.Rubro;
 import ec.com.sisapus.util.HibernateUtil;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.connection.ConnectionProvider;
+import org.hibernate.engine.SessionFactoryImplementor;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -58,8 +73,10 @@ public class presupuestoBean implements Serializable {
     private Analisispreciounitario apu;
     private List<Analisispreciounitario> listaApus;
     //Variables de Rubro
-    private Rubro rubro;
     
+    private Rubro rubro;
+    //coneccion hibernate
+    private Connection coneccion;
     
     public presupuestoBean() {
         
@@ -304,6 +321,25 @@ public class presupuestoBean implements Serializable {
     public void setRubro(Rubro rubro) {
         this.rubro = rubro;
     }
+
+    public Connection getConeccion() {
+        Session session = this.getSession();
+        SessionFactoryImplementor sessionFactoryImplementor = null;
+        ConnectionProvider connectionProvider = null;
+        java.sql.Connection connection = null;
+        try {
+            sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
+            connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
+            connection = connectionProvider.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return coneccion;
+    }
+
+    public void setConeccion(Connection coneccion) {
+        this.coneccion = coneccion;
+    }
     
    
     ///Funcion para agregar un proyecto al presupuesto
@@ -500,4 +536,41 @@ public class presupuestoBean implements Serializable {
             }
         }
     }
+    
+    //reportes
+    
+    public void exportarPresupuestoPDF(ActionEvent actionEvent) throws JRException, IOException {
+
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            //ApusDaoImpl apugenal = new ApusDaoImpl();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaction = this.session.beginTransaction();
+            //this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            HashMap parametros = new HashMap();
+            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
+            parametros.put("codigoPres",23);
+
+
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.coneccion);
+
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=APU.pdf");
+            ServletOutputStream stream = response.getOutputStream();
+
+            JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+
+            stream.flush();
+            stream.close();
+            FacesContext.getCurrentInstance().getResponseStream();
+            this.transaction.commit();
+        } catch (Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
+        }
+    }
+    
 }

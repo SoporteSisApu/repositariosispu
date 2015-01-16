@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package ec.com.sisapus.bean;
+
 import ec.com.sisapus.modelo.Categoriamaterial;
 import ec.com.sisapus.dao.usuarioDao;
 import ec.com.sisapus.daoimpl.ApusDaoImpl;
@@ -89,9 +90,8 @@ import org.primefaces.event.RowEditEvent;
 @Named(value = "ApuBeanVista")
 @ViewScoped
 public class ApuBeanVista {
-    
-    
-     Session session;
+
+    Session session;
     Transaction transaction;
     // equipos   
     private Equipoherramienta equipherramientas;
@@ -135,11 +135,12 @@ public class ApuBeanVista {
     //
     private Escenarioapu escenariosapu;
     private Connection coneccion;
-  //Escenarios
+    //Escenarios
     private boolean escenarioact1;
     private boolean escenarioact2;
     private boolean escenarioact3;
-   //     
+    //     
+
     public ApuBeanVista() {
         this.equipherramientas = new Equipoherramienta();
         this.listaEquiposApus = new ArrayList<>();
@@ -151,12 +152,12 @@ public class ApuBeanVista {
         this.listaTransporteApus = new ArrayList<>();
         this.rubro = new Rubro();
         this.analisisapus = new Analisispreciounitario();
-        this.escenariosapu=new Escenarioapu();  
+        this.escenariosapu = new Escenarioapu();
         this.auxdesrubro = "";
         this.auxunidrubro = "";
-     this.escenarioact1=false;
-    this.escenarioact2=true;
-    this.escenarioact3=true;
+        this.escenarioact1 = false;
+        this.escenarioact2 = true;
+        this.escenarioact3 = true;
     }
 
     public boolean isEscenarioact1() {
@@ -182,9 +183,6 @@ public class ApuBeanVista {
     public void setEscenarioact3(boolean escenarioact3) {
         this.escenarioact3 = escenarioact3;
     }
-    
-    
-    
 
     public Escenarioapu getEscenariosapu() {
         return escenariosapu;
@@ -193,9 +191,7 @@ public class ApuBeanVista {
     public void setEscenariosapu(Escenarioapu escenariosapu) {
         this.escenariosapu = escenariosapu;
     }
-    
-    
-    
+
     //// Listar los apus en el dialogo
     public List<Analisispreciounitario> getListarapus() throws Exception {
         this.session = null;
@@ -228,8 +224,6 @@ public class ApuBeanVista {
     public void setListarapus(List<Analisispreciounitario> listarapus) {
         this.listarapus = listarapus;
     }
-        
-        
 
     ///funcion para agregar el rubro
     public void agregarRubroApus(Integer idRubros) {
@@ -286,7 +280,7 @@ public class ApuBeanVista {
             this.transaction = this.session.beginTransaction();
             this.equipherramientas = daoequipo.getByIdEquipo(session, idEquipos);
             //this.listaEquiposApus.add(new EquipherrApu( null,this.equipherramientas.getNombreEqherr(), null,this.equipherramientas.getCostohoraEqherr(),null, null, null, null));
-            this.listaEquiposApus.add(new EquipherrApu(null,null, this.equipherramientas.getNombreEqherr(), null, this.equipherramientas.getCostohoraEqherr(), null, null, null));
+            this.listaEquiposApus.add(new EquipherrApu(null, null, this.equipherramientas.getNombreEqherr(), null, this.equipherramientas.getCostohoraEqherr(), null, null, null));
             this.transaction.commit();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Equipo/Herramienta agregado"));
@@ -325,10 +319,10 @@ public class ApuBeanVista {
             }
 
             Double totalVenta = new Double("0");
-  DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
                 Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
 
@@ -356,29 +350,27 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
         try {
             Double totalVenta = new Double("0.00");
-          DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
                 Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
                 Double totalVentaPorProducto = (costohora * (new Double(item.getRendimEqherrApu())));
                 item.setCostohoraEqherrApu(Double.parseDouble(formato.format(costohora)));
                 item.setCostotEqherrApu(Double.parseDouble(formato.format(totalVentaPorProducto)));
 
-                totalVenta =Double.parseDouble(formato.format(totalVenta + totalVentaPorProducto));
+                totalVenta = Double.parseDouble(formato.format(totalVenta + totalVentaPorProducto));
             }
 
             this.setPrecioTotalEquipo(totalVenta);
-              this.analisisapus.setAnalApuEqherr(totalVenta);
+            this.analisisapus.setAnalApuEqherr(totalVenta);
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta");
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta");
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
     }
-
-  
     //probar creacion de Escenarios
     private TabView tabView;
 
@@ -427,7 +419,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
             this.manoobras = daomano.getByIdManobra(session, idmanobra);
 
-            this.listaManoBra.add(new ManoobraApu(null,null, this.manoobras.getNombreManob(), this.manoobras.getCategoriamanoobra().getNombCatManob(),null, this.manoobras.getCostojrhManob(), null, null, null));
+            this.listaManoBra.add(new ManoobraApu(null, null, this.manoobras.getNombreManob(), this.manoobras.getCategoriamanoobra().getNombCatManob(), null, this.manoobras.getCostojrhManob(), null, null, null));
             this.transaction.commit();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Mano de Obra agregado"));
@@ -467,11 +459,11 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
                 i++;
             }
 
-             Double totalVenta1 = new Double("0.00");
-             DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);  
+            Double totalVenta1 = new Double("0.00");
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             for (ManoobraApu item : this.listaManoBra) {
                 Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
@@ -479,11 +471,11 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
                 item.setCostohoraMoApu(Double.parseDouble(formato.format(costohora1)));
                 item.setCostotMoApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotalmanoobra(totalVenta1);
-               this.analisisapus.setAnalApuMob(totalVenta1);
+            this.analisisapus.setAnalApuMob(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Mano de Obra retirado de la lista"));
 
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
@@ -498,10 +490,10 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     public void calcularCostosManobra() {
         try {
             Double totalVenta1 = new Double("0.00");
-             DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             for (ManoobraApu item : this.listaManoBra) {
                 Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
@@ -509,11 +501,11 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
                 item.setCostohoraMoApu(Double.parseDouble(formato.format(costohora1)));
                 item.setCostotMoApu(Double.parseDouble(formato.format(totalVentaPorProducto1)));
 
-                totalVenta1 = totalVenta1 + totalVentaPorProducto1;
+                totalVenta1 = Double.parseDouble(formato.format(totalVenta1 + totalVentaPorProducto1));
             }
 
             this.setPrecioTotalmanoobra(totalVenta1);
-               this.analisisapus.setAnalApuMob(totalVenta1);
+            this.analisisapus.setAnalApuMob(totalVenta1);
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta1");
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta1");
         } catch (Exception ex) {
@@ -522,10 +514,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     }
 
     //
-   
-
     // 
-   
 //materiales    
     public void agregarListaMaterialApu(Integer idmaterial) {
         this.session = null;
@@ -543,7 +532,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             this.materiales = materialdao.getByIdMaterial(session, idmaterial);
 
             //this.listaManoBra.add(new ManoobraApu(null,this.manoobras.getNombreManob(),null,null,this.manoobras.getCostojrhManob(),null, null, null,null));
-            this.listaMaterialApus.add(new MaterialApu(null,null, this.materiales.getNombreMat(), this.materiales.getUnidMat(), null, this.materiales.getPrecunitMat(), null));
+            this.listaMaterialApus.add(new MaterialApu(null, null, this.materiales.getNombreMat(), this.materiales.getUnidMat(), null, this.materiales.getPrecunitMat(), null));
             this.transaction.commit();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Material agregado"));
@@ -584,10 +573,10 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             }
 
             Double totalVenta1 = new Double("0.00");
-            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
 
             for (MaterialApu item : this.listaMaterialApus) {
 
@@ -600,7 +589,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             }
 
             this.setPrecioTotalmaterial(totalVenta1);
-   this.analisisapus.setAnalApuMat(totalVenta1);
+            this.analisisapus.setAnalApuMat(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Material retirado de la lista"));
 
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
@@ -615,10 +604,10 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     public void calcularCostosMateriales() {
         try {
             Double totalVenta1 = new Double("0.00");
-          DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
             for (MaterialApu item : this.listaMaterialApus) {
 
 
@@ -630,7 +619,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             }
 
             this.setPrecioTotalmaterial(totalVenta1);
-               this.analisisapus.setAnalApuMat(totalVenta1);
+            this.analisisapus.setAnalApuMat(totalVenta1);
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta2");
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:panelFinalVenta2");
         } catch (Exception ex) {
@@ -639,8 +628,6 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     }
 
     // 
-  
-
 //fin materiales
 //transporte    
     public void agregarListaTransporteApu(Integer idtrans) {
@@ -649,7 +636,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
-         
+
             transporteDaoImpl transpdao = new transporteDaoImpl();
 
 
@@ -658,7 +645,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             this.transportes = transpdao.getByIdTransporte(session, idtrans);
 
             //this.listaManoBra.add(new ManoobraApu(null,this.manoobras.getNombreManob(),null,null,this.manoobras.getCostojrhManob(),null, null, null,null));
-            this.listaTransporteApus.add(new TransporteApu(null,null, this.transportes.getNombreTransp(), "GLB", null, this.transportes.getTarifaTransp(), null));
+            this.listaTransporteApus.add(new TransporteApu(null, null, this.transportes.getNombreTransp(), "GLB", null, this.transportes.getTarifaTransp(), null));
             this.transaction.commit();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte agregado"));
@@ -697,10 +684,10 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             }
 
             Double totalVenta1 = new Double("0.00");
-            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
@@ -713,7 +700,7 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
             }
 
             this.setPrecioTotaltransporte(totalVenta1);
-               this.analisisapus.setAnalApuTran(totalVenta1);
+            this.analisisapus.setAnalApuTran(totalVenta1);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Transporte retirado de la lista"));
 
             RequestContext.getCurrentInstance().update("frmRealizarVentas:Escenarios:tablaListaProductosVenta3");
@@ -728,10 +715,10 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     public void calcularCostosTransporte() {
         try {
             Double totalVenta1 = new Double("0.00");
-            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
@@ -757,177 +744,174 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
 
     // 
   /*  public void guardarTransporteApus() {
+     this.session = null;
+     this.transaction = null;
+
+     try {
+     this.session = HibernateUtil.getSessionFactory().openSession();
+
+     transporteDaoImpl transpodao = new transporteDaoImpl();
+     ApusDaoImpl apustraanporte = new ApusDaoImpl();
+
+
+     this.transaction = this.session.beginTransaction();
+     this.transportes = transpodao.getUltimoRegistro(session);
+
+     for (TransporteApu item : this.listaTransporteApus) {
+     this.transportes = transpodao.getByIdTransporte(session, this.transportes.getCodigoTransp());
+     item.setTransporte(this.transportes);
+     apustraanporte.insertarTransporte(this.session, item);
+     }
+
+     this.transaction.commit();
+     //this.listaTransporteApus=new ArrayList<>();
+     //this.transportes=new Transporte();
+     //this.precioTotaltransporte=0.0;
+     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte guardado correctamente"));
+     } catch (Exception ex) {
+     if (this.transaction != null) {
+     transaction.rollback();
+     }
+
+     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
+     } finally {
+     if (this.session != null) {
+     this.session.close();
+     }
+     }
+     }
+     */
+//fin transporte
+//Analisis Precios Unitarios
+    public void guardarAPU() {
         this.session = null;
         this.transaction = null;
 
         try {
+
             this.session = HibernateUtil.getSessionFactory().openSession();
+            //enconntrar ide del tab segun eso setear el escenario
 
-            transporteDaoImpl transpodao = new transporteDaoImpl();
-            ApusDaoImpl apustraanporte = new ApusDaoImpl();
+            // UIComponent componente1 = findComponent("tab1", FacesContext.getCurrentInstance().getViewRoot());
+            // UIComponent componente2 = findComponent("tab2", FacesContext.getCurrentInstance().getViewRoot());
+            // UIComponent componente3 = findComponent("tab3", FacesContext.getCurrentInstance().getViewRoot());
+        /* if (componente1.equals("tab1")){
+             this.escenariosapu.setCodigoEscenario(1);
+             }*/
 
+            // if (componente2.equals("tab2")){
+            this.escenariosapu.setCodigoEscenario(1);
+            //}
+         /*if (componente3.equals("tab3")){
+             this.escenariosapu.setCodigoEscenario(3);
+             }*/
+
+            //this.escenariosapu.setCodigoEscenario(1);
+            this.analisisapus.setEscenarioapu(escenariosapu);
+            this.analisisapus.setDescApu(getAuxdesrubro());
+            this.analisisapus.setCategoriaApu(getAuxcategoria());
+            this.analisisapus.setUnidadApu(getAuxunidrubro());
+            this.analisisapus.setRubro(rubro);
+            //los daos que necesito
+            //daos para el analilsis ose la cabecera
+            ApusDaoImpl apugenal = new ApusDaoImpl();
+            equipoherrDaoImpl daoequipo = new equipoherrDaoImpl();
+            manoobraDaoImpl manoobradao = new manoobraDaoImpl();
+            materialDaoImpl materialdao = new materialDaoImpl();
+            transporteDaoImpl transportedao = new transporteDaoImpl();
 
             this.transaction = this.session.beginTransaction();
-            this.transportes = transpodao.getUltimoRegistro(session);
+            apugenal.insertarAPU(session, this.analisisapus);
+            this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            this.equipherramientas = daoequipo.getUltimoRegistro(session);
+            this.manoobras = manoobradao.getUltimoRegistro(session);
+            this.materiales = materialdao.getUltimoRegistro(session);
+            this.transportes = transportedao.getUltimoRegistro(session);
+            for (EquipherrApu item : this.listaEquiposApus) {
+                this.equipherramientas = daoequipo.getByIdEquipo(session, this.equipherramientas.getCodigoEqherr());
+                item.setEquipoherramienta(this.equipherramientas);
 
+                item.setAnalisispreciounitario(this.analisisapus);
+                apugenal.insert(this.session, item);
+            }
+            //detalle mano de obra
+            for (ManoobraApu item : this.listaManoBra) {
+                this.manoobras = manoobradao.getByIdManobra(session, this.manoobras.getCodigoManob());
+                item.setManoobra(this.manoobras);
+
+                item.setAnalisispreciounitario(this.analisisapus);
+                apugenal.insertarManobra(this.session, item);
+            }
+            // detalle material
+            for (MaterialApu item : this.listaMaterialApus) {
+                this.materiales = materialdao.getByIdMaterial(session, this.materiales.getCodigoMat());
+                item.setMaterial(this.materiales);
+
+                item.setAnalisispreciounitario(this.analisisapus);
+                apugenal.insertarMaterial(this.session, item);
+            }
+            //detalle transporte
             for (TransporteApu item : this.listaTransporteApus) {
-                this.transportes = transpodao.getByIdTransporte(session, this.transportes.getCodigoTransp());
+                this.transportes = transportedao.getByIdTransporte(session, this.transportes.getCodigoTransp());
                 item.setTransporte(this.transportes);
-                apustraanporte.insertarTransporte(this.session, item);
+                item.setAnalisispreciounitario(this.analisisapus);
+                apugenal.insertarTransporte(this.session, item);
+
             }
 
+
+
             this.transaction.commit();
-            //this.listaTransporteApus=new ArrayList<>();
-            //this.transportes=new Transporte();
-            //this.precioTotaltransporte=0.0;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Transporte guardado correctamente"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Precio Unitario guardado correctamente"));
+
+            this.listaEquiposApus = new ArrayList<>();
+            this.listaManoBra = new ArrayList<>();
+            this.listaMaterialApus = new ArrayList<>();
+            this.listaTransporteApus = new ArrayList<>();
+            this.analisisapus = new Analisispreciounitario();
+            this.auxdesrubro = "";
+            this.auxcategoria = "";
+            this.auxiliarPorcenjate = null;
+            this.auxiliarotroscostos = null;
+            this.auxocidigo = 0;
+            this.auxunidrubro = "";
+            this.precioTotalEquipo = 0.00;
+            this.precioTotalmanoobra = 0.00;
+            this.precioTotalmaterial = 0.00;
+            this.precioTotaltransporte = 0.00;
+            this.costoaputotal = 0.00;
+            this.costoinAPu = 0.00;
+            this.totaldirAPU = 0.00;
+            this.rubro = new Rubro();
+            this.escenariosapu = new Escenarioapu();
+
+
+
         } catch (Exception ex) {
             if (this.transaction != null) {
                 transaction.rollback();
             }
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
         } finally {
             if (this.session != null) {
                 this.session.close();
             }
         }
     }
-*/
-//fin transporte
-//Analisis Precios Unitarios
-    public void guardarAPU() {
-         this.session=null;
-        this.transaction=null;
-        
-        try
-        {
-            
-        this.session=HibernateUtil.getSessionFactory().openSession();
-        //enconntrar ide del tab segun eso setear el escenario
-        
-       // UIComponent componente1 = findComponent("tab1", FacesContext.getCurrentInstance().getViewRoot());
-       // UIComponent componente2 = findComponent("tab2", FacesContext.getCurrentInstance().getViewRoot());
-       // UIComponent componente3 = findComponent("tab3", FacesContext.getCurrentInstance().getViewRoot());
-        /* if (componente1.equals("tab1")){
-         this.escenariosapu.setCodigoEscenario(1);
-         }*/
-         
-        // if (componente2.equals("tab2")){
-         this.escenariosapu.setCodigoEscenario(1);
-         //}
-         /*if (componente3.equals("tab3")){
-         this.escenariosapu.setCodigoEscenario(3);
-         }*/
-         
-       //this.escenariosapu.setCodigoEscenario(1);
-        this.analisisapus.setEscenarioapu(escenariosapu);
-        this.analisisapus.setDescApu(getAuxdesrubro());
-        this.analisisapus.setCategoriaApu(getAuxcategoria());
-        this.analisisapus.setUnidadApu(getAuxunidrubro());
-        this.analisisapus.setRubro(rubro);
-          //los daos que necesito
-          //daos para el analilsis ose la cabecera
-         ApusDaoImpl apugenal=new ApusDaoImpl();
-        equipoherrDaoImpl daoequipo=new equipoherrDaoImpl();
-        manoobraDaoImpl manoobradao=new manoobraDaoImpl();
-        materialDaoImpl materialdao=new materialDaoImpl();
-       transporteDaoImpl transportedao=new transporteDaoImpl();
-       
-         this.transaction=this.session.beginTransaction();
-         apugenal.insertarAPU(session, this.analisisapus);
-         this.analisisapus=apugenal.getUltimoRegistroApu(session);
-         this.equipherramientas=daoequipo.getUltimoRegistro(session);
-         this.manoobras=manoobradao.getUltimoRegistro(session);
-         this.materiales=materialdao.getUltimoRegistro(session);
-         this.transportes=transportedao.getUltimoRegistro(session);
-          for(EquipherrApu item : this.listaEquiposApus)
-            {
-                this.equipherramientas=daoequipo.getByIdEquipo(session,this.equipherramientas.getCodigoEqherr());
-                item.setEquipoherramienta(this.equipherramientas);
-               
-                item.setAnalisispreciounitario(this.analisisapus);
-                  apugenal.insert(this.session, item); }
-           //detalle mano de obra
-           for(ManoobraApu item : this.listaManoBra)
-            {
-                this.manoobras=manoobradao.getByIdManobra(session,this.manoobras.getCodigoManob());
-                item.setManoobra(this.manoobras);
-           
-                 item.setAnalisispreciounitario(this.analisisapus);
-                  apugenal.insertarManobra(this.session, item);
-            }
-         // detalle material
-             for(MaterialApu item : this.listaMaterialApus)
-            {
-                this.materiales=materialdao.getByIdMaterial(session,this.materiales.getCodigoMat());
-                item.setMaterial(this.materiales);
-               
-                 item.setAnalisispreciounitario(this.analisisapus);
-                  apugenal.insertarMaterial(this.session, item);
-            }
-          //detalle transporte
-            for(TransporteApu item : this.listaTransporteApus)
-            {
-                this.transportes=transportedao.getByIdTransporte(session,this.transportes.getCodigoTransp());
-                item.setTransporte(this.transportes);
-               item.setAnalisispreciounitario(this.analisisapus);
-                apugenal.insertarTransporte(this.session, item);
-                 
-            }
-          
-          	
-           
-            this.transaction.commit();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Precio Unitario guardado correctamente"));
-       
-         this.listaEquiposApus=new ArrayList<>();
-         this.listaManoBra= new ArrayList<>();
-         this.listaMaterialApus=new ArrayList<>();
-         this.listaTransporteApus=new ArrayList<>();
-         this.analisisapus=new Analisispreciounitario();
-         this.auxdesrubro="";
-         this.auxcategoria="";
-         this.auxiliarPorcenjate=null;
-         this.auxiliarotroscostos=null;
-         this.auxocidigo=0;
-         this.auxunidrubro="";
-         this.precioTotalEquipo=0.00;
-         this.precioTotalmanoobra=0.00;
-         this.precioTotalmaterial=0.00;
-         this.precioTotaltransporte=0.00;
-         this.costoaputotal=0.00;
-         this.costoinAPu=0.00;
-         this.totaldirAPU=0.00;
-         this.rubro=new Rubro();
-         this.escenariosapu=new Escenarioapu();
-      
-        
-         
-        } catch (Exception ex) {
-            if (this.transaction != null) {
-                transaction.rollback();
-            }
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
-    }    
     //costos totales apus
+
     public void calcularCostosTotalesAPU() {
         try {
             Double costodir1APu = new Double("0.00");
             Double costoinAPu = new Double("0.00");
             Double costosotrosindAPu = new Double("0.00");
             Double costoaputotal = new Double("0.00");
-            
-            DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
-    simbolo.setDecimalSeparator('.');
-    simbolo.setGroupingSeparator(',');
-DecimalFormat formato= new DecimalFormat("######.00",simbolo);
+
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            simbolo.setGroupingSeparator(',');
+            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
 
             Analisispreciounitario apus = new Analisispreciounitario();
 
@@ -1220,191 +1204,173 @@ DecimalFormat formato= new DecimalFormat("######.00",simbolo);
     }
 
     ///probar cambio de datos
-   
     //Reporte
-    
- 
- 
-public void imprimirpdfaapu(){
-  
-    this.session = null;
-this.transaction = null;
- 
-          try{
-              ApusDaoImpl apugenal=new ApusDaoImpl();
-this.session=HibernateUtil.getSessionFactory().openSession();
-this.transaction=this.session.beginTransaction();   
-this.analisisapus=apugenal.getUltimoRegistroApu(session);
-HashMap parametros = new HashMap();
-parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
-         File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		//byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
-         // JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
-          byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,this.coneccion);
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.setContentType("application/pdf");
-		response.setContentLength(bytes.length);
-		ServletOutputStream outStream = response.getOutputStream();
-		outStream.write(bytes, 0 , bytes.length);
-		outStream.flush();
-		outStream.close();   
-          this.transaction.commit();
-            
-           // this.analisisapus=new Analisispreciounitario();
+    public void imprimirpdfaapu() {
+
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            ApusDaoImpl apugenal = new ApusDaoImpl();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaction = this.session.beginTransaction();
+            this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            HashMap parametros = new HashMap();
+            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
+            parametros.put("Codigoapu", this.analisisapus.getCodigoApu());
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+            //byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(),parametros,CONEXION);
+            // JasperPrint imprimit = JasperFillManager.fillReport(jasper.getPath(),parametros);
+            byte[] bytes = JasperRunManager.runReportToPdf(jasper.getPath(), parametros, this.coneccion);
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.setContentType("application/pdf");
+            response.setContentLength(bytes.length);
+            ServletOutputStream outStream = response.getOutputStream();
+            outStream.write(bytes, 0, bytes.length);
+            outStream.flush();
+            outStream.close();
+            this.transaction.commit();
+
+            // this.analisisapus=new Analisispreciounitario();
             //this.contrasenia=null; 
          /*} catch (Exception ex) {
             
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
-        } */
-                }   catch (Exception ex) {
-            
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
-                }
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se puede Generar Apu"));
+             } */
+        } catch (Exception ex) {
 
-            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
+        }
+
+
     }
-         
-	public void imprimirexcelapu(){
-      
-           this.session = null;
-          this.transaction = null;
- 
-          try{
-              ApusDaoImpl apugenal=new ApusDaoImpl();
-this.session=HibernateUtil.getSessionFactory().openSession();
-this.transaction=this.session.beginTransaction();   
-this.analisisapus=apugenal.getUltimoRegistroApu(session);
-HashMap parametros = new HashMap();
-parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
-   
-          
-          File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));		
-		  
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros,this.coneccion);
-		
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=APU"+this.analisisapus.getDescApu()+".xls");
-		ServletOutputStream outStream = response.getOutputStream();
-		
-		JRXlsExporter exporter = new JRXlsExporter();
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
-		exporter.exportReport();
-		
-		outStream.flush();
-		outStream.close();
-		FacesContext.getCurrentInstance().responseComplete();		
-          this.transaction.commit();
-        }catch(Exception e){
-            
-  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
+
+    public void imprimirexcelapu() {
+
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            ApusDaoImpl apugenal = new ApusDaoImpl();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaction = this.session.beginTransaction();
+            this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            HashMap parametros = new HashMap();
+            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
+            parametros.put("Codigoapu", this.analisisapus.getCodigoApu());
+
+
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.coneccion);
+
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=APU" + this.analisisapus.getDescApu() + ".xls");
+            ServletOutputStream outStream = response.getOutputStream();
+
+            JRXlsExporter exporter = new JRXlsExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
+            exporter.exportReport();
+
+            outStream.flush();
+            outStream.close();
+            FacesContext.getCurrentInstance().responseComplete();
+            this.transaction.commit();
+        } catch (Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
         }
     }
 
+    public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException {
 
-		public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException{
-		 
-           this.session = null;
-this.transaction = null;
- 
-          try{
-              ApusDaoImpl apugenal=new ApusDaoImpl();
-this.session=HibernateUtil.getSessionFactory().openSession();
-this.transaction=this.session.beginTransaction();   
-this.analisisapus=apugenal.getUltimoRegistroApu(session);
-HashMap parametros = new HashMap();
-parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION,this.session);
-parametros.put("Codigoapu",this.analisisapus.getCodigoApu());
-   
-		
-		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, this.coneccion);
-		
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=APU"+this.analisisapus.getDescApu()+".pdf");
-		ServletOutputStream stream = response.getOutputStream();
-		
-		JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-		
-		stream.flush();
-		stream.close();
-		FacesContext.getCurrentInstance().getResponseStream();
-                             this.transaction.commit();
-        }catch(Exception e){
-            
-  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","NO se Guardo Apu"));
+        this.session = null;
+        this.transaction = null;
+
+        try {
+            ApusDaoImpl apugenal = new ApusDaoImpl();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaction = this.session.beginTransaction();
+            this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            HashMap parametros = new HashMap();
+            parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
+            parametros.put("Codigoapu", this.analisisapus.getCodigoApu());
+
+
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReporteApu.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros, this.coneccion);
+
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=APU" + this.analisisapus.getDescApu() + ".pdf");
+            ServletOutputStream stream = response.getOutputStream();
+
+            JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+
+            stream.flush();
+            stream.close();
+            FacesContext.getCurrentInstance().getResponseStream();
+            this.transaction.commit();
+        } catch (Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
         }
-	}
-	
+    }
+
 //cambio de escenarios
-  public void ActivarEscenarios(ValueChangeEvent vcEvent){
+    public void ActivarEscenarios(ValueChangeEvent vcEvent) {
 
-       // rendered = Boolean.valueOf(vcEvent.getNewValue().toString()).booleanValue();
-       this.escenarioact1=false;
-       this.escenarioact2=false;
-       this.escenarioact3=true;
+        // rendered = Boolean.valueOf(vcEvent.getNewValue().toString()).booleanValue();
+        this.escenarioact1 = false;
+        this.escenarioact2 = false;
+        this.escenarioact3 = true;
+
+
+    }
+
+    public Connection getConeccion() {
         
-
-    }
-
- 
-
-
-public Connection getConeccion() {
-         Session session = this.getSession();
-    SessionFactoryImplementor sessionFactoryImplementor = null;
-    ConnectionProvider connectionProvider = null;
-    java.sql.Connection connection = null;
-    try {
-        sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
-        connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
-        connection = connectionProvider.getConnection();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+        Session session = this.getSession();
+        SessionFactoryImplementor sessionFactoryImplementor = null;
+        ConnectionProvider connectionProvider = null;
+        java.sql.Connection connection = null;
+        try {
+            sessionFactoryImplementor = (SessionFactoryImplementor) session.getSessionFactory();
+            connectionProvider = (ConnectionProvider) sessionFactoryImplementor.getConnectionProvider().getConnection();
+            connection = connectionProvider.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return connection;
     }
-
-
-
-
 
     public void setConeccion(Connection coneccion) {
         this.coneccion = coneccion;
     }
-
 //buscar el id para setear los escenarios
   /*  private UIComponent findComponent(String id, UIComponent idcomp) {
-if (idcomp == null) {
-   return null;
-}
-else if (idcomp.getId().equals(id)) {
-   return idcomp;
-}
-else {
+     if (idcomp == null) {
+     return null;
+     }
+     else if (idcomp.getId().equals(id)) {
+     return idcomp;
+     }
+     else {
     
     
-   List<UIComponent> childrenList = idcomp.getChildren();
-   if (childrenList == null || childrenList.isEmpty()) {
-      return null;
-   }
-   for (UIComponent child : childrenList) {
-      UIComponent result = null;
-      result = findComponent(id, child);
-      if(result != null) {
-         return result;
-   }
-   return result;
-}
-   }
+     List<UIComponent> childrenList = idcomp.getChildren();
+     if (childrenList == null || childrenList.isEmpty()) {
+     return null;
+     }
+     for (UIComponent child : childrenList) {
+     UIComponent result = null;
+     result = findComponent(id, child);
+     if(result != null) {
+     return result;
+     }
+     return result;
+     }
+     }
       
-}*/
-    
-   
-
-
-
-    }
-
+     }*/
+}

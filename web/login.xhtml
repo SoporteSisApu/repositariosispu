@@ -16,41 +16,23 @@
 
         <div id="contenedorLogin">
             <div class="conteinerlogin">
-                <p:growl id="growl" showDetail="true" life="3000" />  
-                <h:form id="formLogin">  
+                <h:form id="frmLogin">
+                    <p:panel header="Inicio de Sesion" style="margin-bottom:20px; margin-top:20px ">  
+                        <p:growl id="mensageGeneral" showDetail="true" sticky="false"/>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel value="Usuario" for="txtusu"/>
+                            <p:inputText id="txtusu" size="25" value="#{loginBean.sobrenombre}"/>
+                            <p:outputLabel value="ContraseÃ±a" for="txtContrasenia"/>
+                            <p:password id="txtContrasenia" size="25" value="#{loginBean.contrasenia}"/>
 
-                        <p:panel header="Inicio de Sesion" style="margin-bottom:20px; margin-top:20px ">  
-                        <h:panelGrid columns="2" cellpadding="5">  
-                            <h:outputLabel for="username" value="Usuario:" />  
-                            <p:inputText value="#{loginBean.usuario.sobrenombreUsu}"   
-                                         id="username" required="true" label="username" />  
-
-                            <h:outputLabel for="password" value="Contrase&ntilde;a:" />  
-                            <p:password value="#{loginBean.usuario.contraseniaUsu}"   
-                                        id="password" required="true" label="password"/>
                             <f:facet name="footer">  
-                                <p:commandButton id="loginButton" value="Iniciar Sesion" update=":growl"   
-                                                 actionListener="#{loginBean.login(actionEvent)}"   
-                                                 oncomplete="handleLoginRequest(xhr, status, args)" icon="icon-login"/>  
-                                <A HREF="http://localhost:8080/sisapus/Pantallas/usuarios/registroUsuarios.xhtml">Registrar Usuario</A>
-                                
-                               
-                            </f:facet>  
-                        </h:panelGrid>     
-                    </p:panel> 
+                                <p:commandButton value="Ingresar" ajax="false" icon="icon-login" action="#{loginBean.iniciarSesion()}"/>
+                                <a href="/sisapus/Pantallas/usuarios/registroUsuarios.xhtml">Registro de Usuarios</a>
+                            </f:facet>
+                        </h:panelGrid>
+                    </p:panel>
                 </h:form>
 
-
-                <script type="text/javascript">
-                    function handleLoginRequest(xhr, status, args) {
-                        if (args.validationFailed || !args.loggedIn) {
-                            jQuery('#formLogin').effect("shake", {times: 3}, 100);
-                        }
-                        else {
-                            window.location = '/sisapus/Pantallas/menuTemplate.xhtml';
-                        }
-                    }
-                </script>
             </div>
             <div id="contenedorImagenLogin"></div>
         </div>
