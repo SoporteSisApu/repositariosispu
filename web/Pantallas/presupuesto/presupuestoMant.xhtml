@@ -161,15 +161,16 @@
                             <h:outputText value="#{presupuestoBean.precioTiva}" />  
                             <h:outputText value="Costo Total "/>
                             <h:outputText value="#{presupuestoBean.costoPresupuesto}" />  
+                            
+                             
                         </h:panelGrid>
 
                     </FIELDSET>
                     <br></br>
-
-                    <p:commandButton id="btnPresupuestar1" title="Guardar Presupuesto" value="Presupuestar"
+                  
+           <p:commandButton ajax="false" id="btnPresupuestar1" title="Guardar Presupuesto" value="Presupuestar"
                                      actionListener="#{presupuestoBean.guardarPresupuesto()}"/>  
                     <p:commandButton value="PDF" ajax="false" actionListener="#{presupuestoBean.exportarPresupuestoPDF(actionEvent)}"/>
-
                 </h:form>
             </ui:define>
         </ui:composition>
