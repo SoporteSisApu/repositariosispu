@@ -535,13 +535,17 @@ public class presupuestoBean implements Serializable {
             }
             this.transaction.commit();
             
+            this.listaDetPresupuestos=new ArrayList<>();
+          //  this.proyecto=new Proyecto();
+            //this.cabpresupuesto=new CabeceraPresupuesto();
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Presupuesto guardado correctamente"));
         } catch (Exception ex) {
             if (this.transaction != null) {
                 transaction.rollback();
             }
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", " No se puede guardar Presupuesto"));
         } finally {
             if (this.session != null) {
                 this.session.close();
