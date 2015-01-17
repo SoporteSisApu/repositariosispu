@@ -322,7 +322,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
                 Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
 
@@ -353,7 +353,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             for (EquipherrApu item : this.listaEquiposApus) {
                 Double costohora = Double.parseDouble(formato.format(item.getCantEqherrApu())) * (new Double(item.getTarifaEqherrApu()));
                 Double totalVentaPorProducto = (costohora * (new Double(item.getRendimEqherrApu())));
@@ -463,7 +463,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             for (ManoobraApu item : this.listaManoBra) {
                 Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
@@ -493,7 +493,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             for (ManoobraApu item : this.listaManoBra) {
                 Double costohora1 = Double.parseDouble(formato.format(item.getCantMoApu())) * (new Double(item.getCostojrhMoApu()));
 
@@ -576,7 +576,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
 
             for (MaterialApu item : this.listaMaterialApus) {
 
@@ -607,7 +607,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             for (MaterialApu item : this.listaMaterialApus) {
 
 
@@ -687,7 +687,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
@@ -718,7 +718,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
 
             for (TransporteApu item : this.listaTransporteApus) {
 
@@ -911,7 +911,7 @@ public class ApuBeanVista {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
 
             Analisispreciounitario apus = new Analisispreciounitario();
 

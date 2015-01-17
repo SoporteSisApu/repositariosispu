@@ -97,6 +97,11 @@ public class presupuestoBean implements Serializable {
         this.ubicacionproyecto = "";
         this.fechaproyecto = null;
         this.costoproyecto = 0.0;
+            this.precioTotApuRubro=0.00;
+    this.porcentajeiva=null;
+      this.precioTiva=0.00;
+   this.subtotalPres=0.00;
+     this.costoPresupuesto=0.00;
     }
     
     // Getter Setter Session y Transaction
@@ -438,7 +443,7 @@ public class presupuestoBean implements Serializable {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
             Double valorTotalPres = new Double("0.00");
@@ -473,7 +478,7 @@ public class presupuestoBean implements Serializable {
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
-            DecimalFormat formato = new DecimalFormat("######.00", simbolo);
+            DecimalFormat formato = new DecimalFormat("######.##", simbolo);
             
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
