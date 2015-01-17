@@ -395,11 +395,11 @@
 
                             <h:panelGroup>
 
-                                <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVista.guardarAPU()}"/>
+                                <p:commandButton value="Guardar" ajax="false" icon="icon-save" actionListener="#{ApuBeanVista.guardarAPU()}"/>
                                 
-                                <p:commandButton id="imprimirreporte" value="Imprimir" ajax="false" actionListener="#{ApuBeanVista.imprimirpdfaapu()}"/>
-                                <p:commandButton value="PDF" ajax="false" actionListener="#{ApuBeanVista.exportarPDF(actionEvent)}"/>
-                                <p:commandButton value="Excel" ajax="false" actionListener="#{ApuBeanVista.imprimirexcelapu()}"/>
+                                <p:commandButton  id="imprimirreporte" value="Imprimir" icon="icon-imprimir" ajax="false" actionListener="#{ApuBeanVista.imprimirpdfaapu()}"/>
+                                <p:commandButton style="width:10%; text-align:center" icon="icon-pdf" value="PDF" ajax="false" actionListener="#{ApuBeanVista.exportarPDF(actionEvent)}"/>
+                                <p:commandButton style="width:10%; text-align:center" icon="icon-excel" value="Excel" ajax="false" actionListener="#{ApuBeanVista.imprimirexcelapu()}"/>
                                 <h:selectBooleanCheckbox title="Seleccionar Escenarios" id="escenarios1" value="#{ApuBeanVista.escenarioact1}" >
                                     <p:ajax event="valueChange" update="Escenarios" listener="#{ApuBeanVista.ActivarEscenarios(vcEvent)}" />
                </h:selectBooleanCheckbox>
@@ -779,11 +779,11 @@
 
                             <h:panelGroup>
 
-                                <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVistaQuito.guardarAPU()}"/>
+                                <p:commandButton value="Guardar" icon="icon-save" ajax="false" actionListener="#{ApuBeanVistaQuito.guardarAPU()}"/>
                                 
-                                <p:commandButton id="imprimirreporte1" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaQuito.imprimirpdfaapu()}"/>
-                                <p:commandButton value="PDF" ajax="false" actionListener="#{ApuBeanVistaQuito.exportarPDF(actionEvent)}"/>
-                                <p:commandButton value="Excel" ajax="false" actionListener="#{ApuBeanVistaQuito.imprimirexcelapu()}"/>
+                                <p:commandButton id="imprimirreporte1" icon="icon-imprimir" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaQuito.imprimirpdfaapu()}"/>
+                                <p:commandButton style="width:10%; text-align:center" icon="icon-pdf" value="PDF" ajax="false" actionListener="#{ApuBeanVistaQuito.exportarPDF(actionEvent)}"/>
+                                <p:commandButton style="width:10%; text-align:center" icon="icon-excel" value="Excel" ajax="false" actionListener="#{ApuBeanVistaQuito.imprimirexcelapu()}"/>
                                 <h:selectBooleanCheckbox title="Seleccionar Escenarios" id="escenarios" value="#{ApuBeanVistaQuito.escenarioact1}" >
                                     <p:ajax event="valueChange" update="Escenarios" listener="#{ApuBeanVistaQuito.ActivarEscenarios(vcEvent)}" />
                </h:selectBooleanCheckbox>
@@ -1165,14 +1165,17 @@
 
                             <h:panelGroup >
 
-                                <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.guardarAPU()}"/>
+                                <p:commandButton value="Guardar" icon="icon-save" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.guardarAPU()}"/>
                                 
-                                <p:commandButton icon="icon-imprimir" style="width:20%; text-align:center" id="imprimirreporte2" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirpdfaapu()}"/>
+                                <p:commandButton icon="icon-imprimir"  id="imprimirreporte2" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirpdfaapu()}"/>
                                 <p:commandButton style="width:10%; text-align:center" icon="icon-pdf" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.exportarPDF(actionEvent)}"/>
                                 <p:commandButton style="width:10%; text-align:center" icon="icon-excel" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirexcelapu()}"/>
+                                
+                                
                                 <h:selectBooleanCheckbox title="Seleccionar Escenarios" id="escenarios2" value="#{ApuBeanVistaGuayaquil.escenarioact1}" >
                                     <p:ajax event="valueChange" update="Escenarios" listener="#{ApuBeanVistaGuayaquil.ActivarEscenarios(vcEvent)}" />
-               </h:selectBooleanCheckbox>
+                                    
+                                </h:selectBooleanCheckbox>
                             </h:panelGroup>
                         </h:panelGrid>
                     </FIELDSET>
