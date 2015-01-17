@@ -1,6 +1,6 @@
 package ec.com.sisapus.bean;
 
-import ec.com.sisapus.daoimpl.usuarioDaoImpl1;
+import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Usuario;
 import ec.com.sisapus.util.HibernateUtil;
 import java.io.Serializable;
@@ -90,7 +90,7 @@ public class loginBean implements Serializable {
         boolean logeado = false;  
         try {
              RequestContext context = RequestContext.getCurrentInstance();
-            usuarioDaoImpl1 daousuario = new usuarioDaoImpl1();
+            usuarioDaoImpl daousuario = new usuarioDaoImpl();
 
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaccion = this.session.beginTransaction();

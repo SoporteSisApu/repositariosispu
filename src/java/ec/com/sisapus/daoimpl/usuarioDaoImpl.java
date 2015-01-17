@@ -140,34 +140,7 @@ public class usuarioDaoImpl implements usuarioDao{
         
     }
 
-    @Override
-    public Usuario getByCodigoUsuario(Session session, String codigoUsuario) throws Exception {
-        return (Usuario) session.get(Usuario.class, codigoUsuario); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Usuario getByCorreoElectronico( String correoElectronico)  {
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-         String hql="select u from Usuario u where correoUsu=:correoElectronico";
-        Query query=sesion.createQuery(hql);
-        query.setParameter("correoElectronico", correoElectronico);
-        
-        Usuario usuarios=(Usuario) query.uniqueResult();
-        return usuarios; //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Usuario getByCorreoElectronicoDiferent(Session session, String codigoUsuario, String correoElectronico) throws Exception {
-        String hql="from Usuario where codigoUsu!=:codigoUsuario and correoUsu=:correoElectronico";
-        Query query=session.createQuery(hql);
-        query.setParameter("codigoUsuario", codigoUsuario);
-        query.setParameter("correoElectronico", correoElectronico);
-        
-        Usuario tUsuario=(Usuario) query.uniqueResult();
-        
-        return tUsuario; //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
     @Override
     public Usuario buscarPorcodigoUsuario(Usuario usuario) {
      Session session = HibernateUtil.getSessionFactory().openSession();
@@ -185,6 +158,38 @@ public class usuarioDaoImpl implements usuarioDao{
      Query query=session.createQuery(sql);
      query.setString("usuario",sobrenombre); 
      return (Usuario) query.uniqueResult(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean register(Session session, Usuario usuario) throws Exception {
+        session.save(usuario);
+        return true;  //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Usuario> getAll(Session session) throws Exception {
+         String hql="from Usuario";
+        Query query=session.createQuery(hql);
+        
+        List<Usuario> listaTUsuario=(List<Usuario>) query.list();
+        
+        return listaTUsuario; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario getByCodigoUsuario(Session session, int codigoUsuario) throws Exception {
+         return (Usuario) session.get(Usuario.class, codigoUsuario); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario getBySobrenombreusu(Session session, String sobre) throws Exception {
+         String hql="from Usuario where sobrenombreUsu=:sobre and estadoUsu=1 ";
+        Query query=session.createQuery(hql);
+        query.setParameter("sobre", sobre);
+        
+        Usuario tUsuario=(Usuario) query.uniqueResult();
+        
+        return tUsuario;  //To change body of generated methods, choose Tools | Templates.
     }
     
 }

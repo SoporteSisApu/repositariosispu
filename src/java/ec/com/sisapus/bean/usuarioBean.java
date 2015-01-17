@@ -28,6 +28,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Transaction;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -45,6 +46,7 @@ public class usuarioBean {
     private String nombre,apellido,sobrenombre, contrasenia,correo;
     //private boolean estado;
     private Session session;
+    private Transaction transaccion;
    
     private String nombreperfil;
     //private Date fechaReg, fechaMod;
@@ -80,6 +82,22 @@ public class usuarioBean {
 
     public void setContraseniaRepita(String contraseniaRepita) {
         this.contraseniaRepita = contraseniaRepita;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaccion() {
+        return transaccion;
+    }
+
+    public void setTransaccion(Transaction transaccion) {
+        this.transaccion = transaccion;
     }
     
     ////
@@ -126,7 +144,9 @@ public class usuarioBean {
     }
     
     ////
-      
+  
+   /// 
+    
     public void crearUsuario(ActionEvent actionEvent) {
         usuarioDao usuarioDao = new usuarioDaoImpl();
         String msg;
