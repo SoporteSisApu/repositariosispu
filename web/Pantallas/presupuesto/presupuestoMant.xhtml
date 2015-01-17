@@ -152,14 +152,14 @@
                         <legend>Presupuestar</legend>
 
                         <td></td>
-                        <h:panelGrid id="panelPresupuestar" columns="2" style="float:right" cellpadding="3" border="1">
+                        <h:panelGrid id="panelPresupuestar" columns="5" style="float:right" cellpadding="2" border="1">
                                  
                                 <h:outputText id="subtotal" value="Subtotal "/>
                             <h:outputText value="#{presupuestoBean.precioTotApuRubro}"/>  
                             <h:outputText value="IVA " />
                             <p:inputText value="#{presupuestoBean.porcentajeiva}" style="width: 50px"/>
                             <h:outputText value="#{presupuestoBean.precioTiva}" />  
-                            <h:outputText value="Total "/>
+                            <h:outputText value="Total                                    "/>
                             <h:outputText value="#{presupuestoBean.costoPresupuesto}" />  
                         </h:panelGrid>
 

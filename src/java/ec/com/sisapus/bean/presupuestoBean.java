@@ -536,9 +536,21 @@ public class presupuestoBean implements Serializable {
             this.transaction.commit();
             
             this.listaDetPresupuestos=new ArrayList<>();
-          //  this.proyecto=new Proyecto();
-            //this.cabpresupuesto=new CabeceraPresupuesto();
-            
+           this.proyecto=new Proyecto();
+            this.cabpresupuesto=new CabeceraPresupuesto();
+             this.codigoproyecto = 0;
+        this.propietarioproyecto = "";
+        this.contratistaproyecto = "";
+        this.obraproyecto = "";
+        this.ubicacionproyecto = "";
+        this.fechaproyecto = null;
+        this.costoproyecto = 0.00;
+        this.detpresupuesto=new DetallePresupuesto();
+     this.precioTotApuRubro=0.00;
+    this.porcentajeiva=0.00;
+      this.precioTiva=0.00;
+   this.subtotalPres=0.00;
+     this.costoPresupuesto=0.00;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Presupuesto guardado correctamente"));
         } catch (Exception ex) {
             if (this.transaction != null) {
