@@ -1168,8 +1168,8 @@
                                 <p:commandButton value="Guardar" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.guardarAPU()}"/>
                                 
                                 <p:commandButton id="imprimirreporte2" value="Imprimir" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirpdfaapu()}"/>
-                                <p:commandButton value="PDF" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.exportarPDF(actionEvent)}"/>
-                                <p:commandButton value="Excel" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirexcelapu()}"/>
+                                <p:commandButton value="PDF" icon="icon-pdf" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.exportarPDF(actionEvent)}"/>
+                                <p:commandButton value="Excel" icon="icon-excel" ajax="false" actionListener="#{ApuBeanVistaGuayaquil.imprimirexcelapu()}"/>
                                 <h:selectBooleanCheckbox title="Seleccionar Escenarios" id="escenarios2" value="#{ApuBeanVistaGuayaquil.escenarioact1}" >
                                     <p:ajax event="valueChange" update="Escenarios" listener="#{ApuBeanVistaGuayaquil.ActivarEscenarios(vcEvent)}" />
                </h:selectBooleanCheckbox>

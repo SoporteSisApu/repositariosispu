@@ -128,3 +128,10 @@ a:link:hover, a:visited:hover  {
 .ui-icon.icon-presupuesto{
     background-image: url(../imagenes/iconos/Presupuesto.png);
 }
+
+.ui-icon.icon-pdf{
+    background-image: url(../imagenes/iconos/pdf.png);
+}
+.ui-icon.icon-excel{
+    background-image: url(../imagenes/iconos/excel.png);
+}
