@@ -246,7 +246,7 @@
 				<subreportExpression><![CDATA["C:\\Users\\kleber\\Documents\\NetBeansProjects\\sisapus\\web\\Reportes\\TransporteApu.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement uuid="5a9751c8-3872-4639-8e8c-60e76aca50f1" x="0" y="587" width="256" height="20" forecolor="#000000"/>
+				<reportElement uuid="5a9751c8-3872-4639-8e8c-60e76aca50f1" x="18" y="566" width="256" height="20" forecolor="#000000"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
