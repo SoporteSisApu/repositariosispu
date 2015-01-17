@@ -135,3 +135,6 @@ a:link:hover, a:visited:hover  {
 .ui-icon.icon-excel{
     background-image: url(../imagenes/iconos/excel.png);
 }
+.ui-icon.icon-imprimir{
+    background-image: url(../imagenes/iconos/imprimir.png);
+}
