@@ -46,6 +46,12 @@ public class proyectoDaoImpl implements proyectoDao {
             session.delete(proyecto);
             return true;//To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception {
+         return (Proyecto) session.load(Proyecto.class, idProyecto);
+ //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

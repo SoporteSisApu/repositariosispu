@@ -17,4 +17,6 @@ public interface proyectoDao {
          public List<Proyecto> getbyUsuarioProyecto(Session session,String sobre)throws Exception;
          public boolean actualizarproyecto(Session session, Proyecto proyecto)throws Exception;
          public boolean eliminarproyecto(Session session, Integer idproyecto)throws Exception;
+           public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception;
+
 }
