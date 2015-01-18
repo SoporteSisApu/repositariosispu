@@ -7,7 +7,9 @@ package ec.com.sisapus.bean;
 import ec.com.sisapus.dao.rubroDao;
 import ec.com.sisapus.daoimpl.rubroDaoImpl;
 import ec.com.sisapus.daoimpl.rubroDaoImplInterface;
+import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Rubro;
+import ec.com.sisapus.modelo.Usuario;
 import ec.com.sisapus.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class rubroBeanVista {
     private Transaction transaccion;
     private Rubro rubro;
     private List<Rubro> listaRubro;
+    private List<Rubro> listaRubroUsuario;
     private List<SelectItem> listaRubross;
     //setear 
     private int codigorubro;
@@ -48,6 +51,9 @@ public class rubroBeanVista {
     private String descripcrubro;
     private String categString;
     Transaction transaction;
+    
+   //usuario usuario
+    private Usuario usuario;
 
     public rubroBeanVista() {
         this.rubro = new Rubro();
@@ -97,8 +103,16 @@ public class rubroBeanVista {
 
         try {
             rubroDaoImplInterface daoRubro = new rubroDaoImplInterface();
+            usuarioDaoImpl usuariodao=new usuarioDaoImpl();
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaccion = session.beginTransaction();
+            
+            
+           HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+           this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
+           this.usuario.getCodigoUsu();
+            this.rubro.setUsuario(this.usuario);
             if (daoRubro.crearRubro(this.session, this.rubro)) {
                 this.transaccion.commit();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto:", "Rubro creado correctamente"));
@@ -239,38 +253,82 @@ public class rubroBeanVista {
     }
 
     //Lista de rubros para cargar en el combobox
-    public List<SelectItem> getListaRubross() throws Exception {
+ /*   public List<SelectItem> getListaRubross() throws Exception {
         this.listaRubross = new ArrayList<SelectItem>();
         ///Crear Instancia de objeto para RolDaoImpl
         rubroDaoImpl rubrosdao = new rubroDaoImpl();
-        List<Rubro> rubros = rubrosdao.BuscarRubro();
+    //    List<Rubro> rubros = rubrosdao.BuscarRubro();
         for (Rubro rub : rubros) {
             SelectItem selectItem = new SelectItem(rub.getCodigoRubro(), rub.getNombreRubro());
             this.listaRubross.add(selectItem);
         }
         return listaRubross;
-    }
+    }*/
 
     /*public void cargartextosRubros() throws Exception
-           
-     {
-     this.listaRubross = new ArrayList<>();
-     rubroDao rubrodao = new rubroDaoImpl();
-     this.session=HibernateUtil.getSessionFactory().openSession();
-     this.transaction=this.session.beginTransaction();
-     rubro = rubrodao.getByIdRubro(session,this.rubro.getCodigoRubro());
-     for (Rubro rub : listaRubro) {
-     SelectItem selectItem = new SelectItem(rub.getCodigoRubro(),rub.getNombreRubro());
-          
-     this.codigorubro=rub.getCodigoRubro();
-     this.descripcrubro=rub.getNombreRubro();
-     this.unidadrubro=rub.getUnidadRubro();
-          
+    {
+    this.listaRubross = new ArrayList<>();
+    rubroDao rubrodao = new rubroDaoImpl();
+    this.session=HibernateUtil.getSessionFactory().openSession();
+    this.transaction=this.session.beginTransaction();
+    rubro = rubrodao.getByIdRubro(session,this.rubro.getCodigoRubro());
+    for (Rubro rub : listaRubro) {
+    SelectItem selectItem = new SelectItem(rub.getCodigoRubro(),rub.getNombreRubro());
+    this.codigorubro=rub.getCodigoRubro();
+    this.descripcrubro=rub.getNombreRubro();
+    this.unidadrubro=rub.getUnidadRubro();
+    }
+    this.transaction.commit();
+    }*/
+    public List<Rubro> getListaRubroUsuario() {
+         this.session=null;
+        this.transaccion=null;
+        
+        try
+        {
+            rubroDaoImpl rubroDao=new rubroDaoImpl();
+            usuarioDaoImpl usuariodao=new usuarioDaoImpl();
+            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaccion=this.session.beginTransaction();
+            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+           this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
+           this.usuario.getCodigoUsu();
+            this.rubro.setUsuario(this.usuario);
+            this.listaRubroUsuario= rubroDao.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
+            this.transaccion.commit();
+            
+            return this.listaRubroUsuario;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaccion!=null)
+            {
+                this.transaccion.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }
+
+    public void setListaRubroUsuario(List<Rubro> listaRubroUsuario) {
+        this.listaRubroUsuario = listaRubroUsuario;
+    }
     
-       
-     }
-     this.transaction.commit();
-     }*/
+    
+    
+    
     public int getCodigorubro() {
         return codigorubro;
     }
@@ -315,6 +373,15 @@ public class rubroBeanVista {
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
 
     public void valueChangeListener(ValueChangeEvent event) {
         //System.out.println("Cliente: " + event.getNewValue());  

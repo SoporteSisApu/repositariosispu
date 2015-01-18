@@ -17,76 +17,7 @@ import org.hibernate.Session;
  */
 public class rubroDaoImpl implements rubroDao{
 
-    @Override
-    public Rubro buscarPorRubro(Rubro rubro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Rubro> buscarTodosRubros() {
-        List<Rubro> listado = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "FROM Rubro r ";
-        try {
-            sesion.beginTransaction();
-            listado = sesion.createQuery(sql).list();
-            sesion.beginTransaction().commit();
-        } catch (Exception e) {
-            sesion.beginTransaction().rollback();
-        }
-
-        return listado;
-    }
-
-    @Override
-    public boolean crearRubro(Rubro rubro) {
-        boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            sesion.save(rubro);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-    @Override
-    public boolean actualizarRubro(Rubro rubro) {
-        boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            Rubro rubrodb = (Rubro) sesion.load(Rubro.class, rubro.getCodigoRubro());
-            rubrodb.setNombreRubro(rubro.getNombreRubro());
-            rubrodb.setDetalleRubro(rubro.getDetalleRubro());
-            rubrodb.setUnidadRubro(rubro.getUnidadRubro());
-            sesion.merge(rubrodb);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-    @Override
-    public boolean eliminarRubro(Integer idRubro) {
-        boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            Rubro rubro = (Rubro) sesion.load(Rubro.class, idRubro);
-            sesion.delete(rubro);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
-    }
+   
 
     @Override
     public Rubro getByIdRubro(Session session, Integer idrubro) throws Exception {
@@ -101,20 +32,37 @@ public class rubroDaoImpl implements rubroDao{
          return (Rubro) query.uniqueResult();//To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Rubro> BuscarRubro() {
-        List<Rubro> listado = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "FROM Rubro";
-        try {
-            sesion.beginTransaction();
-            listado = sesion.createQuery(sql).list();
-            sesion.beginTransaction().commit();
-        } catch (Exception e) {
-            sesion.beginTransaction().rollback();
-        }
+  
 
-        return listado; //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public List<Rubro> getbyUsuarioRubro(Session session, String sobre) throws Exception {
+          String hql="select r from Rubro r where r.usuario.sobrenombreUsu=:sobre";
+         Query query=session.createQuery(hql);
+        query.setParameter("sobre",sobre);
+        
+        List<Rubro> listarubro=(List<Rubro>) query.list();
+        
+        return listarubro; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean guardarrubro(Session session, Rubro rubro) throws Exception {
+          session.save(rubro);
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean actualizarrubro(Session session, Rubro rubro) throws Exception {
+         session.update(rubro);
+        
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean eliminarrubro(Session session, Integer idrubro) throws Exception {
+         Rubro rubro = (Rubro) session.load(Rubro.class, idrubro);
+            session.delete(rubro);
+            return true; //To change body of generated methods, choose Tools | Templates.
     }
 
   

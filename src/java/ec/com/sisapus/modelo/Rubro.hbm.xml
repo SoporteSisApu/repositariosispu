@@ -8,6 +8,9 @@
             <column name="CODIGO_RUBRO" />
             <generator class="identity" />
         </id>
+         <many-to-one name="usuario" class="ec.com.sisapus.modelo.Usuario" fetch="select">
+            <column name="CODIGO_USU" />
+        </many-to-one>
         <many-to-one name="categoriarubro" class="ec.com.sisapus.modelo.Categoriarubro" fetch="select">
             <column name="CODIGO_CAT_RUBRO" />
         </many-to-one>

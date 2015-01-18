@@ -41,5 +41,11 @@
             </key>
             <one-to-many class="ec.com.sisapus.modelo.Proyecto" />
         </set>
+         <set name="rubros" inverse="true">
+            <key>
+                <column name="CODIGO_USU" />
+            </key>
+            <one-to-many class="ec.com.sisapus.modelo.Rubro" />
+        </set>
     </class>
 </hibernate-mapping>

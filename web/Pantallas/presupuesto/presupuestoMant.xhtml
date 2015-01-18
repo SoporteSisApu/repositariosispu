@@ -27,7 +27,7 @@
                     <p:growl id="mensajeGeneralPresupuesto" showDetail="true"/>          
 
                     <p:dialog header="Proyectos" id="dialogProyectos" widgetVar="dialogProyectos" showEffect="fade" hideEffect="explode" height="165"  modal="true">
-                        <p:dataTable value="#{proyectoBean.listaProyectos}" var="proyecto"  scrollable="true" scrollHeight="100"
+                        <p:dataTable value="#{proyectoBean.listaproyectoporUsurio}" var="proyecto"  scrollable="true" scrollHeight="100"
                                      style="width:650px ">
                             <p:column headerText="Codigo">
                                 <h:outputText value="#{proyecto.codigoProy}"/>

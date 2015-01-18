@@ -14,20 +14,14 @@ import org.hibernate.Session;
  */
 public interface rubroDao {
 
-    public Rubro buscarPorRubro(Rubro rubro);
-
-    public List<Rubro> buscarTodosRubros();
-
-    public boolean crearRubro(Rubro rubro);
-
-    public boolean actualizarRubro(Rubro rubro);
-
-    public boolean eliminarRubro(Integer idRubro);
-
-    public List<Rubro> BuscarRubro();
+   public boolean guardarrubro(Session session, Rubro rubro)throws Exception;
+     public List<Rubro> getbyUsuarioRubro(Session session,String sobre)throws Exception;
+         public boolean actualizarrubro(Session session,Rubro rubro)throws Exception;
+         public boolean eliminarrubro(Session session, Integer idrubro)throws Exception;
    
     //agregado
     public Rubro getByIdRubro(Session session, Integer idrubro) throws Exception;
-
     public Rubro getUltimoRegistroRubro(Session session) throws Exception;
+    
+    
 }

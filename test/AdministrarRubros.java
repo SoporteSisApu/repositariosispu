@@ -9,6 +9,8 @@ import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Rubro;
 import java.util.List;
 import javax.annotation.Resource;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -28,7 +30,8 @@ public class AdministrarRubros {
      @Resource  
     List<Rubro> listarubros;  
    Rubro rubro;
-    
+       Session session;
+    Transaction transaction;
     rubroDao rubrodao= new rubroDaoImpl();
     
     private static final int Rubrobd = 6;  
@@ -57,9 +60,9 @@ public class AdministrarRubros {
     //
     
      @Test
-    public void BuscarRubros()
+    public void BuscarRubros() throws Exception
            {
-         listarubros=rubrodao.buscarTodosRubros();
+         listarubros=rubrodao.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
           Assert.assertTrue("Busca en la base de datos que exista 6 registros de Rubros",  
           listarubros.size() == Rubrobd);  
            }  
@@ -67,7 +70,7 @@ public class AdministrarRubros {
        public void CrearRubros() {
           try {
     //crear usuario
-         rubrodao.crearRubro(rubro); 
+         rubrodao.guardarrubro(session,rubro); 
        if(rubrodao !=null) {
  
          assertTrue("Rubro Creado Exitosamente", true);
@@ -86,7 +89,7 @@ public class AdministrarRubros {
     @Test   
 public void EliminarRubro() {
  try {
- rubrodao.eliminarRubro(rubro.getCodigoRubro());   
+ rubrodao.eliminarrubro(session, this.rubro.getCodigoRubro());   
 if(rubrodao !=null) {
  
 assertTrue(" Registro Eliminado Exitosamente", true);
@@ -106,7 +109,7 @@ fail("Rubro no eliminado");
  public void ActualizarRubro() {
    try {
     
-rubrodao.actualizarRubro(rubro); 
+rubrodao.actualizarrubro(session, rubro);
 if(rubrodao !=null) {
  
 assertTrue(" Registro Actualizado Exitosamente", true);

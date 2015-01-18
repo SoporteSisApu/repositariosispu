@@ -13,6 +13,7 @@ public class Rubro  implements java.io.Serializable {
 
      private Integer codigoRubro;
      private Categoriarubro categoriarubro;
+      private Usuario usuario;
      private String nombreRubro;
      private String detalleRubro;
      private String unidadRubro;
@@ -21,9 +22,11 @@ public class Rubro  implements java.io.Serializable {
     public Rubro() {
         this.codigoRubro = 0;
         this.categoriarubro = new Categoriarubro();
+        this.usuario=new Usuario();
     }
 
-    public Rubro(Categoriarubro categoriarubro, String nombreRubro, String detalleRubro, String unidadRubro, Set analisispreciounitarios) {
+    public Rubro(Usuario usuario,Categoriarubro categoriarubro, String nombreRubro, String detalleRubro, String unidadRubro, Set analisispreciounitarios) {
+        this.usuario=usuario;
        this.categoriarubro = categoriarubro;
        this.nombreRubro = nombreRubro;
        this.detalleRubro = detalleRubro;
@@ -72,6 +75,14 @@ public class Rubro  implements java.io.Serializable {
     
     public void setAnalisispreciounitarios(Set analisispreciounitarios) {
         this.analisispreciounitarios = analisispreciounitarios;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 
