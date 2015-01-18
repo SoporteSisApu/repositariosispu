@@ -5,150 +5,47 @@
 package ec.com.sisapus.daoimpl;
 
 import ec.com.sisapus.dao.proyectoDao;
-import ec.com.sisapus.modelo.ControlEjecutadoPresupuestado;
 import ec.com.sisapus.modelo.Proyecto;
-import ec.com.sisapus.modelo.Usuario;
-import ec.com.sisapus.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
  *
- * @author Edison
+ * @author kleber
  */
-public class proyectoDaoImpl implements proyectoDao{
+public class proyectoDaoImpl implements proyectoDao {
 
     @Override
-    public List<Proyecto> listarProyectos() {
-        List<Proyecto> listado = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "from Proyecto p left join fetch p.usuario";
-        //String sql = "from Proyecto p inner join p.usuario u WHERE u.sobrenombreUsu=";
-     
-        //Query query=sesion.createQuery(sql);
-        try {
-            sesion.beginTransaction();
-          //  query.setString("sobre",sobre);
-            listado = sesion.createQuery(sql).list();
-            sesion.beginTransaction().commit();
-        } catch (Exception e) {
-            sesion.beginTransaction().rollback();
-        }
-
-        return listado;
+    public boolean guardarproyecto(Session session, Proyecto proyecto) throws Exception {
+         session.save(proyecto);
+        return true; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean crearProyecto(Proyecto proyecto) {
-        boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            sesion.save(proyecto);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
+    public List<Proyecto> getbyUsuarioProyecto(Session session,String sobre) throws Exception {
+          String hql="select p from Proyecto p where p.usuario.sobrenombreUsu=:sobre";
+         Query query=session.createQuery(hql);
+        query.setParameter("sobre",sobre);
+        
+        List<Proyecto> listaproyecto=(List<Proyecto>) query.list();
+        
+        return listaproyecto; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean actualizarProyecto(Proyecto proyecto) {
-        boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            Proyecto proyectodb = (Proyecto) sesion.load(Proyecto.class, proyecto.getCodigoProy());
-            proyectodb.setUsuario(proyecto.getUsuario());
-            proyectodb.setContratProy(proyecto.getContratProy());
-            proyectodb.setPropiepProy(proyecto.getPropiepProy());
-            proyectodb.setObraProy(proyecto.getObraProy());
-            proyectodb.setUbicProy(proyecto.getUbicProy());
-            proyectodb.setFechaProy(proyecto.getFechaProy());
-            proyectodb.setCostotProy(proyecto.getCostotProy());
-            
-            sesion.merge(proyectodb);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-    @Override
-    public boolean eliminarProyecto(Integer idProyecto) {
-         boolean flag;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            sesion.beginTransaction();
-            Proyecto proyecto = (Proyecto) sesion.load(Proyecto.class, idProyecto);
-            sesion.delete(proyecto);
-            sesion.beginTransaction().commit();
-            flag = true;
-        } catch (Exception e) {
-            flag = false;
-        }
-        return flag;
-    }
-
-    @Override
-
-    public List<Proyecto> listarProyectosPorUsuario(String sobre) {
-        List<Proyecto> listado = null;
-        Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "select p from Proyecto p where p.usuario.sobrenombreUsu=:sobre";
-        try {
-            Query query=sesion.createQuery(sql);
-            sesion.beginTransaction();
-       query.setParameter("sobre",sobre);
-        query.executeUpdate();
-            listado = sesion.createQuery(sql).list();
-            sesion.beginTransaction().commit();
-        } catch (Exception e) {
-            sesion.beginTransaction().rollback();
-        }
-
-        return listado;
-    }
-
-    @Override
-
-    public boolean modificarProyecto(Session session, Proyecto tProyecto) throws Exception {
-        session.update(tProyecto);
-        return true;
-    }
-
-    @Override
-    public List<Proyecto> listarPorUsuario(Session session,String sobre ) throws Exception {
-        String hql="from Proyecto p inner join p.usuario u WHERE u.sobrenombreUsu=:sobre";
-        Query query=session.createQuery(hql);
-        try {
-            query.setParameter("sobre", sobre);
-        } catch (Exception e) {
-            session.beginTransaction().rollback();
-        }
-                return (List<Proyecto>) query.list();
-    }
-
-    @Override
-    public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception {
-        return (Proyecto) session.load(Proyecto.class, idProyecto);
-    }
-
-    @Override
-    public List<ControlEjecutadoPresupuestado> listaproyectosejecucion(Session session) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean guardarproyecto(Session session,  Proyecto tProyecto) throws Exception {
-         session.save(tProyecto);
+    public boolean actualizarproyecto(Session session, Proyecto proyecto) throws Exception {
+         session.update(proyecto);
         
         return true; //To change body of generated methods, choose Tools | Templates.
     }
 
-      
+    @Override
+    public boolean eliminarproyecto(Session session, Integer idproyecto) throws Exception {
+       Proyecto proyecto = (Proyecto) session.load(Proyecto.class, idproyecto);
+            session.delete(proyecto);
+            return true;//To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

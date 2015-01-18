@@ -363,7 +363,7 @@ public class presupuestoBean implements Serializable {
             
             this.transaction = this.session.beginTransaction();
             
-            this.proyecto = daoproyecto.obtenerProyectoPorId(session, idproyecto);
+           // this.proyecto = daoproyecto.obtenerProyectoPorId(session, idproyecto);
             
             this.setCodigoproyecto(this.proyecto.getCodigoProy());
             this.setContratistaproyecto(this.proyecto.getContratProy());

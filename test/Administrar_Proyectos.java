@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -35,7 +37,9 @@ public class Administrar_Proyectos {
     Usuario usuario;
     usuarioDao usuarioDao= new usuarioDaoImpl();
     proyectoDao proyectoDao=new proyectoDaoImpl();
-    private static final int proyectobd = 4;  
+    private static final int proyectobd = 4; 
+      Session session;
+    Transaction transaction;
     @BeforeClass
    
     public static void setUpClass() {
@@ -72,9 +76,9 @@ public class Administrar_Proyectos {
     //
    @ Test
             
- public void ListarProyectos()
+ public void ListarProyectos() throws Exception
            {
-         listaproyectos=proyectoDao.listarProyectos();
+         listaproyectos=proyectoDao.getbyUsuarioProyecto(session,this.proyecto.getUsuario().getSobrenombreUsu());
           Assert.assertTrue("Comprobar que en la base de datos hay 4 registros de proyectos",  
            listaproyectos.size() == proyectobd);  
            }  
@@ -83,7 +87,7 @@ public class Administrar_Proyectos {
        public void CrearProyecto() {
           try {
     //crear usuario
-         proyectoDao.crearProyecto(proyecto); 
+         proyectoDao.guardarproyecto(session,proyecto); 
        if(proyectoDao !=null) {
  
          assertTrue("Proyecto Creado Exitosamente", true);
@@ -103,7 +107,7 @@ fail("Proyecto no creado");
  public void EliminarProyecto() {
    try {
     
- proyectoDao.eliminarProyecto(proyecto.getCodigoProy());   
+ proyectoDao.eliminarproyecto(session,proyecto.getCodigoProy());   
 if(usuarioDao !=null) {
  
 junit.framework.Assert.assertTrue(" Registro Eliminado Exitosamente", true);
@@ -123,7 +127,7 @@ fail("Proyecto no eliminado");
  public void ActualizarProyecto() {
    try {
     
-proyectoDao.actualizarProyecto(proyecto);   
+proyectoDao.actualizarproyecto(session,proyecto);   
 if(usuarioDao !=null) {
  
 assertTrue(" Registro Actualizado Exitosamente", true);
