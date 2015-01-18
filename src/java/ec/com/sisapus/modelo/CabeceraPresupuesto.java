@@ -20,6 +20,8 @@ public class CabeceraPresupuesto  implements java.io.Serializable {
      private Set detallePresupuestos = new HashSet(0);
 
     public CabeceraPresupuesto() {
+        this.codigoPres=0;
+        this.proyecto=new Proyecto();
     }
 
     public CabeceraPresupuesto(Proyecto proyecto, String descripPres, Double subtPres, Double ivaPres, Double gastotPres, Set detallePresupuestos) {

@@ -20,6 +20,9 @@ public class DetallePresupuesto  implements java.io.Serializable {
      private Double ptotDetPres;
 
     public DetallePresupuesto() {
+        this.codigoDetPres=0;
+        this.cabeceraPresupuesto=new CabeceraPresupuesto();
+        this.analisispreciounitario=new Analisispreciounitario();
     }
 
     public DetallePresupuesto(CabeceraPresupuesto cabeceraPresupuesto, Analisispreciounitario analisispreciounitario, String nombreDetPres, String unidadDetPres, String categoriaDetPres, Integer cantidadDetPres, Double punitDetPres, Double ptotDetPres) {
