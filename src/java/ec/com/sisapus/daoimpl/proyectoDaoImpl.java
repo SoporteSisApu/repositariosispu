@@ -99,11 +99,11 @@ public class proyectoDaoImpl implements proyectoDao{
     public List<Proyecto> listarProyectosPorUsuario(String sobre) {
         List<Proyecto> listado = null;
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql = "select p,u from Proyecto p, Usuario u where p.usuario=u.codigoUsu and u.sobrenombreUsu=usuario";
+        String sql = "select p from Proyecto p where p.usuario.sobrenombreUsu=:sobre";
         try {
             Query query=sesion.createQuery(sql);
             sesion.beginTransaction();
-       query.setParameter("usuario",sobre);
+       query.setParameter("sobre",sobre);
         query.executeUpdate();
             listado = sesion.createQuery(sql).list();
             sesion.beginTransaction().commit();

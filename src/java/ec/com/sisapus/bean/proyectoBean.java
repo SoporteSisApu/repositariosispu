@@ -105,32 +105,22 @@ public class proyectoBean implements Serializable {
     }
 
     ///////////
-    public List<Proyecto> getListaporUsuario() {
-           this.session=null;
-        this.transaccion=null;
-        
-        try
-        {
+  /*  public Proyecto getListaporUsuario() throws Exception {
+         
         
             proyectoDaoImpl daoproy=new proyectoDaoImpl();
             usuarioDaoImpl userdao=new usuarioDaoImpl();
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            
-            this.usuario=userdao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
-        this.listaporUsuario=daoproy.listarPorUsuario(session,"admin");
+        this.usuario=userdao.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+            this.usuario=this.mbSLogin.getUsuario();
+            this.usuario=userdao.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+        this.proyecto.setUsuario(this.usuario);
         
-        return this.listaporUsuario;
-        }
-        catch(Exception ex)
-        {
-          
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "No se puede cargar datos de usuario "+ex.getMessage()));
-            
-            return null;
-        }
+        return proyecto;
         
-    }
+        
+        
+    }*/
 
 public void setListaporUsuario(List<Proyecto> listaporUsuario) {
         this.listaporUsuario = listaporUsuario;
@@ -166,15 +156,16 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
     //////////
     //////////////////////////
     ////Crear Proyecto
-    public void crearProyecto(ActionEvent actionEvent) throws Exception {
+    public void crearProyecto(ActionEvent actionEvent)  {
+        
+        
         proyectoDao proyectDao = new proyectoDaoImpl();
         String msg;
        usuarioDaoImpl userdao= new usuarioDaoImpl();
-       //Usuario usuarios=new Usuario();
+       //HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+       //this.usuario=userdao.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
        
-       //  HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            
-       //     usuarios=userdao.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+       // this.proyecto.setUsuario(this.usuario);
        //this.proyecto.setUsuario(usuarios);
        /*this.proyecto.setContratProy(this.proyecto.getContratProy());
         this.proyecto.setPropiepProy(this.proyecto.getPropiepProy());
@@ -219,7 +210,7 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
         }
     }
 
-    /*Eliminar Proyecto*/
+    //Eliminar Proyecto
     public void eliminarProyecto(ActionEvent actionEvent) {
         proyectoDao proyectDao = new proyectoDaoImpl();
         String msg;
@@ -235,61 +226,7 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
 
     }
 
-    //MODIFICAR PROYECTO OTRA FORMA///////
-    public void modificarProyecto() {
-        this.session = null;
-        this.transaccion = null;
-
-        try {
-            proyectoDaoImpl daoProyecto = new proyectoDaoImpl();
-
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaccion = session.beginTransaction();
-
-            daoProyecto.modificarProyecto(this.session, this.proyecto);
-            this.transaccion.commit();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Proyecto Actualizado:", "Los cambios fueron realizados exitosamente"));
-        } catch (Exception ex) {
-            if (this.transaccion != null) {
-                this.transaccion.rollback();
-            }
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
-    }
-
-    ////////////////////////////////
-    public List<Proyecto> listarProyectosUsuario() {
-        this.session = null;
-        this.transaccion = null;
-
-        try {
-            proyectoDao daoProy = new proyectoDaoImpl();
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaccion = this.session.beginTransaction();
-            HttpSession sessionUsuario = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            //this.listaProyectos = daoProy.listarPorUsuario(this.session, this.idUssuu.getSobrenombreUsu());
-            this.listaProyectos = daoProy.listarPorUsuario(this.session, sessionUsuario.getAttribute("sobrenombreUsuario").toString());
-            this.transaccion.commit();
-            return this.listaProyectos;
-        } catch (Exception ex) {
-            if (this.transaccion != null) {
-                this.transaccion.rollback();
-            }
-
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
-
-            return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
-    }
+    
 
     //Cargar lista de proyectos en el combobox
     public List<SelectItem> getCargarProyectos() {
@@ -318,10 +255,10 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
             
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=session.beginTransaction();
-            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+           // HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             
-            this.usuario=daoTUsuario.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
-            this.proyecto.setUsuario(usuario);
+          //  this.usuario=daoTUsuario.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+          //  this.proyecto.setUsuario(usuario);
             daoproyecto.guardarproyecto(this.session, this.proyecto);
             
             this.transaccion.commit();

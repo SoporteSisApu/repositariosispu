@@ -21,22 +21,24 @@
     <body>
         <ui:composition template="./../menuTemplate.xhtml">
             <ui:define name="content">
-                <p:growl id="msgs" showDetail="false" />  
             
+                <p:growl id="msgs" showDetail="false" />  
                 
                 <h:form>
                     <p:commandButton id="btnProyectoCreate" update=":formCreate" oncomplete="dialogProyectoCreate.show()" icon="icon-add" title="Nuevo Proyecto" value="Crear">  
                     </p:commandButton>  
                                       </h:form>
                 <h:form id="formDataTable">  
-                    <p:dataTable id="mostrarProyectos" var="proyecto" value="#{proyectoBean.listaporUsuario}" scrollable="true" scrollHeight="150"
+                    <p:dataTable id="mostrarProyectos" var="proyecto" value="#{proyectoBean1.listaproyectoporUsurio}" scrollable="true" scrollHeight="150"
                                  paginator="true" rows="10" paginatorPosition="bottom"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                  >  
                         <f:facet name="header">  
                             Proyectos  
                         </f:facet>
-                     
+                      <p:column headerText="Usuario" style="width:20%"  footerText="contains" filterMatchMode="contains">  
+                          <h:outputText value="#{proyecto.usuario.codigoUsu}" dir="center"/>  
+                        </p:column>  
                         <p:column headerText="Propietario" style="width:20%" filterBy="#{proyecto.propiepProy}"   
                                   footerText="contains" filterMatchMode="contains">  
                             <h:outputText value="#{proyecto.propiepProy}" dir="center"/>  
@@ -57,11 +59,11 @@
                         
                         <p:column headerText="Acciones" style="width:10%; text-align:center">  
                             <p:commandButton id="btnProyectoUpdate" update=":formUpdate" oncomplete="dialogProyectoUpdate.show()" icon="icon-edit" title="Modificar">  
-                                <f:setPropertyActionListener value="#{proyecto}" target="#{proyectoBean.proyecto}" />  
+                                <f:setPropertyActionListener value="#{proyecto}" target="#{proyectoBean1.proyecto}" />  
                             </p:commandButton>  
 
                             <p:commandButton id="btnProyectoDelete" update=":formDelete" oncomplete="dialogProyectoDelete.show()" icon="icon-delete" title="Eliminar">  
-                                <f:setPropertyActionListener value="#{proyecto}" target="#{proyectoBean.proyecto}" />  
+                                <f:setPropertyActionListener value="#{proyecto}" target="#{proyectoBean1.proyecto}" />  
                             </p:commandButton>  
 
                         </p:column>  
@@ -69,36 +71,33 @@
                 </h:form>  
 
                 <h:form id="formCreate">
+                    
                     <p:dialog header="Crear Nuevo Proyecto" widgetVar="dialogProyectoCreate" resizable="false" id="dlgProyectoCreate"  
                               showEffect="fade" hideEffect="explode" modal="true">  
                         <h:panelGrid id="pantallacrearproyecto" columns="2" cellpadding="4" >  
                               <p:outputLabel value="Usuario:" />  
-                              <p:inputText value="#{proyectoBean.proyecto.usuario.codigoUsu}" />         
+                              <p:inputText value="#{proyectoBean1.proyecto.usuario.codigoUsu}" />         
                             <p:outputLabel value="Propietario:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.propiepProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.propiepProy}" />  
                             <p:outputLabel value="Contratista:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.contratProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.contratProy}" />  
                             <p:outputLabel value="Nombre Obra:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.obraProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.obraProy}" />  
                             <p:outputLabel value="Ubicacion:" />  
-                            <p:selectOneMenu value="#{proyectoBean.proyecto.ubicProy}">  
-                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" />  
-                              
-                                <f:selectItems value="#{proyectoBean.opciones}" />
+                            <p:inputText value="#{proyectoBean1.proyecto.ubicProy}"/>  
                                
-                            </p:selectOneMenu> 
                             <p:outputLabel value="Fecha:" for="txtFechaProyecto" />  
                             <h:panelGroup layout="block">
                             <p:calendar id="txtFechaProyecto" label="Fecha:" showOn="button" title="Ejemplo: dd/mm/yyyy" value="#{proyectoBean.proyecto.fechaProy}" pattern="dd/MM/yyyy" navigator="true" yearRange="c-50:c+2"/>
                             </h:panelGroup>
                             <p:outputLabel value="Costo:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.costotProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.costotProy}" />  
                             
-                            <h:inputHidden value="#{proyectoBean.proyecto.codigoProy}"/>  
+                            <h:inputHidden value="#{proyectoBean1.proyecto.codigoProy}"/>  
                             
                             <f:facet name="footer">
                                 <p:separator/>
-                                <p:commandButton id="btnCreateAceptar" update=":formDataTable, :msgs" oncomplete="dialogProyectoCreate.hide()" actionListener="#{proyectoBean.crearProyecto(actionEvent)}" icon="icon-save" title="Guardar" value="Guardar"/>  
+                                <p:commandButton id="btnCreateAceptar" update=":formDataTable, :msgs" oncomplete="dialogProyectoCreate.hide()" actionListener="#{proyectoBean1.guardarproyecto()}" icon="icon-save" title="Guardar" value="Guardar"/>  
                                 <p:commandButton id="btnCreateCancelar" oncomplete="dialogProyectoCreate.hide()" icon="icon-cancel" title="Cancelar" value="Cancelar"/>  
                             </f:facet>
                         </h:panelGrid>  
@@ -106,40 +105,42 @@
                 </h:form>  
 
                 <h:form id="formUpdate">
+   
                     <p:dialog header="Modificar Datos Proyecto" widgetVar="dialogProyectoUpdate" resizable="false" id="dlgMaterialUpdate"  
                               showEffect="fade" hideEffect="explode" modal="true">  
                         <h:panelGrid id="pantallamodificarproyecto" columns="2" cellpadding="4" style="margin:0 auto;">  
                              <h:outputText value="Usuario:" />  
-                             <p:inputText value="#{proyectoBean.proyecto.usuario.codigoUsu}" />          
+                             <p:inputText value="#{proyectoBean1.proyecto.usuario.codigoUsu}" />          
                             <h:outputText value="Propietario:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.propiepProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.propiepProy}" />  
                             <h:outputText value="Contratista:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.contratProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.contratProy}" />  
                             <h:outputText value="Nombre Obra:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.obraProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.obraProy}" />  
                             <h:outputText value="Ubicacion:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.ubicProy}" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.ubicProy}" />  
                             <h:outputText value="Fecha:" />  
                             <h:panelGroup layout="block">
                             <p:calendar id="txtFechaProyecto1" label="Fecha:" showOn="button" title="Ejemplo: dd/mm/yyyy" value="#{proyectoBean.proyecto.fechaProy}" pattern="dd/MM/yyyy" navigator="true" yearRange="c-50:c+2"/>
                             </h:panelGroup>
                             <h:outputText value="Costo:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.costotProy}" />  
-                            <h:inputHidden value="#{proyectoBean.proyecto.codigoProy}"/>  
+                            <p:inputText value="#{proyectoBean1.proyecto.costotProy}" />  
+                            <h:inputHidden value="#{proyectoBean1.proyecto.codigoProy}"/>  
                             <f:facet name="footer">
                                 <p:separator/>
-                                <p:commandButton id="btnUpdateAceptar" update=":formDataTable, :msgs" oncomplete="dialogProyectoUpdate.hide()" actionListener="#{proyectoBean.actualizarProyecto(actionEvent)}" icon="icon-save" title="Guardar" value="Guardar"/>  
+                                <p:commandButton id="btnUpdateAceptar" update=":formDataTable, :msgs1" oncomplete="dialogProyectoUpdate.hide()" actionListener="#{proyectoBean1.actulizarproyecto()}" icon="icon-save" title="Guardar" value="Guardar"/>  
                                 <p:commandButton id="btnUpdateCancelar" oncomplete="dialogProyectoUpdate.hide()" icon="icon-cancel" title="Cancelar" value="Cancelar"/>  
                             </f:facet>
                         </h:panelGrid>  
                     </p:dialog>  
                 </h:form>  
                 <h:form id="formDelete">
+                     
                     <p:confirmDialog id="confirmDialog" message="Desea Eliminar el Proyecto" showEffect="fade" hideEffect="explode"
                                      header="Eliminar Proyecto" severity="alert" widgetVar="dialogProyectoDelete">  
-                        <h:inputHidden value="#{proyectoBean.proyecto.codigoProy}"/>  
-                        <p:commandButton id="confirm" value="Aceptar" update=":formDataTable, :msgs" oncomplete="dialogProyectoDelete.hide()"  
-                                         actionListener="#{proyectoBean.eliminarProyecto(actionEvent)}" icon="icon-check"/>  
+                        <h:inputHidden value="#{proyectoBean1.proyecto.codigoProy}"/>  
+                        <p:commandButton id="confirm" value="Aceptar" update=":formDataTable, :msgs3" oncomplete="dialogProyectoDelete.hide()"  
+                                         actionListener="#{proyectoBean1.eliminarproyecto()}" icon="icon-check"/>  
                         <p:commandButton id="decline" value="Cancelar" onclick="dialogProyectoDelete.hide()" type="button" icon="icon-cancel"/>       
                     </p:confirmDialog>  
                 </h:form>

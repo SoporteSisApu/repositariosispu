@@ -21,15 +21,87 @@
     <body>
         <ui:composition template="./../menuTemplate.xhtml">
             <ui:define name="content">
-                <p:growl id="msgs" showDetail="false" />  
             
-                
-                <h:form>
-                
-                    <p:tabView binding="#{proyectoBean.tabView}" rendered="true" 
-                           >
+                         
+  
+                <h:form  id="formprincipal">
+                  <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
+                    <p:dataTable id="mostrarProyectos" var="proyecto1" value="#{proyectoBean1.listaproyectoporUsurio}" scrollable="true" scrollHeight="150"
+                                 paginator="true" rows="10" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 >  
+                        <f:facet name="header">  
+                            Proyectos  
+                        </f:facet>
+                      <p:column headerText="Usuario" style="width:20%"  footerText="contains" filterMatchMode="contains">  
+                          <h:outputText value="#{proyecto1.usuario.codigoUsu}" dir="center"/>  
+                        </p:column>  
+                        <p:column headerText="Propietario" style="width:20%" filterBy="#{proyecto1.propiepProy}"   
+                                  footerText="contains" filterMatchMode="contains">  
+                            <h:outputText value="#{proyecto1.propiepProy}" dir="center"/>  
+                        </p:column>  
+                        <p:column headerText="Contratista" style="width:20%"    
+                                  footerText="contains" filterMatchMode="contains">  
+                            <h:outputText value="#{proyecto1.contratProy}" />  
+                        </p:column>
+                        <p:column headerText="Obra" style="width:20%">  
+                            <h:outputText value="#{proyecto1.obraProy}" />  
+                        </p:column>
+                        <p:column headerText="Ubicacion" style="width:24%">  
+                            <h:outputText value="#{proyecto1.ubicProy}" />  
+                        </p:column> 
+                        <p:column headerText="Fecha" style="width:24%">  
+                            <h:outputText value="#{proyecto1.fechaProy}" />
+                        </p:column>
+                        
+                   
+                    </p:dataTable>  
                     
-                </p:tabView>
+                    
+       
+                    <h:panelGrid columns="3">
+                      
+                        <p:outputLabel value="Nombre" for="txtNombre"/>
+                        <p:inputText id="txtNombre" label="Nombre" size="50" value="#{proyectoBean1.proyecto.propiepProy}">
+                            <f:validator validatorId="validatorVacio"/>
+                        </p:inputText>
+                        <p:message for="txtNombre"/>
+                        <p:outputLabel value="Apellido paterno" for="txtApellidoPaterno"/>
+                        <p:inputText id="txtApellidoPaterno" label="Apellido paterno" size="50" value="#{proyectoBean1.proyecto.contratProy}">
+                            <f:validator validatorId="validatorVacio"/>
+                        </p:inputText>
+                      
+                      
+                       
+                     
+                       
+                        <p:commandButton value="guardar" ajax="false" actionListener="#{proyectoBean1.guardarproyecto()}"/>
+                    </h:panelGrid>
+                  
+                    <h:panelGrid id="pantallamodificarproyecto" columns="2" cellpadding="4" style="margin:0 auto;">  
+                             <h:outputText value="Usuario:" />  
+                             <p:inputText value="#{proyectoBean1.proyecto.usuario.codigoUsu}" />          
+                            <h:outputText value="Propietario:" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.propiepProy}" />  
+                            <h:outputText value="Contratista:" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.contratProy}" />  
+                            <h:outputText value="Nombre Obra:" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.obraProy}" />  
+                            <h:outputText value="Ubicacion:" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.ubicProy}" />  
+                            <h:outputText value="Fecha:" />  
+                            <h:panelGroup layout="block">
+                            <p:calendar id="txtFechaProyecto1" label="Fecha:" showOn="button" title="Ejemplo: dd/mm/yyyy" value="#{proyectoBean1.proyecto.fechaProy}" pattern="dd/MM/yyyy" navigator="true" yearRange="c-50:c+2"/>
+                            </h:panelGroup>
+                            <h:outputText value="Costo:" />  
+                            <p:inputText value="#{proyectoBean1.proyecto.costotProy}" />  
+                            <h:inputHidden value="#{proyectoBean1.proyecto.codigoProy}"/>  
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton ajax="false" id="btnUpdateAceptar" update=":formprincipal, :mensajeGeneral"  actionListener="#{proyectoBean1.actulizarproyecto()}" icon="icon-save" title="Guardar" value="Guardar"/>  
+                              
+                            </f:facet>
+                            </h:panelGrid>
                 </h:form>
 
 
