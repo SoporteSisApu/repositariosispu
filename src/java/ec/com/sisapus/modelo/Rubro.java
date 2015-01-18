@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,21 +13,18 @@ public class Rubro  implements java.io.Serializable {
 
      private Integer codigoRubro;
      private Categoriarubro categoriarubro;
-      private Usuario usuario;
+     private Usuario usuario;
      private String nombreRubro;
      private String detalleRubro;
      private String unidadRubro;
      private Set analisispreciounitarios = new HashSet(0);
 
     public Rubro() {
-        this.codigoRubro = 0;
-        this.categoriarubro = new Categoriarubro();
-        this.usuario=new Usuario();
     }
 
-    public Rubro(Usuario usuario,Categoriarubro categoriarubro, String nombreRubro, String detalleRubro, String unidadRubro, Set analisispreciounitarios) {
-        this.usuario=usuario;
+    public Rubro(Categoriarubro categoriarubro, Usuario usuario, String nombreRubro, String detalleRubro, String unidadRubro, Set analisispreciounitarios) {
        this.categoriarubro = categoriarubro;
+       this.usuario = usuario;
        this.nombreRubro = nombreRubro;
        this.detalleRubro = detalleRubro;
        this.unidadRubro = unidadRubro;
@@ -47,6 +44,13 @@ public class Rubro  implements java.io.Serializable {
     
     public void setCategoriarubro(Categoriarubro categoriarubro) {
         this.categoriarubro = categoriarubro;
+    }
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     public String getNombreRubro() {
         return this.nombreRubro;
@@ -75,14 +79,6 @@ public class Rubro  implements java.io.Serializable {
     
     public void setAnalisispreciounitarios(Set analisispreciounitarios) {
         this.analisispreciounitarios = analisispreciounitarios;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 

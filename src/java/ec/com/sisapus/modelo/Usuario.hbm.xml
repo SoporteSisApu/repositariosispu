@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 18/01/2015 05:06:37 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="ec.com.sisapus.modelo.Usuario" table="usuario" catalog="bdsisapu_1">
         <id name="codigoUsu" type="java.lang.Integer">
@@ -41,7 +41,7 @@
             </key>
             <one-to-many class="ec.com.sisapus.modelo.Proyecto" />
         </set>
-         <set name="rubros" inverse="true">
+        <set name="rubros" inverse="true">
             <key>
                 <column name="CODIGO_USU" />
             </key>

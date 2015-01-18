@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -34,12 +34,6 @@ public class Analisispreciounitario  implements java.io.Serializable {
      private Set manoobraApus = new HashSet(0);
 
     public Analisispreciounitario() {
-        
-     this.codigoApu = 0;
-      
-      //  this.categoriapreciounitario=new Categoriapreciounitario();
-        this.rubro=new Rubro();
-        this.escenarioapu=new Escenarioapu();
     }
 
     public Analisispreciounitario(Escenarioapu escenarioapu, Rubro rubro, String descApu, String unidadApu, String categoriaApu, Double analApuMat, Double analApuEqherr, Double analApuMob, Double analApuTran, Double costDirApu, Double costIndApu, Double costOtrosIndApu, Double costotApu, Double rendApu, Double porcenIndApu, Set detallePresupuestos, Set materialApus, Set transporteApus, Set equipherrApus, Set manoobraApus) {

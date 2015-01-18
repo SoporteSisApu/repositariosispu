@@ -72,9 +72,8 @@ public class rubroBean1 {
         this.usuario = usuario;
     }
 
-    public List<Rubro> getlistarubroporUsurio() {
-        
-        this.session=null;
+    public List<Rubro> getListarubroporUsurio() {
+  this.session=null;
         this.transaccion=null;
         
         try
@@ -113,12 +112,13 @@ public class rubroBean1 {
                 this.session.close();
             }
         }
-        
     }
 
-    public void setlistarubroporUsurio(List<Rubro> listarubroporUsurio) {
+    public void setListarubroporUsurio(List<Rubro> listarubroporUsurio) {
         this.listarubroporUsurio = listarubroporUsurio;
     }
+
+  
     
     
    

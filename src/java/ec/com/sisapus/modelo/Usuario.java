@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 14/01/2015 12:31:40 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -23,14 +23,12 @@ public class Usuario  implements java.io.Serializable {
      private Date fechregUsu;
      private Date fechmodUsu;
      private Set proyectos = new HashSet(0);
-      private Set rubros = new HashSet(0);
-    public Usuario() {
-          this.codigoUsu = 0;
-        this.perfil = new Perfil();
+     private Set rubros = new HashSet(0);
 
+    public Usuario() {
     }
 
-    public Usuario(Perfil perfil, String nombreUsu, String apellidoUsu, String sobrenombreUsu, String contraseniaUsu, String correoUsu, Boolean estadoUsu, Date fechregUsu, Date fechmodUsu, Set proyectos,Set rubros ) {
+    public Usuario(Perfil perfil, String nombreUsu, String apellidoUsu, String sobrenombreUsu, String contraseniaUsu, String correoUsu, Boolean estadoUsu, Date fechregUsu, Date fechmodUsu, Set proyectos, Set rubros) {
        this.perfil = perfil;
        this.nombreUsu = nombreUsu;
        this.apellidoUsu = apellidoUsu;
@@ -41,7 +39,7 @@ public class Usuario  implements java.io.Serializable {
        this.fechregUsu = fechregUsu;
        this.fechmodUsu = fechmodUsu;
        this.proyectos = proyectos;
-       this.rubros=rubros;
+       this.rubros = rubros;
     }
    
     public Integer getCodigoUsu() {
@@ -121,11 +119,10 @@ public class Usuario  implements java.io.Serializable {
     public void setProyectos(Set proyectos) {
         this.proyectos = proyectos;
     }
-
     public Set getRubros() {
-        return rubros;
+        return this.rubros;
     }
-
+    
     public void setRubros(Set rubros) {
         this.rubros = rubros;
     }

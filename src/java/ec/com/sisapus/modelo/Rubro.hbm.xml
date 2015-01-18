@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/01/2015 12:31:41 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 18/01/2015 05:06:37 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="ec.com.sisapus.modelo.Rubro" table="rubro" catalog="bdsisapu_1">
         <id name="codigoRubro" type="java.lang.Integer">
             <column name="CODIGO_RUBRO" />
             <generator class="identity" />
         </id>
-         <many-to-one name="usuario" class="ec.com.sisapus.modelo.Usuario" fetch="select">
-            <column name="CODIGO_USU" />
-        </many-to-one>
         <many-to-one name="categoriarubro" class="ec.com.sisapus.modelo.Categoriarubro" fetch="select">
             <column name="CODIGO_CAT_RUBRO" />
+        </many-to-one>
+        <many-to-one name="usuario" class="ec.com.sisapus.modelo.Usuario" fetch="select">
+            <column name="CODIGO_USU" />
         </many-to-one>
         <property name="nombreRubro" type="string">
             <column name="NOMBRE_RUBRO" />
