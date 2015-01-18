@@ -24,7 +24,7 @@ public class proyectoDaoImpl implements proyectoDao {
 
     @Override
     public List<Proyecto> getbyUsuarioProyecto(Session session,String sobre) throws Exception {
-          String hql="select r from Rubro r where r.usuario.sobrenombreUsu=:sobre";
+          String hql="select p from Proyecto p where p.usuario.sobrenombreUsu=:sobre";
          Query query=session.createQuery(hql);
         query.setParameter("sobre",sobre);
         

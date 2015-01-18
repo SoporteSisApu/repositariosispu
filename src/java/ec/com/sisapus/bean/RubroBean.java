@@ -5,7 +5,7 @@
 package ec.com.sisapus.bean;
 
 import ec.com.sisapus.daoimpl.proyectoDaoImpl;
-import ec.com.sisapus.daoimpl.rubroDaoImpl1;
+import ec.com.sisapus.daoimpl.rubroDaoImpl;
 import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Rubro;
 import ec.com.sisapus.modelo.Usuario;
@@ -24,14 +24,14 @@ import org.hibernate.Transaction;
  */
 @ManagedBean
 @ViewScoped
-public class RubroBean11 {
+public class RubroBean {
       private Session session;
     private Transaction transaccion;
     
     private Rubro rubro;
     private Usuario usuario;
     private List<Rubro> listarubroporUsurio;
-     public  RubroBean11(){
+     public  RubroBean(){
         this.rubro=new Rubro();
         
     }
@@ -74,7 +74,7 @@ public class RubroBean11 {
         
         try
         {
-            rubroDaoImpl1 daorubro=new rubroDaoImpl1();
+            rubroDaoImpl daorubro=new rubroDaoImpl();
             usuarioDaoImpl usuariodao=new usuarioDaoImpl();
             
             this.session=HibernateUtil.getSessionFactory().openSession();
@@ -120,7 +120,7 @@ public class RubroBean11 {
         {            
            
 
-           rubroDaoImpl1 daorubro=new rubroDaoImpl1();
+           rubroDaoImpl daorubro=new rubroDaoImpl();
             usuarioDaoImpl usuariodao=new usuarioDaoImpl();
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=session.beginTransaction();
@@ -169,7 +169,7 @@ public class RubroBean11 {
         {            
            
 
-            rubroDaoImpl1 daorubro=new rubroDaoImpl1();
+            rubroDaoImpl daorubro=new rubroDaoImpl();
          
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=session.beginTransaction();
@@ -211,7 +211,7 @@ public class RubroBean11 {
         {            
            
 
-            rubroDaoImpl1 daorubro=new rubroDaoImpl1();
+            rubroDaoImpl daorubro=new rubroDaoImpl();
            
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=session.beginTransaction();
