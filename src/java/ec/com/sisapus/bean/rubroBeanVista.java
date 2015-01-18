@@ -112,7 +112,7 @@ public class rubroBeanVista {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.rubro.setUsuario(this.usuario);
+          //  this.rubro.setUsuario(this.usuario);
             if (daoRubro.crearRubro(this.session, this.rubro)) {
                 this.transaccion.commit();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto:", "Rubro creado correctamente"));
@@ -296,8 +296,8 @@ public class rubroBeanVista {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.rubro.setUsuario(this.usuario);
-            this.listaRubroUsuario= rubroDao.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
+       //     this.rubro.setUsuario(this.usuario);
+         //   this.listaRubroUsuario= rubroDao.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
             this.transaccion.commit();
             
             return this.listaRubroUsuario;

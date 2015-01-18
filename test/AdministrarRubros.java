@@ -62,7 +62,7 @@ public class AdministrarRubros {
      @Test
     public void BuscarRubros() throws Exception
            {
-         listarubros=rubrodao.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
+       //  listarubros=rubrodao.getbyUsuarioRubro(session,this.rubro);
           Assert.assertTrue("Busca en la base de datos que exista 6 registros de Rubros",  
           listarubros.size() == Rubrobd);  
            }  

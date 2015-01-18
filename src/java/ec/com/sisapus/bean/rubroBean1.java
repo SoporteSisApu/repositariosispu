@@ -88,8 +88,8 @@ public class rubroBean1 {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.rubro.setUsuario(this.usuario);
-            this.listarubroporUsurio=daorubro.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
+        //    this.rubro.setUsuario(this.usuario);
+           // this.listarubroporUsurio=daorubro.getbyUsuarioRubro(session,this.rubro.getUsuario().getSobrenombreUsu());
             this.transaccion.commit();
             
             return this.listarubroporUsurio;
@@ -143,7 +143,7 @@ public class rubroBean1 {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.rubro.setUsuario(this.usuario);
+            //this.rubro.setUsuario(this.usuario);
             daorubro.guardarrubro(this.session, this.rubro);
             
             this.transaccion.commit();
