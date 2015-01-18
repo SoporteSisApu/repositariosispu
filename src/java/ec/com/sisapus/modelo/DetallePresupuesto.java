@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 06:23:43 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -20,9 +20,6 @@ public class DetallePresupuesto  implements java.io.Serializable {
      private Double ptotDetPres;
 
     public DetallePresupuesto() {
-        this.codigoDetPres=0;
-        this.cabeceraPresupuesto=new CabeceraPresupuesto();
-        this.analisispreciounitario=new Analisispreciounitario();
     }
 
     public DetallePresupuesto(CabeceraPresupuesto cabeceraPresupuesto, Analisispreciounitario analisispreciounitario, String nombreDetPres, String unidadDetPres, String categoriaDetPres, Integer cantidadDetPres, Double punitDetPres, Double ptotDetPres) {

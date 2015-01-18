@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 06:23:43 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -21,9 +21,6 @@ public class ManoobraApu  implements java.io.Serializable {
      private Double costotMoApu;
 
     public ManoobraApu() {
-         this.codMoApu=0;
-        this.manoobra = new Manoobra();
-this.analisispreciounitario=new Analisispreciounitario();
     }
 
     public ManoobraApu(Analisispreciounitario analisispreciounitario, Manoobra manoobra, String descMoApu, String categMoApu, Integer cantMoApu, Double costojrhMoApu, Double costohoraMoApu, Double rendimMoApu, Double costotMoApu) {

@@ -1,5 +1,5 @@
 package ec.com.sisapus.modelo;
-// Generated 18/01/2015 05:06:35 PM by Hibernate Tools 3.2.1.GA
+// Generated 18/01/2015 06:23:43 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -20,8 +20,6 @@ public class CabeceraPresupuesto  implements java.io.Serializable {
      private Set detallePresupuestos = new HashSet(0);
 
     public CabeceraPresupuesto() {
-        this.codigoPres=0;
-        this.proyecto=new Proyecto();
     }
 
     public CabeceraPresupuesto(Proyecto proyecto, String descripPres, Double subtPres, Double ivaPres, Double gastotPres, Set detallePresupuestos) {
