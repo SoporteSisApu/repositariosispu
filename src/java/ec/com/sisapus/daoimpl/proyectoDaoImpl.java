@@ -122,11 +122,11 @@ public class proyectoDaoImpl implements proyectoDao{
     }
 
     @Override
-    public List<Proyecto> listarPorUsuario(Session session,String sobre1 ) throws Exception {
-        String hql="from Proyecto p inner join p.usuario u WHERE u.sobrenombreUsu=:sobre1";
+    public List<Proyecto> listarPorUsuario(Session session,String sobre ) throws Exception {
+        String hql="from Proyecto p inner join p.usuario u WHERE u.sobrenombreUsu=:sobre";
         Query query=session.createQuery(hql);
         try {
-            query.setParameter("sobre1", sobre1);
+            query.setParameter("sobre", sobre);
         } catch (Exception e) {
             session.beginTransaction().rollback();
         }
@@ -141,6 +141,13 @@ public class proyectoDaoImpl implements proyectoDao{
     @Override
     public List<ControlEjecutadoPresupuestado> listaproyectosejecucion(Session session) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean guardarproyecto(Session session,  Proyecto tProyecto) throws Exception {
+         session.save(tProyecto);
+        
+        return true; //To change body of generated methods, choose Tools | Templates.
     }
 
       

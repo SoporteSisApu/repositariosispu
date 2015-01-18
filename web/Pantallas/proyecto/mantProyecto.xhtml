@@ -29,16 +29,14 @@
                     </p:commandButton>  
                                       </h:form>
                 <h:form id="formDataTable">  
-                    <p:dataTable id="mostrarProyectos" var="proyecto" value="#{proyectoBean.listaProyectos}" scrollable="true" scrollHeight="150"
+                    <p:dataTable id="mostrarProyectos" var="proyecto" value="#{proyectoBean.listaporUsuario}" scrollable="true" scrollHeight="150"
                                  paginator="true" rows="10" paginatorPosition="bottom"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                  >  
                         <f:facet name="header">  
                             Proyectos  
                         </f:facet>
-                        <!--<p:column headerText="Codigo" style="width:5%">  
-                            <h:outputText value="#{proyecto.codigoProy}" />  
-                        </p:column>-->
+                     
                         <p:column headerText="Propietario" style="width:20%" filterBy="#{proyecto.propiepProy}"   
                                   footerText="contains" filterMatchMode="contains">  
                             <h:outputText value="#{proyecto.propiepProy}" dir="center"/>  
@@ -74,8 +72,8 @@
                     <p:dialog header="Crear Nuevo Proyecto" widgetVar="dialogProyectoCreate" resizable="false" id="dlgProyectoCreate"  
                               showEffect="fade" hideEffect="explode" modal="true">  
                         <h:panelGrid id="pantallacrearproyecto" columns="2" cellpadding="4" >  
-                            <p:outputLabel value="Usuario:" />  
-                            <p:inputText value="#{proyectoBean.proyecto.usuario.codigoUsu}" />          
+                              <p:outputLabel value="Usuario:" />  
+                              <p:inputText value="#{proyectoBean.proyecto.usuario.codigoUsu}" />         
                             <p:outputLabel value="Propietario:" />  
                             <p:inputText value="#{proyectoBean.proyecto.propiepProy}" />  
                             <p:outputLabel value="Contratista:" />  

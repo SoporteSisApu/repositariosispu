@@ -6,7 +6,7 @@ package ec.com.sisapus.dao;
 
 import ec.com.sisapus.modelo.ControlEjecutadoPresupuestado;
 import ec.com.sisapus.modelo.Proyecto;
-import ec.com.sisapus.modelo.Usuario;
+
 import java.util.List;
 import org.hibernate.Session;
 
@@ -25,10 +25,12 @@ public interface proyectoDao {
     public List<Proyecto> listarProyectosPorUsuario(String sobre);
     public boolean modificarProyecto(Session session, Proyecto tProyecto)throws Exception;
     ///// Metodos para listar proyectos por usuario
-    public List<Proyecto> listarPorUsuario(Session session, String sobre1)throws Exception;
+    public List<Proyecto> listarPorUsuario(Session session, String sobre)throws Exception;
     
     //Metodos Agregados para usarlos dentro del presupuesto
     public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception;
     //metodo para la ejecucion de los proyectos
      public List<ControlEjecutadoPresupuestado> listaproyectosejecucion (Session session) throws  Exception;
+     ///guardar proyecto
+     public boolean guardarproyecto(Session session,  Proyecto tProyecto)throws Exception;
 }

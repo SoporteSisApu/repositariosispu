@@ -69,7 +69,7 @@
     <managed-bean>
         <managed-bean-name>proyectoBean</managed-bean-name>
         <managed-bean-class>ec.com.sisapus.bean.proyectoBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>rubroBeanVista</managed-bean-name>

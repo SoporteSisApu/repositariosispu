@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -31,7 +32,7 @@ import org.primefaces.context.RequestContext;
  * @author Edison
  */
 @Named(value = "proyectoBean")
-@javax.faces.view.ViewScoped
+@ViewScoped
 //@ManagedBean
 //@ViewScoped
 public class proyectoBean implements Serializable {
@@ -41,12 +42,16 @@ public class proyectoBean implements Serializable {
     private List<Proyecto> listaProyectos;
     private List<Proyecto> liscaldimensional;
     private List<Proyecto> listaporUsuario;
-     private Session session;
-    private Transaction transaccion;
+     //private Session session;
+    //private Transaction transaccion;
     private List<SelectItem> cargarProyectos;
     
     private Integer codigoProy;
-    
+     org.hibernate.Session session;
+     
+      @ManagedProperty("#{loginBean}")
+    private loginBean mbSLogin;
+    Transaction transaccion;
     private SelectItem[] opciones = new SelectItem[]{
 		new SelectItem("Quito", "Quito"),
 		new SelectItem("Guayaquil", "Guayaquil"),
@@ -66,9 +71,9 @@ public class proyectoBean implements Serializable {
     }
 
     public Proyecto getProyecto() {
-        if (this.proyecto == null) {
-            proyecto = new Proyecto();
-        }
+        //if (this.proyecto == null) {
+          //  proyecto = new Proyecto();
+        //}
         return proyecto;
     }
 
@@ -81,6 +86,10 @@ public class proyectoBean implements Serializable {
         listaProyectos = proyecDao.listarProyectos();
         return listaProyectos;
     }
+    
+    
+    
+    
 
     public void setListaProyectos(List<Proyecto> listaProyectos) {
         this.listaProyectos = listaProyectos;
@@ -97,32 +106,30 @@ public class proyectoBean implements Serializable {
 
     ///////////
     public List<Proyecto> getListaporUsuario() {
-         // proyecDao = new proyectoDaoImpl();
-        //listaporUsuario = proyecDao.listarProyectosPorUsuario("kleper");
-        this.session = null;
-        this.transaccion = null;
-        try {
-            proyectoDaoImpl daoproyecto = new proyectoDaoImpl();
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaccion = this.session.beginTransaction();
-            this.listaporUsuario = daoproyecto.listarProyectosPorUsuario("kleper");
-            this.transaccion.commit();
-            return this.listaporUsuario;
-        } catch (Exception ex) {
-            if (this.transaccion != null) {
-                this.transaccion.rollback();
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
-            return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
+           this.session=null;
+        this.transaccion=null;
+        
+        try
+        {
+        
+            proyectoDaoImpl daoproy=new proyectoDaoImpl();
+            usuarioDaoImpl userdao=new usuarioDaoImpl();
+        HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+            this.usuario=userdao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
+        this.listaporUsuario=daoproy.listarPorUsuario(session,"admin");
+        
+        return this.listaporUsuario;
         }
-
-
-
-
+        catch(Exception ex)
+        {
+          
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "No se puede cargar datos de usuario "+ex.getMessage()));
+            
+            return null;
+        }
+        
     }
 
 public void setListaporUsuario(List<Proyecto> listaporUsuario) {
@@ -146,18 +153,30 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
         this.transaccion = transaccion;
     }
 
+    public loginBean getMbSLogin() {
+        return mbSLogin;
+    }
+
+    public void setMbSLogin(loginBean mbSLogin) {
+        this.mbSLogin = mbSLogin;
+    }
+
     
 
     //////////
     //////////////////////////
     ////Crear Proyecto
-    public void crearProyecto(ActionEvent actionEvent) {
+    public void crearProyecto(ActionEvent actionEvent) throws Exception {
         proyectoDao proyectDao = new proyectoDaoImpl();
         String msg;
        usuarioDaoImpl userdao= new usuarioDaoImpl();
-        //this.usuario=userdao.buscarPorcodigoUsuario(usuario);
-       // this.proyecto.setUsuario(this.usuario.);
-        /*this.proyecto.setContratProy(this.proyecto.getContratProy());
+       //Usuario usuarios=new Usuario();
+       
+       //  HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+       //     usuarios=userdao.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+       //this.proyecto.setUsuario(usuarios);
+       /*this.proyecto.setContratProy(this.proyecto.getContratProy());
         this.proyecto.setPropiepProy(this.proyecto.getPropiepProy());
         this.proyecto.setObraProy(this.proyecto.getObraProy());
         this.proyecto.setUbicProy(this.proyecto.getUbicProy());
@@ -285,42 +304,52 @@ public void setListaporUsuario(List<Proyecto> listaporUsuario) {
     }
 
     
-    
-    ////////Pestañas
-    private TabView tabView;
+    public void GuardarProyecto()
+    {
+        this.session=null;
+        this.transaccion=null;
+        
+        try
+        {            
+            
 
-    public TabView getTabView() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        tabView = (TabView) fc.getApplication().createComponent("org.primefaces.component.TabView");
+            usuarioDaoImpl daoTUsuario=new usuarioDaoImpl();
+            proyectoDaoImpl daoproyecto=new proyectoDaoImpl();
+            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaccion=session.beginTransaction();
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            
+            this.usuario=daoTUsuario.getByUsuarioCodigo(this.session, sessionUsuario.getAttribute("sobre").toString());
+            this.proyecto.setUsuario(usuario);
+            daoproyecto.guardarproyecto(this.session, this.proyecto);
+            
+            this.transaccion.commit();
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto:", "El ingreso fue realizado correctamente"));
 
-        // cargar la lista de objetos para tabview
-
-        //Se crean dinamicamente las tabs y en su contenido, unas cajas de texto
-        //for ( Proyecto sub : listaProyectos) {
-        Tab tab = new Tab();
-        tab.setTitle("Guayaquil");
-
-
-        Random randomGenerator = new Random();
-        int total = 4;//Math.max(1, randomGenerator.nextInt(6));
-        for (int i = 0; i < total; i++) {
-
-            InputText inputtext = new InputText();
-
-            inputtext.setLabel("Label");
-            inputtext.setValue("id:" + inputtext.getClientId());
-            inputtext.setOnfocus("");
-            tab.getChildren().add(inputtext);
+            //this.usuario=new Usuario();
+           
+          
         }
-        tabView.getChildren().add(tab);
-        return tabView;
+        catch(Exception ex)
+        {
+            if(this.transaccion!=null)
+            {
+                this.transaccion.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
     }
-
-    // return tabView; 
-    //}
-    public void setTabView(TabView tabView) {
-        this.tabView = tabView;
-    }
+    
     
     
 }

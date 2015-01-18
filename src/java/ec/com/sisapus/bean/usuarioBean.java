@@ -7,6 +7,7 @@ package ec.com.sisapus.bean;
 import ec.com.sisapus.dao.usuarioDao;
 import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Usuario;
+import ec.com.sisapus.util.HibernateUtil;
 import java.awt.event.ActionEvent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -45,8 +46,8 @@ public class usuarioBean {
     private String contraseniaRepita;
     private String nombre,apellido,sobrenombre, contrasenia,correo;
     //private boolean estado;
-    private Session session;
-    private Transaction transaccion;
+ org.hibernate.Session session;
+    Transaction transaccion;
    
     private String nombreperfil;
     //private Date fechaReg, fechaMod;
@@ -84,21 +85,7 @@ public class usuarioBean {
         this.contraseniaRepita = contraseniaRepita;
     }
 
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public Transaction getTransaccion() {
-        return transaccion;
-    }
-
-    public void setTransaccion(Transaction transaccion) {
-        this.transaccion = transaccion;
-    }
+    
     
     ////
       
@@ -360,28 +347,47 @@ public class usuarioBean {
     //}
 //obtener lista de usuarios por sesion
     
-    public Usuario buscarPorUsuario1()
+ 
+    
+    public Usuario getByUsuario()
     {
-        //this.session=null;
-        //this.transaccion=null;
+        this.session=null;
+        this.transaccion=null;
         
-        
-            usuarioDaoImpl usuariobdao=new usuarioDaoImpl();
+        try
+        {
+           usuarioDaoImpl daoTUsuario=new usuarioDaoImpl();
+            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaccion=this.session.beginTransaction();
             
             HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             
-           this.usuario=usuariobdao.buscarPorsobreUsuario(sessionUsuario.getAttribute("usuario").toString());
+            this.usuario=daoTUsuario.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
             
-           // this.transaccion.commit();
+            this.transaccion.commit();
             
-           
-         //   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "));
-           
-        return this.usuario;
-        
-    }
-    
-    
+            return this.usuario;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaccion!=null)
+            {
+                this.transaccion.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "No se puede cargar datos de usuario "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    } 
     
     
     

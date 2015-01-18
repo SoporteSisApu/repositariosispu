@@ -31,5 +31,6 @@ public interface usuarioDao {
     public List<Usuario> getAll(Session session)throws Exception;
     public Usuario getByCodigoUsuario(Session session, int codigoUsuario)throws Exception;
     public Usuario getBySobrenombreusu(Session session, String sobre)throws Exception;
-    
+    //obtener codigo de usuario para proyecto
+      public Usuario getByUsuarioCodigo(Session session, String sobre)throws Exception;
 }

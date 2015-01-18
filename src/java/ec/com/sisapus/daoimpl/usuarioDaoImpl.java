@@ -191,5 +191,16 @@ public class usuarioDaoImpl implements usuarioDao{
         
         return tUsuario;  //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Usuario getByUsuarioCodigo(Session session, String sobre) throws Exception {
+            String hql="select u.codigoUsu from Usuario u where sobrenombreUsu=:sobre and estadoUsu=1 ";
+        Query query=session.createQuery(hql);
+        query.setParameter("sobre", sobre);
+        
+        Usuario tUsuario=(Usuario) query.uniqueResult();
+        
+        return tUsuario; //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
