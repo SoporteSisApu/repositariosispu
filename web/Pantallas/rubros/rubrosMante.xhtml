@@ -27,7 +27,7 @@
                     </p:commandButton>  
                 </h:form>
                 <h:form id="formDataTable">  
-                    <p:dataTable id="mostrarRubros" var="rubro" value="#{rubroBean1.listarubroporUsurio}" scrollable="true" scrollHeight="150"
+                    <p:dataTable id="mostrarRubros" var="rubro" value="#{rubroBean11.listarubroporUsurio}" scrollable="true" scrollHeight="150"
                                  paginator="true" rows="10" paginatorPosition="bottom"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                  resizableColumns="true">  
@@ -53,10 +53,10 @@
                         
                         <p:column style="width:8%; text-align: center">  
                             <p:commandButton id="btnRubroUpdate" update=":formUpdate" oncomplete="dialogRubroUpdate.show()" icon="icon-edit1" title="Modificar">  
-                                <f:setPropertyActionListener value="#{rubro}" target="#{rubroBean1.rubro}"/>  
+                                <f:setPropertyActionListener value="#{rubro}" target="#{rubroBean11.rubro}"/>  
                             </p:commandButton>  
                             <p:commandButton id="btnRubroDelete" update=":formDelete" oncomplete="dialogRubroDelete.show()" icon="icon-delete" title="Eliminar">  
-                                <f:setPropertyActionListener value="#{rubro}" target="#{rubroBean1.rubro}"/>  
+                                <f:setPropertyActionListener value="#{rubro}" target="#{rubroBean11.rubro}"/>  
                             </p:commandButton>  
 
                         </p:column>  
@@ -69,21 +69,21 @@
                         <h:panelGrid id="pantallacrearRubro" columns="2" cellpadding="1" style="margin:0 auto;">  
 
                             <h:outputText value="Nombre:" />  
-                            <p:inputText value="#{rubroBean1.rubro.nombreRubro}" />  
+                            <p:inputText value="#{rubroBean11.rubro.nombreRubro}" />  
                             <h:outputText value="Detalle:" />  
-                            <p:inputTextarea rows="6" value="#{rubroBean1.rubro.detalleRubro}" />  
+                            <p:inputTextarea rows="6" value="#{rubroBean11.rubro.detalleRubro}" />  
                             <h:outputText value="Unidad:" />  
-                            <p:inputText value="#{rubroBean1.rubro.unidadRubro}" />  
+                            <p:inputText value="#{rubroBean11.rubro.unidadRubro}" />  
                             <h:outputText value="Categoria:" />
-                            <p:selectOneMenu value="#{rubroBean1.rubro.categoriarubro.codigoCatRubro}">  
+                            <p:selectOneMenu value="#{rubroBean11.rubro.categoriarubro.codigoCatRubro}">  
                                 <f:selectItem itemLabel="-- Seleccione --" itemValue="" />  
                                 <f:selectItems value="#{catrubroBean.listacatrubro}" />  
                             </p:selectOneMenu> 
-                            <h:inputHidden value="#{rubroBean1.rubro.codigoRubro}"/>  
+                            <h:inputHidden value="#{rubroBean11.rubro.codigoRubro}"/>  
                             <!---->
                             <f:facet name="footer">
                                 <p:separator/>
-                                <p:commandButton id="btnCreateAceptar" update=":formDataTable, :msgs" oncomplete="dialogRubroCreate.hide()" actionListener="#{rubroBean1.guardarrubro()}" icon="icon-save" title="Guardar" value="Guardar"/>  
+                                <p:commandButton id="btnCreateAceptar" update=":formDataTable, :msgs" oncomplete="dialogRubroCreate.hide()" actionListener="#{rubroBean11.guardarrubro()}" icon="icon-save" title="Guardar" value="Guardar"/>  
                                 <p:commandButton id="btnCreateCancelar" oncomplete="dialogRubroCreate.hide()" icon="icon-cancel" title="Cancelar" value="Cancelar"/>  
                             </f:facet>
                         </h:panelGrid>  
@@ -96,21 +96,21 @@
                         <h:panelGrid id="pantallamodificarRubro" columns="2" cellpadding="1" style="margin:0 auto;">  
 
                            <h:outputText value="Nombre:" />  
-                            <p:inputText value="#{rubroBean1.rubro.nombreRubro}" />  
+                            <p:inputText value="#{rubroBean11.rubro.nombreRubro}" />  
                             <h:outputText value="Detalle:" />  
-                            <p:inputText value="#{rubroBean1.rubro.detalleRubro}" />  
+                            <p:inputText value="#{rubroBean11.rubro.detalleRubro}" />  
                             <h:outputText value="Unidad:" />  
-                            <p:inputText value="#{rubroBean1.rubro.unidadRubro}" />
+                            <p:inputText value="#{rubroBean11.rubro.unidadRubro}" />
                             <h:outputText value="Categoria:" />
-                            <p:selectOneMenu value="#{rubroBean1.rubro.categoriarubro.codigoCatRubro}">  
+                            <p:selectOneMenu value="#{rubroBean11.rubro.categoriarubro.codigoCatRubro}">  
                                 <f:selectItem itemLabel="-- Seleccione --" itemValue="" />  
                                 <f:selectItems value="#{catrubroBean.listacatrubro}" />  
                             </p:selectOneMenu> 
-                            <h:inputHidden value="#{rubroBean1.rubro.codigoRubro}"/>  
+                            <h:inputHidden value="#{rubroBean11.rubro.codigoRubro}"/>  
                             
                             <f:facet name="footer">
                                 <p:separator/>
-                                <p:commandButton id="btnUpdateAceptar" update=":formDataTable, :msgs" oncomplete="dialogRubroUpdate.hide()" actionListener="#{rubroBean1.actulizarrubro()}" icon="icon-save" title="Guardar" value="Guardar"/>  
+                                <p:commandButton id="btnUpdateAceptar" update=":formDataTable, :msgs" oncomplete="dialogRubroUpdate.hide()" actionListener="#{rubroBean11.actulizarrubro()}" icon="icon-save" title="Guardar" value="Guardar"/>  
                                 <p:commandButton id="btnUpdateCancelar" oncomplete="dialogRubroUpdate.hide()" icon="icon-cancel" title="Cancelar" value="Cancelar"/>  
                             </f:facet>
                         </h:panelGrid>  
@@ -119,9 +119,9 @@
                 <h:form id="formDelete">
                     <p:confirmDialog id="confirmDialog" message="Desea Eliminar el Rubro..??" showEffect="fade" hideEffect="explode"
                                      header="Eliminar Rubro" severity="alert" widgetVar="dialogRubroDelete">  
-                        <h:inputHidden value="#{rubroBean1.rubro.codigoRubro}"/>  
+                        <h:inputHidden value="#{rubroBean11.rubro.codigoRubro}"/>  
                         <p:commandButton id="confirm" value="Aceptar" update=":formDataTable, :msgs" oncomplete="dialogRubroDelete.hide()"  
-                                         actionListener="#{rubroBean1.eliminarrubro()}" icon="icon-check"/>  
+                                         actionListener="#{rubroBean11.eliminarrubro()}" icon="icon-check"/>  
                         <p:commandButton id="decline" value="Cancelar" onclick="dialogRubroDelete.hide()" type="button" icon="icon-cancel"/>       
                     </p:confirmDialog>  
                 </h:form>
