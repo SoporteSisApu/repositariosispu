@@ -85,9 +85,9 @@ public class proyectoBean {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.proyecto.setUsuario(this.usuario);
-            this.listaproyectoporUsurio=daoproyecto.getbyUsuarioProyecto(session,this.proyecto.getUsuario().getSobrenombreUsu());
-            this.transaccion.commit();
+           this.proyecto.setUsuario(this.usuario);
+           this.listaproyectoporUsurio=daoproyecto.getbyUsuarioProyecto(session,this.proyecto.getUsuario().getSobrenombreUsu());
+           this.transaccion.commit();
             
             return this.listaproyectoporUsurio;
         }
@@ -139,8 +139,8 @@ public class proyectoBean {
             
            this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
            this.usuario.getCodigoUsu();
-            this.proyecto.setUsuario(this.usuario);
-            daoproyecto.guardarproyecto(this.session, this.proyecto);
+           this.proyecto.setUsuario(this.usuario);
+           daoproyecto.guardarproyecto(this.session, this.proyecto);
             
             this.transaccion.commit();
             

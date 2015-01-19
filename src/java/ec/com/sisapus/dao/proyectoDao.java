@@ -13,10 +13,14 @@ import org.hibernate.Session;
  * @author kleber
  */
 public interface proyectoDao {
-         public boolean guardarproyecto(Session session, Proyecto proyecto)throws Exception;
-         public List<Proyecto> getbyUsuarioProyecto(Session session,String sobre)throws Exception;
-         public boolean actualizarproyecto(Session session, Proyecto proyecto)throws Exception;
-         public boolean eliminarproyecto(Session session, Integer idproyecto)throws Exception;
-           public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception;
 
+    public boolean guardarproyecto(Session session, Proyecto proyecto) throws Exception;
+
+    public List<Proyecto> getbyUsuarioProyecto(Session session, String sobre) throws Exception;
+
+    public boolean actualizarproyecto(Session session, Proyecto proyecto) throws Exception;
+
+    public boolean eliminarproyecto(Session session, Integer idproyecto) throws Exception;
+
+    public Proyecto obtenerProyectoPorId(Session session, Integer idProyecto) throws Exception;
 }
