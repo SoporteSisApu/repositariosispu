@@ -43,9 +43,9 @@ import org.primefaces.context.RequestContext;
  * @author Edison
  */
 public class presupuestoBean implements Serializable {
+
     Session session;
     Transaction transaction;
-    
     //Variables de la Cabecera del Presupuesto
     private CabeceraPresupuesto cabpresupuesto;
     private Double precioTotApuRubro;
@@ -75,13 +75,12 @@ public class presupuestoBean implements Serializable {
     private Analisispreciounitario apu;
     private List<Analisispreciounitario> listaApus;
     //Variables de Rubro
-    
     private Rubro rubro;
     //coneccion hibernate
     private Connection coneccion;
-    
+
     public presupuestoBean() {
-        
+
         this.listaApus = new ArrayList<>();
         this.listaCabPresupuestos = new ArrayList<>();
         this.cabpresupuesto = new CabeceraPresupuesto();
@@ -97,13 +96,13 @@ public class presupuestoBean implements Serializable {
         this.ubicacionproyecto = "";
         this.fechaproyecto = null;
         this.costoproyecto = 0.0;
-            this.precioTotApuRubro=0.00;
-    this.porcentajeiva=null;
-      this.precioTiva=0.00;
-   this.subtotalPres=0.00;
-     this.costoPresupuesto=0.00;
+        this.precioTotApuRubro = 0.00;
+        this.porcentajeiva = null;
+        this.precioTiva = 0.00;
+        this.subtotalPres = 0.00;
+        this.costoPresupuesto = 0.00;
     }
-    
+
     // Getter Setter Session y Transaction
     public Session getSession() {
         return session;
@@ -122,6 +121,7 @@ public class presupuestoBean implements Serializable {
     }
     //
     //Getter Setter Presupuesto
+
     public Double getCostoPresupuesto() {
         return costoPresupuesto;
     }
@@ -129,7 +129,7 @@ public class presupuestoBean implements Serializable {
     public void setCostoPresupuesto(Double costoPresupuesto) {
         this.costoPresupuesto = costoPresupuesto;
     }
-    
+
     public CabeceraPresupuesto getCabpresupuesto() {
         return cabpresupuesto;
     }
@@ -193,8 +193,7 @@ public class presupuestoBean implements Serializable {
     public void setListaDetPresupuestos(List<DetallePresupuesto> listaDetPresupuestos) {
         this.listaDetPresupuestos = listaDetPresupuestos;
     }
-    
-      
+
     //Getters y Setters de Proyecto
     public Proyecto getProyecto() {
         return proyecto;
@@ -259,7 +258,7 @@ public class presupuestoBean implements Serializable {
     public void setCostoproyecto(Double costoproyecto) {
         this.costoproyecto = costoproyecto;
     }
-    
+
     public List<Proyecto> getListaProyecto() {
         return listaProyecto;
     }
@@ -267,7 +266,7 @@ public class presupuestoBean implements Serializable {
     public void setListaProyecto(List<Proyecto> listaProyecto) {
         this.listaProyecto = listaProyecto;
     }
-        
+
     ///// Getter y Setter APU
     public Analisispreciounitario getApu() {
         return apu;
@@ -284,10 +283,8 @@ public class presupuestoBean implements Serializable {
     public void setListaApus(List<Analisispreciounitario> listaApus) {
         this.listaApus = listaApus;
     }
-    
-    
-   ///////////////////////
 
+    ///////////////////////
     public Double getPrecioTotApuRubro() {
         return precioTotApuRubro;
     }
@@ -295,7 +292,7 @@ public class presupuestoBean implements Serializable {
     public void setPrecioTotApuRubro(Double precioTotApuRubro) {
         this.precioTotApuRubro = precioTotApuRubro;
     }
-    
+
     public Double getPorcentajeiva() {
         return porcentajeiva;
     }
@@ -311,7 +308,7 @@ public class presupuestoBean implements Serializable {
     public void setPrecioTiva(Double precioTiva) {
         this.precioTiva = precioTiva;
     }
-    
+
     public Double getSubtotalPres() {
         return subtotalPres;
     }
@@ -319,7 +316,7 @@ public class presupuestoBean implements Serializable {
     public void setSubtotalPres(Double subtotalPres) {
         this.subtotalPres = subtotalPres;
     }
-    
+
     //Getter Setter Rubro
     public Rubro getRubro() {
         return rubro;
@@ -347,24 +344,22 @@ public class presupuestoBean implements Serializable {
     public void setConeccion(Connection coneccion) {
         this.coneccion = coneccion;
     }
-    
-   
+
     ///Funcion para agregar un proyecto al presupuesto
-    
     public void agregarProyectoPresup(Integer idproyecto) {
-        
+
         this.session = null;
         this.transaction = null;
 
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
-            
+
             proyectoDaoImpl daoproyecto = new proyectoDaoImpl();
-            
+
             this.transaction = this.session.beginTransaction();
-            
+
             this.proyecto = daoproyecto.obtenerProyectoPorId(session, idproyecto);
-            
+
             this.setCodigoproyecto(this.proyecto.getCodigoProy());
             this.setContratistaproyecto(this.proyecto.getContratProy());
             this.setPropietarioproyecto(this.proyecto.getPropiepProy());
@@ -391,7 +386,7 @@ public class presupuestoBean implements Serializable {
             }
         }
     }
-    
+
     ///Funcion para agregar los apus al presupuesto
     public void agregarApus(Integer idApu) {
         this.session = null;
@@ -404,9 +399,9 @@ public class presupuestoBean implements Serializable {
 
             this.transaction = this.session.beginTransaction();
             this.apu = daoapu.obtenerApuPorId(session, idApu);
-            
-            this.listaDetPresupuestos.add(new DetallePresupuesto(null,null,apu.getDescApu(),this.apu.getUnidadApu(),null,0,this.apu.getCostotApu(),new Double("0.00")));
-            
+
+            this.listaDetPresupuestos.add(new DetallePresupuesto(null, null, apu.getDescApu(), this.apu.getUnidadApu(), this.apu.getCategoriaApu(), 0, this.apu.getCostotApu(), new Double("0.00")));
+
             this.transaction.commit();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Apu del rubro agregado"));
@@ -428,6 +423,7 @@ public class presupuestoBean implements Serializable {
         }
     }
     //Funcion para retirar un apu del detalle del presupuesto
+
     public void EliminarApuLista(String nombrePres) {
         try {
             int i = 0;
@@ -439,7 +435,7 @@ public class presupuestoBean implements Serializable {
                 }
                 i++;
             }
-             Double totalVenta = new Double("0");
+            Double totalVenta = new Double("0");
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
@@ -447,19 +443,18 @@ public class presupuestoBean implements Serializable {
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
             Double valorTotalPres = new Double("0.00");
-            
-            for (DetallePresupuesto presup : this.listaDetPresupuestos) 
-            {
+
+            for (DetallePresupuesto presup : this.listaDetPresupuestos) {
                 Double costototalapurubro = Double.parseDouble(formato.format((presup.getCantidadDetPres()))) * Double.parseDouble(formato.format((presup.getPunitDetPres())));
                 presup.setPtotDetPres(costototalapurubro);
                 subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
             this.setPrecioTotApuRubro(subtotalPresup);
-            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva/100)));
+            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva / 100)));
             this.setPrecioTiva(ivaPres);
-            valorTotalPres= Double.parseDouble(formato.format((subtotalPresup+ivaPres)));
+            valorTotalPres = Double.parseDouble(formato.format((subtotalPresup + ivaPres)));
             this.setCostoPresupuesto(valorTotalPres);
-            
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correcto", "Rubro retirado de la lista"));
 
             RequestContext.getCurrentInstance().update("frmPresupuesto:tablaDetallePresupuesto");
@@ -471,91 +466,92 @@ public class presupuestoBean implements Serializable {
         }
     }
     //Funcion para calcular el costo total del presupuesto
+
     public void calcularCostosPresupuesto() {
-        
+
         try {
-             Double totalVenta = new Double("0");
+            Double totalVenta = new Double("0");
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             simbolo.setGroupingSeparator(',');
             DecimalFormat formato = new DecimalFormat("######.##", simbolo);
-            
+
             Double subtotalPresup = new Double("0.00");
             Double ivaPres = new Double("0.00");
             Double valorTotalPres = new Double("0.00");
-            
-           for (DetallePresupuesto presup : this.listaDetPresupuestos) 
-            {
+
+            for (DetallePresupuesto presup : this.listaDetPresupuestos) {
                 Double costototalapurubro = Double.parseDouble(formato.format(presup.getCantidadDetPres())) * Double.parseDouble(formato.format(presup.getPunitDetPres()));
                 presup.setPtotDetPres(costototalapurubro);
                 subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
-            
-            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva/100)));
+
+            ivaPres = Double.parseDouble(formato.format(subtotalPresup * (this.porcentajeiva / 100)));
             valorTotalPres = Double.parseDouble(formato.format(subtotalPresup + ivaPres));
             ////
             this.cabpresupuesto.setSubtPres(subtotalPresup);
             this.cabpresupuesto.setIvaPres(ivaPres);
             this.cabpresupuesto.setGastotPres(valorTotalPres);
-            
+
             ///
             this.setPrecioTotApuRubro(subtotalPresup);
             this.setPrecioTiva(ivaPres);
             this.setCostoPresupuesto(valorTotalPres);
-            
+
             RequestContext.getCurrentInstance().update("frmPresupuesto:tablaDetallePresupuesto");
             RequestContext.getCurrentInstance().update("frmPresupuesto:panelFinalPres");
             RequestContext.getCurrentInstance().update("frmPresupuesto:panelPresupuestar");
-            
+
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", ex.getMessage()));
         }
     }
     //Funcion para guardar la cabecera y el detalle del presupuesto calculado
+
     public void guardarPresupuesto() {
         this.session = null;
         this.transaction = null;
 
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
-            
+
             //this.presupuesto.setDescripPres(getObraproyecto());
             this.cabpresupuesto.setDescripPres(getObraproyecto());
             this.cabpresupuesto.setProyecto(proyecto);
-            
+
             ApusDaoImpl apusdao = new ApusDaoImpl();
             presupuestoDaoImpl presDao = new presupuestoDaoImpl();
-            
+
             this.transaction = this.session.beginTransaction();
             presDao.insertaCabeceraPres(session, this.cabpresupuesto);
             this.cabpresupuesto = presDao.obtenerUltimoRegistroCabPres(session);
             this.apu = apusdao.getUltimoRegistroApu(session);
 
             for (DetallePresupuesto item : this.listaDetPresupuestos) {
-                this.apu=apusdao.obtenerApuPorId(session, this.apu.getCodigoApu());
+                this.apu = apusdao.obtenerApuPorId(session, this.apu.getCodigoApu());
                 item.setAnalisispreciounitario(this.apu);
                 item.setCabeceraPresupuesto(cabpresupuesto);
                 presDao.insertaDetallePres(session, item);
-                
+
             }
             this.transaction.commit();
-            
-            this.listaDetPresupuestos=new ArrayList<>();
-           this.proyecto=new Proyecto();
-            this.cabpresupuesto=new CabeceraPresupuesto();
-             this.codigoproyecto = 0;
-        this.propietarioproyecto = "";
-        this.contratistaproyecto = "";
-        this.obraproyecto = "";
-        this.ubicacionproyecto = "";
-        this.fechaproyecto = null;
-        this.costoproyecto = 0.00;
-        this.detpresupuesto=new DetallePresupuesto();
-     this.precioTotApuRubro=0.00;
-    this.porcentajeiva=0.00;
-      this.precioTiva=0.00;
-   this.subtotalPres=0.00;
-     this.costoPresupuesto=0.00;
+
+            this.listaDetPresupuestos = new ArrayList<>();
+            this.proyecto = new Proyecto();
+            this.cabpresupuesto = new CabeceraPresupuesto();
+            this.codigoproyecto = 0;
+            this.propietarioproyecto = "";
+            this.contratistaproyecto = "";
+            this.obraproyecto = "";
+            this.ubicacionproyecto = "";
+            this.fechaproyecto = null;
+            this.costoproyecto = 0.00;
+            this.detpresupuesto = new DetallePresupuesto();
+            this.precioTotApuRubro = 0.00;
+            this.porcentajeiva = 0.00;
+            this.precioTiva = 0.00;
+            this.subtotalPres = 0.00;
+            this.costoPresupuesto = 0.00;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Presupuesto guardado correctamente"));
         } catch (Exception ex) {
             if (this.transaction != null) {
@@ -569,9 +565,8 @@ public class presupuestoBean implements Serializable {
             }
         }
     }
-    
+
     //reportes
-    
     public void exportarPresupuestoPDF(ActionEvent actionEvent) throws JRException, IOException {
 
         this.session = null;
@@ -584,7 +579,7 @@ public class presupuestoBean implements Serializable {
             this.cabpresupuesto = apupresupuesto.obtenerUltimoRegistroCabPres(session);
             HashMap parametros = new HashMap();
             parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
-            parametros.put("codigoPres",this.cabpresupuesto.getCodigoPres());
+            parametros.put("codigoPres", this.cabpresupuesto.getCodigoPres());
 
 
             File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReportePresupuesto.jasper"));
@@ -605,5 +600,4 @@ public class presupuestoBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "NO se Guardo Apu"));
         }
     }
-    
 }
