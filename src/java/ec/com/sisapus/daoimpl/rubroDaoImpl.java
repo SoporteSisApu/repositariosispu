@@ -63,5 +63,16 @@ public class rubroDaoImpl implements rubroDao{
         Query query=session.createQuery(hql).setMaxResults(1);
          return (Rubro) query.uniqueResult(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Rubro> listartodosRubros(Session session) throws Exception {
+        String hql="from Rubro";
+        Query query=session.createQuery(hql);
+        
+        List<Rubro> listarubro=(List<Rubro>) query.list();
+        
+        return listarubro; //To change body of generated methods, choose Tools | Templates.
+    }
+     
     
 }

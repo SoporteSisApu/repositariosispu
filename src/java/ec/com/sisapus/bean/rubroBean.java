@@ -31,6 +31,7 @@ public class rubroBean {
     private Rubro rubro;
     private Usuario usuario;
     private List<Rubro> listarubroporUsurio;
+    private List<Rubro> listarubros;
      public  rubroBean(){
         this.rubro=new Rubro();
         
@@ -68,6 +69,51 @@ public class rubroBean {
         this.usuario = usuario;
     }
 
+    public List<Rubro> getListarubros() {
+   this.session=null;
+        this.transaccion=null;
+        
+        try
+        {
+            rubroDaoImpl daorubro=new rubroDaoImpl();
+            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaccion=this.session.beginTransaction();
+            
+            this.listarubros=daorubro.listartodosRubros(this.session);
+            
+            this.transaccion.commit();
+            
+            return this.listarubros;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaccion!=null)
+            {
+                this.transaccion.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }
+
+    public void setListarubros(List<Rubro> listarubros) {
+        this.listarubros = listarubros;
+    }
+
+    
+    
+    
+    
     public List<Rubro> getListarubroporUsurio() {
      this.session=null;
         this.transaccion=null;

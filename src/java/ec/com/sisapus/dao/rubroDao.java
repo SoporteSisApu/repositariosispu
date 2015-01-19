@@ -18,6 +18,7 @@ public interface rubroDao {
          public boolean actualizarrubro(Session session, Rubro rubro)throws Exception;
          public boolean eliminarrubro(Session session, Integer idrubro)throws Exception;
            public Rubro obtenerrubroPorId(Session session, Integer idrubro) throws Exception;
+            public List<Rubro> listartodosRubros(Session session)throws Exception;
               //agregado
     public Rubro getByIdRubro(Session session, Integer idrubro) throws Exception;
     public Rubro getUltimoRegistroRubro(Session session) throws Exception;
