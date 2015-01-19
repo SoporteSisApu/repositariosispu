@@ -29,7 +29,7 @@ public class rubroBean {
     private Transaction transaccion;
     
     private Rubro rubro;
-    private Usuario usuario;
+  
     private List<Rubro> listarubroporUsurio;
     private List<Rubro> listarubros;
      public  rubroBean(){
@@ -61,49 +61,12 @@ public class rubroBean {
         this.rubro = rubro;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+  
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Rubro> getListarubros() {
-   this.session=null;
-        this.transaccion=null;
-        
-        try
-        {
-            rubroDaoImpl daorubro=new rubroDaoImpl();
-            
-            this.session=HibernateUtil.getSessionFactory().openSession();
-            this.transaccion=this.session.beginTransaction();
-            
-            this.listarubros=daorubro.listartodosRubros(this.session);
-            
-            this.transaccion.commit();
-            
-            return this.listarubros;
-        }
-        catch(Exception ex)
-        {
-            if(this.transaccion!=null)
-            {
-                this.transaccion.rollback();
-            }
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
-            
-            return null;
-        }
-        finally
-        {
-            if(this.session!=null)
-            {
-                this.session.close();
-            }
-        }
+  public List<Rubro> getListarubros() {
+     rubroDaoImpl rubrodao=new rubroDaoImpl();
+     listarubros=rubrodao.buscarTodosRubros();
+   return listarubros;
     }
 
     public void setListarubros(List<Rubro> listarubros) {
@@ -114,7 +77,7 @@ public class rubroBean {
     
     
     
-    public List<Rubro> getListarubroporUsurio() {
+ /*   public List<Rubro> getListarubroporUsurio() {
      this.session=null;
         this.transaccion=null;
         
@@ -155,7 +118,7 @@ public class rubroBean {
             }
         }
         
-    }
+    }*/
     
      public void guardarrubro()
     {
@@ -171,10 +134,8 @@ public class rubroBean {
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaccion=session.beginTransaction();
 
-           HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            
-           this.usuario=usuariodao.getBySobrenombreusu(this.session, sessionUsuario.getAttribute("sobre").toString());
-           this.usuario.getCodigoUsu();
+      
+         
        //     this.rubro.setUsuario(this.usuario);
             daorubro.guardarrubro(this.session, this.rubro);
             
@@ -297,6 +258,33 @@ public class rubroBean {
         this.listarubroporUsurio = listarubroporUsurio;
     }
     
-     
+      //Lista de rubros para cargar en el combobox
+ /*   public List<SelectItem> getListaRubross() throws Exception {
+        this.listaRubross = new ArrayList<SelectItem>();
+        ///Crear Instancia de objeto para RolDaoImpl
+        rubroDaoImpl rubrosdao = new rubroDaoImpl();
+    //    List<Rubro> rubros = rubrosdao.BuscarRubro();
+        for (Rubro rub : rubros) {
+            SelectItem selectItem = new SelectItem(rub.getCodigoRubro(), rub.getNombreRubro());
+            this.listaRubross.add(selectItem);
+        }
+        return listaRubross;
+    }*/
+
+    /*public void cargartextosRubros() throws Exception
+    {
+    this.listaRubross = new ArrayList<>();
+    rubroDao rubrodao = new rubroDaoImpl();
+    this.session=HibernateUtil.getSessionFactory().openSession();
+    this.transaction=this.session.beginTransaction();
+    rubro = rubrodao.getByIdRubro(session,this.rubro.getCodigoRubro());
+    for (Rubro rub : listaRubro) {
+    SelectItem selectItem = new SelectItem(rub.getCodigoRubro(),rub.getNombreRubro());
+    this.codigorubro=rub.getCodigoRubro();
+    this.descripcrubro=rub.getNombreRubro();
+    this.unidadrubro=rub.getUnidadRubro();
+    }
+    this.transaction.commit();
+    }*/
      
 }

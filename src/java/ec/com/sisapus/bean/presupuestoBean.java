@@ -3,7 +3,7 @@ package ec.com.sisapus.bean;
 import ec.com.sisapus.daoimpl.ApusDaoImpl;
 import ec.com.sisapus.daoimpl.presupuestoDaoImpl;
 import ec.com.sisapus.daoimpl.proyectoDaoImpl;
-import ec.com.sisapus.daoimpl.rubroDaoImplInterface;
+
 import ec.com.sisapus.modelo.Analisispreciounitario;
 import ec.com.sisapus.modelo.CabeceraPresupuesto;
 import ec.com.sisapus.modelo.DetallePresupuesto;

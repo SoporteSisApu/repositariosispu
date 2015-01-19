@@ -22,5 +22,5 @@ public interface rubroDao {
               //agregado
     public Rubro getByIdRubro(Session session, Integer idrubro) throws Exception;
     public Rubro getUltimoRegistroRubro(Session session) throws Exception;
-    
+      public List<Rubro> buscarTodosRubros();
 }

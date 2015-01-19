@@ -6,6 +6,7 @@ package ec.com.sisapus.daoimpl;
 
 import ec.com.sisapus.dao.rubroDao;
 import ec.com.sisapus.modelo.Rubro;
+import ec.com.sisapus.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -72,6 +73,12 @@ public class rubroDaoImpl implements rubroDao{
         List<Rubro> listarubro=(List<Rubro>) query.list();
         
         return listarubro; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Rubro> buscarTodosRubros() {
+         Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createQuery("from Rubro").list();   //To change body of generated methods, choose Tools | Templates.
     }
      
     
