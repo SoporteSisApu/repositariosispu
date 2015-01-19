@@ -799,13 +799,10 @@ public class ApuBeanVista {
              this.escenariosapu.setCodigoEscenario(1);
              }*/
 
-            // if (componente2.equals("tab2")){
+           
             this.escenariosapu.setCodigoEscenario(1);
             //}
-         /*if (componente3.equals("tab3")){
-             this.escenariosapu.setCodigoEscenario(3);
-             }*/
-
+      
             //this.escenariosapu.setCodigoEscenario(1);
             this.analisisapus.setEscenarioapu(escenariosapu);
             this.analisisapus.setDescApu(getAuxdesrubro());
