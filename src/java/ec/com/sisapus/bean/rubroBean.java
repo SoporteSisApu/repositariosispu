@@ -10,11 +10,13 @@ import ec.com.sisapus.daoimpl.usuarioDaoImpl;
 import ec.com.sisapus.modelo.Rubro;
 import ec.com.sisapus.modelo.Usuario;
 import ec.com.sisapus.util.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,7 +33,8 @@ public class rubroBean {
     private Rubro rubro;
   
     private List<Rubro> listarubroporUsurio;
-    private List<Rubro> listarubros;
+      private List<SelectItem> cargarRubros;
+           private List<Rubro> listarubros;
      public  rubroBean(){
         this.rubro=new Rubro();
         
@@ -257,19 +260,15 @@ public class rubroBean {
     public void setListarubroporUsurio(List<Rubro> listarubroporUsurio) {
         this.listarubroporUsurio = listarubroporUsurio;
     }
+
+   
+    
+    
+    
+    
     
       //Lista de rubros para cargar en el combobox
- /*   public List<SelectItem> getListaRubross() throws Exception {
-        this.listaRubross = new ArrayList<SelectItem>();
-        ///Crear Instancia de objeto para RolDaoImpl
-        rubroDaoImpl rubrosdao = new rubroDaoImpl();
-    //    List<Rubro> rubros = rubrosdao.BuscarRubro();
-        for (Rubro rub : rubros) {
-            SelectItem selectItem = new SelectItem(rub.getCodigoRubro(), rub.getNombreRubro());
-            this.listaRubross.add(selectItem);
-        }
-        return listaRubross;
-    }*/
+  
 
     /*public void cargartextosRubros() throws Exception
     {
@@ -286,5 +285,21 @@ public class rubroBean {
     }
     this.transaction.commit();
     }*/
+
+    public List<SelectItem> getCargarRubros() {
+          this.cargarRubros = new ArrayList<SelectItem>();
+        rubroDaoImpl rubrosdao = new rubroDaoImpl();
+        List<Rubro> rubros = rubrosdao.buscarTodosRubros();
+        for (Rubro rub : rubros) {
+            SelectItem selectItem = new SelectItem(rub.getCodigoRubro(), rub.getNombreRubro());
+            this.cargarRubros.add(selectItem);
+        }
+      
+        return cargarRubros;
+    }
+
+    public void setCargarRubros(List<SelectItem> cargarRubros) {
+        this.cargarRubros = cargarRubros;
+    }
      
 }

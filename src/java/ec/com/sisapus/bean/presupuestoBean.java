@@ -450,7 +450,7 @@ public class presupuestoBean implements Serializable {
             
             for (DetallePresupuesto presup : this.listaDetPresupuestos) 
             {
-                Double costototalapurubro = Double.parseDouble(formato.format((presup.getCantidadDetPres()))) * (new Double(presup.getPunitDetPres()));
+                Double costototalapurubro = Double.parseDouble(formato.format((presup.getCantidadDetPres()))) * Double.parseDouble(formato.format((presup.getPunitDetPres())));
                 presup.setPtotDetPres(costototalapurubro);
                 subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
@@ -486,7 +486,7 @@ public class presupuestoBean implements Serializable {
             
            for (DetallePresupuesto presup : this.listaDetPresupuestos) 
             {
-                Double costototalapurubro = Double.parseDouble(formato.format(presup.getCantidadDetPres())) * (new Double(presup.getPunitDetPres()));
+                Double costototalapurubro = Double.parseDouble(formato.format(presup.getCantidadDetPres())) * Double.parseDouble(formato.format(presup.getPunitDetPres()));
                 presup.setPtotDetPres(costototalapurubro);
                 subtotalPresup = Double.parseDouble(formato.format(subtotalPresup + costototalapurubro));
             }
@@ -578,13 +578,13 @@ public class presupuestoBean implements Serializable {
         this.transaction = null;
 
         try {
-            //ApusDaoImpl apugenal = new ApusDaoImpl();
+            presupuestoDaoImpl apupresupuesto = new presupuestoDaoImpl();
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = this.session.beginTransaction();
-            //this.analisisapus = apugenal.getUltimoRegistroApu(session);
+            this.cabpresupuesto = apupresupuesto.obtenerUltimoRegistroCabPres(session);
             HashMap parametros = new HashMap();
             parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, this.session);
-            parametros.put("codigoPres",23);
+            parametros.put("codigoPres",this.cabpresupuesto.getCodigoPres());
 
 
             File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/ReportePresupuesto.jasper"));
